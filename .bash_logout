@@ -1,7 +1,6 @@
 # Adding session...
 history -a ~/.bash_history
 
-
 # Clean up
 # Need a few aliases...
 if [ -f ~/.bash_aliases ]; then
@@ -11,7 +10,6 @@ if [ -f ~/.bash_aliases ]; then
 
 	# Clean up the Dropbox cache
 	[ -d ~/Dropbox/.dropbox.cache ] && cleanDBC
-
 fi
 
 # Bye... (in Swedish ^^)
