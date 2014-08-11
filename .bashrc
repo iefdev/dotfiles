@@ -39,7 +39,7 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 #
-# Fix host issue (as superuser): "man scutil" + /etc/hostconfig (macpro.dev)
+# Fix host issue (as superuser): "man scutil" + /etc/hostconfig (foobar.dev)
 #
 # Read                        |  Set new name
 # ----------------------------|-----------------------------------------------
