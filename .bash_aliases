@@ -7,7 +7,7 @@
 # Load it in ~/.bashrc with:
 # ----------------------------------------
 #   # Load: ~/.bash_aliases
-#   [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
+#   [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 # ----------------------------------------
 #
 
@@ -16,6 +16,7 @@
 # Alias to cd the folder:
 alias cdD='cd ~/Desktop'
 alias cdS='cd ~/ShellScripts'
+alias=cdR='cd ~/Repos'
 alias cdT='cd ~/.Trash'
 alias www='cd ~/Sites'
 alias srv='cd /srv'
