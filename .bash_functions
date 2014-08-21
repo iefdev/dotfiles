@@ -66,6 +66,9 @@ function manx() { local i; for i; do open x-man-page://$i; done; }
 # comandline search
 function ddg() { open -a Safari "https://duckduckgo.com/?q=$1"; }
 
+# youtube-dl
+function ytdl() { youtube-dl -ci "$1"; }
+
 
 ### Compression
 
