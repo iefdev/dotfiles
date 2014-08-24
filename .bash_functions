@@ -60,7 +60,7 @@ function man2txt()
 	man $1 grep | col -b > $_path_manual.txt
 }
 
-# open man-page(s) in new tab
+# open man-page(s) in its own window
 function manx() { local i; for i; do open x-man-page://$i; done; }
 
 # comandline search
