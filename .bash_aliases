@@ -162,6 +162,9 @@ alias dbUpload='~/ShellScripts/dropbox_uploader.sh'
 # Check why it doesn't go to sleep
 alias whatsOpen='pmset -g assertions'
 
+# List connected hardware
+alias whatHW='networksetup -listallhardwareports'
+
 ### Screen Saver Engine
 alias sse='open -a ScreenSaverEngine'
 
