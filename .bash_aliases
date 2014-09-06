@@ -83,6 +83,9 @@ alias su='sudo bash'
 # Admin Nano
 alias suno='sudo nano'
 
+# Fuck
+alias fuck='sudo $(history -p \!\!)'
+
 # .bash_xxxxxxx
 alias openBashrc='open ~/.bashrc'
 alias openProfile='open ~/.bash_profile'
