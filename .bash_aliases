@@ -176,9 +176,16 @@ alias sse='open -a ScreenSaverEngine'
 #alias defLog='history | grep "defaults write" >> $HOME/ShellScripts/__defaultsLog.txt'
 alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
 
+
+## Wget
+
 # Wget continue
 # (with curl: curl -o <incomplete_local_file> -C - <URL>)
 alias wgetc='wget -c'
+
+# Wget no-check
+alias wgetnc='wget --no-check-certificate'
+
 
 ## Password assistant
 alias passist='open -a Password\ Assistant'
