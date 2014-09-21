@@ -107,7 +107,6 @@ alias reBash='. ~/.bashrc'
 alias reProfile='. ~/.bash_profile'
 alias reAlias='. ~/.bash_aliases'
 alias reFunc='. ~/.bash_functions'
-alias reHistory='. ~/.bash_history'
 alias reLogout='. ~/.bash_logout'
 
 
@@ -193,6 +192,7 @@ alias passist='open -a Password\ Assistant'
 ## Links 2.7
 alias LinX='links -g'
 
+
 ## MySQL
 alias mysql='/usr/local/mysql/bin/mysql'
 alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
@@ -202,9 +202,6 @@ alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 
 alias openSqlHistory='open ~/.mysql_history'
 
-## Old ones...
-#alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM start'
-#alias mysqlstop='sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop'
 
 ### PostgreSQL
 #/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
@@ -220,7 +217,7 @@ alias PostgreSQL='sudo /Library/StartupItems/PostgreSQL/PostgreSQL'
 # pyWeb
 # --------------------------------------------------------------------------
 # Python (bundled in OS X) you can start a simple web server to text files.
-# Can be used/started from any folder, but this one uses one folder: (~/pyWeb) 
+# Can be used/started from any folder, but this one uses one folder: (~/pyWeb)
 #
 # OS X comes with `Python 2.*` and since I've upgraded to python 3, I use this.
 # --------------------------------------------------------------------------
