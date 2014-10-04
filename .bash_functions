@@ -104,9 +104,12 @@ function mkpatch()
 function patchfile () { patch < "$1"; }
 
 # Patch a file
-# Usage: patchp0 patch_file
-function patchp0 () { patch -p0 < "$1"; }
+# Usage: patch1 patch_file
+function patch1 () { patch -p0 < "$1"; }
 
 # version... 
 # Usage: patch21 filetopatch patch_file
 function patch21 () { patch "$1" < "$2"; }
+
+# Sir Patchalot
+function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
