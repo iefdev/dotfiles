@@ -20,8 +20,11 @@ alias python='/usr/local/bin/python3'
 # ShellScripts
 _Sh="$HOME/ShellScripts"
 
+# xbin fo custom (self made) scripts
+_xbin="/usr/local/xbin"
+
 # export PATH.
-export PATH="/usr/local/bin:/usr/local/sbin:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$_xbin:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
 
 #http://osxdaily.com/2013/04/03/keep-track-of-defaults-write-commands-used-in-mac-os-x-automatically/
 PROMPT_COMMAND='echo "$(history 1 | grep "defaults")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
@@ -100,3 +103,6 @@ export HISTCONTROL=ignoredups
 
 # Set the default editor
 export EDITOR=nano
+
+# autocd in bash 4.3
+shopt -s globstar autocd
