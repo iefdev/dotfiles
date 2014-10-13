@@ -10,7 +10,8 @@
 # ----------------------------------------
 #
 
-### File & folders
+
+## File & folders
 
 # Make a dir and cd into it
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
@@ -24,7 +25,7 @@ function mvbak() { mv -iv "$1"{,.bak}; }
 function delHist() { sed "/$1/d" $HISTFILE > $HISTFILE.tmp && mv $HISTFILE{.tmp,}; }
 
 # cd directory of "foo"...
-function cd2 { cd $(dirname `which $1`); }
+function cd2() { cd $(dirname `which $1`); }
 
 # rsync folder2folder
 function rsyncdir() { 
@@ -35,7 +36,8 @@ function rsyncdir() {
 	rsync -avzuc --delete "$_from_dir/" "$_to_dir/";
 }
 
-### Get this...
+
+## Get this...
 
 # Get site with wget
 function wgets()
@@ -70,7 +72,7 @@ function ddg() { open -a Safari "https://duckduckgo.com/?q=$1"; }
 function ytdl() { youtube-dl -ci "$1"; }
 
 
-### Compression
+## Compression
 
 # tar.gz ($1 = folder name)
 function tarGZ()
@@ -86,10 +88,10 @@ function tarBZ()
 	_dir=`echo "$1" | sed -e 's/\/$//g'`;
 	tar -jcvf "$_dir".tar.bz2 --exclude ".DS_Store" --exclude "._*" "$_dir";
 }
-function untarBZ () { tar -jxvf "$1"; }
+function untarBZ() { tar -jxvf "$1"; }
 
 
-### Diff & Patching
+## Diff & Patching
 
 # Create a patch file
 # Usage: mkpatch original_file.ext my_modified.ext [patchname]
@@ -101,15 +103,22 @@ function mkpatch()
 }
 
 # Apply patch
-function patchfile () { patch < "$1"; }
+function patchfile() { patch < "$1"; }
 
 # Patch a file
 # Usage: patch1 patch_file
-function patch1 () { patch -p0 < "$1"; }
+function patch1() { patch -p0 < "$1"; }
 
 # version... 
 # Usage: patch21 filetopatch patch_file
-function patch21 () { patch "$1" < "$2"; }
+function patch21() { patch "$1" < "$2"; }
 
 # Sir Patchalot
 function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
+
+
+## Misc
+
+# OSX “say” for Linux
+# http://jacobsalmela.com/raspberry-pi-and-the-say-command-from-osx-how-to-make-your-pi-speak-at-will/
+#function say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
