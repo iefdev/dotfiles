@@ -11,13 +11,15 @@
 # ----------------------------------------
 #
 
-### File & folders
+
+## File & folders
 
 # Alias to cd the folder:
 alias cdD='cd ~/Desktop'
 alias cdS='cd ~/ShellScripts'
 alias cdR='cd ~/Repos'
 alias cdT='cd ~/.Trash'
+alias cdL='cd /usr/local'
 alias www='cd ~/Sites'
 alias srv='cd /srv'
 alias srw='cd /srv/www'
@@ -68,8 +70,9 @@ alias ping='ping -c 3'
 alias fastping='ping -c 20 -s.2'
 
 # PngCrush from Xcode
-# Xcode is uninstalled and pngcrushed copied into /usr/local/sbin
+# Xcode is uninstalled and pngcrush copied into /usr/local/sbin/pngcrusha
 #alias pngXcrush='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/pngcrush'
+
 
 # Alias for web2png.sh
 alias web2png='~/ShellScripts/web2png.sh'
@@ -85,6 +88,7 @@ alias suno='sudo nano'
 
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
+
 
 # .bash_xxxxxxx
 alias openBashrc='open ~/.bashrc'
@@ -120,11 +124,9 @@ alias rmDF='find ./ -name "._*" -delete'
 #alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
 #alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
-
 # Flush (DNS)cache
 alias killDNS='sudo killall -HUP mDNSResponder'
 alias flushDNS='sudo dscacheutil -flushcache'
-
 
 # Read the "hidden" download history
 alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'select LSQuarantineDataURLString from LSQuarantineEvent' | uniq | more"
@@ -132,8 +134,7 @@ alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineE
 # Delete the "hidden" download history
 alias cleanDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
-
-## Read/Delete the Dropbox cache folder (= more space).
+# Read/Delete the Dropbox cache folder (= more space).
 alias readDBC='ls -alh ~/Dropbox/.dropbox.cache/'
 alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 
@@ -150,16 +151,16 @@ alias resetOpenWith='cd /System/Library/Frameworks/CoreServices.framework/Versio
 alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 
 
-### ShellScripts
+## ShellScripts
 
 # Usage: cleanDisk "Name of Disk"
 alias cleanDisk='~/ShellScripts/cleanDisk.sh'
 
-## Dropbox Uploader
+# Dropbox Uploader
 alias dbUpload='~/ShellScripts/dropbox_uploader.sh'
 
 
-### Misc stuff
+## Misc stuff
 
 # Check why it doesn't go to sleep
 alias whatsOpen='pmset -g assertions'
@@ -167,10 +168,10 @@ alias whatsOpen='pmset -g assertions'
 # List connected hardware
 alias whatHW='networksetup -listallhardwareports'
 
-### Screen Saver Engine
+# Screen Saver Engine
 alias sse='open -a ScreenSaverEngine'
 
-## Add to defaults to custom history log
+# Add to defaults to custom history log
 # moving to: .bashrc (see PROMT_COMMAND)
 #alias defLog='history | grep "defaults write" >> $HOME/ShellScripts/__defaultsLog.txt'
 alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
@@ -186,14 +187,14 @@ alias wgetc='wget -c'
 alias wgetnc='wget --no-check-certificate'
 
 
-## Password assistant
+# Password assistant
 alias passist='open -a Password\ Assistant'
 
-## Links 2.7
+# Links 2.7
 alias LinX='links -g'
 
 
-## MySQL
+# MySQL
 alias mysql='/usr/local/mysql/bin/mysql'
 alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
 
@@ -203,8 +204,8 @@ alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 alias openSqlHistory='open ~/.mysql_history'
 
 
-### PostgreSQL
-#/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
+# PostgreSQL
+# /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
 alias psql='/usr/local/pgsql/bin/psql'
 alias postgres='/usr/local/pgsql/bin/postgres'
 alias PostgreSQL='sudo /Library/StartupItems/PostgreSQL/PostgreSQL'
@@ -229,6 +230,7 @@ alias PostgreSQL='sudo /Library/StartupItems/PostgreSQL/PostgreSQL'
 # Start with: pyWeb
 # Stop with: ctrl+C
 #
+# (think I'll will move this to a function instead)
 
 # Check version
 py3=`python -c 'import sys; print(sys.version_info[:3])' | sed 's/.*\(3\).*/\1/'`
