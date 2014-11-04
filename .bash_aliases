@@ -29,6 +29,9 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias ln='ln -iv'
 
+# alt cp with rsync (testing)
+alias cpa='rsync -avhP'
+
 alias c='clear'
 alias cx='clear && archey'
 
@@ -88,6 +91,9 @@ alias suno='sudo nano'
 
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
+
+# Need this one for: sudo <alias>
+alias sudo='sudo '
 
 
 # .bash_xxxxxxx
@@ -192,6 +198,18 @@ alias passist='open -a Password\ Assistant'
 
 # Links 2.7
 alias LinX='links -g'
+
+
+## PHP
+# @todo: clean up and se what I need.
+alias php54='/usr/local/php54/bin/php'
+alias phpize54='/usr/local/php54/bin/phpize'
+alias pear54='/usr/local/php54/bin/pear'
+
+alias php56='/usr/local/php56/bin/php'
+alias phpize56='/usr/local/php56/bin/phpize'
+alias pear56='/usr/local/php56/bin/pear'
+alias=php-fpm='/usr/local/php56/sbin/php-fpm'
 
 
 # MySQL

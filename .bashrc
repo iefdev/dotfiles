@@ -7,6 +7,12 @@
 # This file is also sourced from ~/.bash_profile
 #
 
+# Apache 2.4
+_AP24="/usr/httpd/bin:/usr/httpd/sbin"
+
+# PHP 5.{4,6}
+_PHP="/usr/local/php54/bin"
+
 # Git
 _GIT="/usr/local/git/bin"
 
@@ -24,9 +30,9 @@ _Sh="$HOME/ShellScripts"
 _xbin="/usr/local/xbin"
 
 # export PATH.
-export PATH="/usr/local/bin:/usr/local/sbin:$_xbin:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
+export PATH="$_AP24:/usr/local/bin:/usr/local/sbin:$_xbin:$_PHP:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
 
-#http://osxdaily.com/2013/04/03/keep-track-of-defaults-write-commands-used-in-mac-os-x-automatically/
+# http://osxdaily.com/2013/04/03/keep-track-of-defaults-write-commands-used-in-mac-os-x-automatically/
 PROMPT_COMMAND='echo "$(history 1 | grep "defaults")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
 
 # Set architecture flags
@@ -41,7 +47,7 @@ export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Colors in man pages.
+# Colors in man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -103,6 +109,9 @@ PS4=' :+ '
 # Try to keep environment pollution down, EPA loves us. unset use_color improve bash history ;)
 shopt -s histappend
 #PROMPT_COMMAND=$PROMPT_COMMAND';history -a'
+
+# Date & time to history
+#export HISTTIMEFORMAT='%F %T '
 
 export HISTFILESIZE=15000
 export HISTSIZE=15000
