@@ -43,6 +43,12 @@ alias q='exit'
 # top, show cpu and memory. 20 processes. (exit with: q)
 alias top20='top -o cpu -O +rsize -s 5 -n 20'
 
+# show 10 largest files/dirs in current directory
+alias lsTop10='du -cks * | sort -rn | head -11'
+
+# show the largest one
+alias lsTop='du -ks * | sort -n'
+
 # Prevents errors when path is not created.
 alias mkdir='mkdir -pv'
 alias rmdir='rm -rv'
@@ -196,7 +202,7 @@ alias wgetnc='wget --no-check-certificate'
 # Password assistant
 alias passist='open -a Password\ Assistant'
 
-# Links 2.7
+# Links 2.8
 alias LinX='links -g'
 
 
@@ -209,7 +215,8 @@ alias pear54='/usr/local/php54/bin/pear'
 alias php56='/usr/local/php56/bin/php'
 alias phpize56='/usr/local/php56/bin/phpize'
 alias pear56='/usr/local/php56/bin/pear'
-alias=php-fpm='/usr/local/php56/sbin/php-fpm'
+alias php-fpm='/usr/local/php56/sbin/php-fpm'
+alias fpmctl='/usr/local/php56/sbin/fpmctl'
 
 
 # MySQL
