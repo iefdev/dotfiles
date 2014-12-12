@@ -141,6 +141,16 @@ function patch21() { patch "$1" < "$2"; }
 function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
 
 
+# Adminer :: Changing theme.
+function chgAdminer()
+{
+	_theme="$1";
+	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
+}
+
+## GPG
+function chksig() { gpg --verify "$1.sig" "$1"; }
+
 ## Misc
 
 # OSX “say” for Linux

@@ -105,11 +105,6 @@ PS4=' :+ '
 # Load archey (if installed)
 [[ `which archey` && $UID != 0 ]] && archey
 
-## http://www.twam.info/software/tune-terminal-in-os-x-lion
-# Try to keep environment pollution down, EPA loves us. unset use_color improve bash history ;)
-shopt -s histappend
-#PROMPT_COMMAND=$PROMPT_COMMAND';history -a'
-
 # Date & time to history
 #export HISTTIMEFORMAT='%F %T '
 
@@ -117,7 +112,11 @@ export HISTFILESIZE=15000
 export HISTSIZE=15000
 
 # No duplicates
-export HISTCONTROL=ignoredups
+# ignoreboth (ignoredups + ignorespace)
+export HISTCONTROL=ignoreboth:erasedups
+
+shopt -s histappend
+PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
 
 # Set the default editor
 export EDITOR=nano
