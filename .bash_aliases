@@ -34,6 +34,7 @@ alias cpa='rsync -avhP'
 
 alias c='clear'
 alias cx='clear && archey'
+alias cxH='cd && clear && archey'
 
 alias h='history'
 alias j='jobs -l'
@@ -55,7 +56,7 @@ alias rmdir='rm -rv'
 alias rm='rm -v'
 alias ls='ls -G'
 alias ls.='ls -d .*'
-alias lsal='ls -AhlG'
+alias lsal='ls -Ahl'
 alias lsless='ls -Ahl | less'
 
 alias grep='grep -n --color=auto'

@@ -27,6 +27,9 @@ function delHist() { sed "/$1/d" $HISTFILE > $HISTFILE.tmp && mv $HISTFILE{.tmp,
 # cd directory of "foo"...
 function cd2() { cd $(dirname `which $1`); }
 
+# cd directory and list
+function cdl() { cd "$1"; ls -Ahl; }
+
 # rsync folder2folder
 function rsyncdir() { 
 	# removing trailing "/" and adding our own
@@ -148,11 +151,20 @@ function chgAdminer()
 	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
 }
 
-## GPG
+# GPG
 function chksig() { gpg --verify "$1.sig" "$1"; }
 
-## Misc
+
+## Misc & Funsies
 
 # OSX “say” for Linux
 # http://jacobsalmela.com/raspberry-pi-and-the-say-command-from-osx-how-to-make-your-pi-speak-at-will/
 #function say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
+
+# Most freq used commands
+# usage: ctop 15
+function ctop()
+{
+	local nr=$1;
+	history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
+}

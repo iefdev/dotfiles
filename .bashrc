@@ -10,8 +10,9 @@
 # Apache 2.4
 _AP24="/usr/httpd/bin:/usr/httpd/sbin"
 
-# PHP 5.{4,6}
-_PHP="/usr/local/php54/bin"
+# PHP 5.6 (default)
+# + PHP 5.{4,6} in .bash_aliases
+_PHP="/usr/local/php56/bin"
 
 # Git
 _GIT="/usr/local/git/bin"
@@ -49,12 +50,12 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Colors in man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;38;5;75m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_so=$'\E[0;38;5;246m'
 export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS_TERMCAP_us=$'\E[04;38;5;83m'
 
 #
 # Fix host issue (as superuser): "man scutil" + /etc/hostconfig (foobar.dev)
