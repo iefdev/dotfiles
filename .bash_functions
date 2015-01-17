@@ -13,8 +13,8 @@
 
 ## File & folders
 
-# locate in home
-function llocate { locate $* | egrep "^$HOME/"; }
+# locate in ext. disk (pics, docs etc) 
+#function Locate { locate $* | egrep "^/Volumes/NameOfDisk"; }
 
 # Make a dir and cd into it
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
