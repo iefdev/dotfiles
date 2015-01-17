@@ -66,6 +66,13 @@ alias forceTrash='rm -rv ~/.Trash/{.*,*}'
 # Echo PATH on separate lines
 alias lPath="echo $PATH | tr ':' '\n'"
 
+# locate home dir (llocate)
+alias llocate='locate -d $HOME/Library/Locate/llocate.database'
+
+# manually update (l)locate
+alias locateupd='sudo /usr/libexec/locate.updatedb'
+alias llocateupd='$HOME/Library/Locate/llocate.updatedb'
+
 # Get external IP
 alias myIP='dig +short myip.opendns.com @resolver1.opendns.com'
 
