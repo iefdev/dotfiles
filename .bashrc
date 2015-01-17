@@ -7,15 +7,15 @@
 # This file is also sourced from ~/.bash_profile
 #
 
-# GCC 4.9
-_GCC="/usr/gcc-4.9/bin"
-
 # Apache 2.4
 _AP24="/usr/httpd/bin:/usr/httpd/sbin"
 
 # PHP 5.6 (default)
 # + PHP 5.{4,6} in .bash_aliases
 _PHP="/usr/local/php56/bin"
+
+# GCC 4.9
+_GCC="/usr/gcc-4.9/bin"
 
 # Git
 _GIT="/usr/local/git/bin"
@@ -34,7 +34,7 @@ _Sh="$HOME/ShellScripts"
 _xbin="/usr/local/xbin"
 
 # export PATH.
-export PATH="$_AP24:$_GCC:/usr/local/bin:/usr/local/sbin:$_xbin:$_PHP:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
+export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:$_Sh:/usr/local/bin:/usr/local/sbin:$_xbin:$PATH"
 
 # http://osxdaily.com/2013/04/03/keep-track-of-defaults-write-commands-used-in-mac-os-x-automatically/
 PROMPT_COMMAND='echo "$(history 1 | grep "defaults")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
@@ -60,19 +60,24 @@ export LESS_TERMCAP_so=$'\E[0;38;5;246m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[04;38;5;83m'
 
+
+
 #
 # Fix host issue (as superuser): "man scutil" + /etc/hostconfig (foobar.dev)
 #
 # Read                        |  Set new name
-# ----------------------------|-----------------------------------------------
-# scutil -–get LocalHostName  |  sudo scutil -–set LocalHostName Shortname
-# scutil -–get ComputerName   |  sudo scutil -–set ComputerName "Shortname's Mac Pro"
-# scutil -–get HostName       |  sudo scutil -–set HostName foobar.dev
+# ----------------------------|-------------------------------------------------
+# scutil --get LocalHostName  |  sudo scutil --set LocalHostName Shortname
+# scutil --get ComputerName   |  sudo scutil --set ComputerName "Shortname's Mac Pro"
+# scutil --get HostName       |  sudo scutil --set HostName foobar.dev
 #
 # xtra: In "/etc/hostconfig", add (example): HOSTNAME=foobar.dev
 #
 
-# Bash name(s) ...
+
+
+# Bash name(s)
+# ------------------------------------------------------------------------------
 
 # colors used in PS1
 _grn='\[\e[0;32m\]'    # green
@@ -98,7 +103,8 @@ PS3=' :? '
 PS4=' :+ '
 
 
-### Load .bash_* files
+# Load .bash_* files + Archey
+# ------------------------------------------------------------------------------
 
 # Load: .bash_aliases
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
@@ -108,6 +114,20 @@ PS4=' :+ '
 
 # Load archey (if installed)
 [[ `which archey` && $UID != 0 ]] && archey
+
+
+# Git
+# ------------------------------------------------------------------------------
+
+# Show branch in git (git_branch(), see .bash_functions)
+PS1="\[\e[0;32m\]\$(git_branch)\[\e[m\]$PS1";
+
+# Load git-completion
+[ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
+
+
+# Misc xtras
+# ------------------------------------------------------------------------------
 
 # Date & time to history
 #export HISTTIMEFORMAT='%F %T '
