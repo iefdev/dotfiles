@@ -13,6 +13,9 @@
 
 ## File & folders
 
+# locate in home
+function llocate { locate $* | egrep "^$HOME/"; }
+
 # Make a dir and cd into it
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
 
@@ -22,7 +25,7 @@ function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
 # Search/delete lines in history 
-function delHist() { sed "/$1/d" $HISTFILE > $HISTFILE.tmp && mv $HISTFILE{.tmp,}; }
+function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
 # cd directory of "foo"...
 function cd2() { cd $(dirname `which $1`); }
@@ -157,7 +160,7 @@ function chksig() { gpg --verify "$1.sig" "$1"; }
 
 ## Misc & Funsies
 
-# OSX “say” for Linux
+# OSX "say" for Linux
 # http://jacobsalmela.com/raspberry-pi-and-the-say-command-from-osx-how-to-make-your-pi-speak-at-will/
 #function say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
