@@ -137,9 +137,12 @@ alias rmDF='find ./ -name "._*" -delete'
 #alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
 #alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
-# Flush (DNS)cache
-alias killDNS='sudo killall -HUP mDNSResponder'
-alias flushDNS='sudo dscacheutil -flushcache'
+# Kill/Flush (DNS)cache (10.7/8/9)
+alias flushDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;'
+
+# Kill/Flush (DNS)cache (10.10)
+# Read more: http://osxdaily.com/2008/03/21/how-to-flush-your-dns-cache-in-mac-os-x/
+alias flushdns='sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;'
 
 # Read the "hidden" download history
 alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'select LSQuarantineDataURLString from LSQuarantineEvent' | uniq | more"
@@ -148,7 +151,7 @@ alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineE
 alias cleanDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # Read/Delete the Dropbox cache folder (= more space).
-alias readDBC='ls -alh ~/Dropbox/.dropbox.cache/'
+alias readDBC='ls -Alh ~/Dropbox/.dropbox.cache/'
 alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 
 # Clean Out LaunchPad
@@ -212,7 +215,9 @@ alias LinX='links -g'
 alias php54='/usr/local/php54/bin/php'
 alias phpize54='/usr/local/php54/bin/phpize'
 alias pear54='/usr/local/php54/bin/pear'
+alias pecl54='/usr/local/php54/bin/pecl'
 
+# note: /usr/local/php56... is in PATH
 alias php56='/usr/local/php56/bin/php'
 alias phpize56='/usr/local/php56/bin/phpize'
 alias pear56='/usr/local/php56/bin/pear'
