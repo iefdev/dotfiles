@@ -7,6 +7,9 @@
 # This file is also sourced from ~/.bash_profile
 #
 
+# GCC 4.9
+_GCC="/usr/gcc-4.9/bin"
+
 # Apache 2.4
 _AP24="/usr/httpd/bin:/usr/httpd/sbin"
 
@@ -31,7 +34,7 @@ _Sh="$HOME/ShellScripts"
 _xbin="/usr/local/xbin"
 
 # export PATH.
-export PATH="$_AP24:/usr/local/bin:/usr/local/sbin:$_xbin:$_PHP:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
+export PATH="$_AP24:$_GCC:/usr/local/bin:/usr/local/sbin:$_xbin:$_PHP:$_GIT:$_SQL:$_PY:$_Sh:$PATH"
 
 # http://osxdaily.com/2013/04/03/keep-track-of-defaults-write-commands-used-in-mac-os-x-automatically/
 PROMPT_COMMAND='echo "$(history 1 | grep "defaults")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
@@ -122,5 +125,5 @@ PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
 # Set the default editor
 export EDITOR=nano
 
-# autocd in bash 4.3
-shopt -s globstar autocd
+# bash 4.3
+[[ `$SHELL --version | grep 'version 4.3'` ]] && shopt -s globstar autocd
