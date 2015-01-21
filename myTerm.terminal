@@ -104,6 +104,8 @@
 	<true/>
 	<key>UseBrightBold</key>
 	<true/>
+	<key>WindowTitle</key>
+	<string>Terminal</string>
 	<key>columnCount</key>
 	<integer>100</integer>
 	<key>name</key>
