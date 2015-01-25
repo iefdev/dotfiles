@@ -112,18 +112,11 @@ PS4=' :+ '
 # Load: .bash_functions
 [ -f ~/.bash_functions ] && . ~/.bash_functions
 
+#Load: ~/.bash_git
+[ -f ~/.bash_git ] && . ~/.bash_git
+
 # Load archey (if installed)
 [[ `which archey` && $UID != 0 ]] && archey
-
-
-# Git
-# ------------------------------------------------------------------------------
-
-# Show branch in git (git_branch(), see .bash_functions)
-PS1="\[\e[0;32m\]\$(git_branch)\[\e[m\]$PS1";
-
-# Load git-completion
-[ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
 
 
 # Misc xtras

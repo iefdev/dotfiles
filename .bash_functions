@@ -171,6 +171,3 @@ function ctop()
 	local nr=$1;
 	history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
 }
-
-# Git branch to PS1 (see .bashrc)
-git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'; }
