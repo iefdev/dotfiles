@@ -1,0 +1,21 @@
+#
+# ~/.bash_git
+#
+# Description: Separate file for git related stuff
+# 
+#
+# Load it in: ~/.bashrc with
+# ------------------------------------------------------------------------------
+#   #Load: ~/.bash_git
+#   [ -f ~/.bash_git ] && . ~/.bash_git
+# ------------------------------------------------------------------------------
+#
+
+# Function to get current branch
+git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'; }
+
+# Git branch to PS1 (see .bashrc)
+PS1="\[\e[0;32m\]\$(git_branch)\[\e[m\]$PS1";
+
+# Load git-completion
+[ -f /usr/local/git/contrib/completion/git-completion.bash ] && . /usr/local/git/contrib/completion/git-completion.bash
