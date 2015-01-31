@@ -18,7 +18,7 @@ My (OS X) Terminal theme/preferences: [myTerm][mt]
 
 
 <!-- Markdown: link and img defs -->
-[arch]: https://github.com/iEFdev/dotfiles/blob/master/linux/ReadMe.md "dotfiles :: Linux"
-[osx]: https://github.com/iEFdev/dotfiles/blob/master/osx/ReadMe.md "dotfiles :: OS X"
-[mt]: https://github.com/iEFdev/dotfiles/blob/master/myTerm/ReadMe.md "myTerm"
+[arch]: https://github.com/iEFdev/dotfiles/tree/master/linux "dotfiles :: Linux"
+[osx]: https://github.com/iEFdev/dotfiles/tree/master/osx "dotfiles :: OS X"
+[mt]: https://github.com/iEFdev/dotfiles/tree/master/myTerm "myTerm"
 [mt_img]: https://raw.githubusercontent.com/iEFdev/dotfiles/master/myTerm/myTerm_maingrp.jpg "myTerm"
