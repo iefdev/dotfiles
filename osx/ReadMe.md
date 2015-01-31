@@ -10,7 +10,7 @@ hostname
 
 In OS X, sometimes the hostname in Terminal ends up with a long serie of numbers and letters (ISP related).
 
-To fix that, use [`scutil`][man] _(OS X link)_.
+To fix that, use `scutil`.
 
 | Read                       | Set new name                                         |
 | :------------------------- | :--------------------------------------------------- |
@@ -40,4 +40,3 @@ If you use a hostname with a dot _(like: foobar.dev)_. `PS1` will display differ
 	\H		# diplays foobar.dev
 
 <!-- Markdown: link & image defs -->
-[man]: x-man-page://scutil "Direct link to the manual page in OS X Terminal: x-man-page://scutil"
