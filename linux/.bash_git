@@ -1,12 +1,12 @@
 #
 # ~/.bash_git
 #
-# Description: Separate file for git related stuff
 #
+# Description: Separate file for git related stuff
 #
 # Load it in: ~/.bashrc with
 # ------------------------------------------------------------------------------
-#   #Load: ~/.bash_git
+#   # Load: ~/.bash_git
 #   [ -f ~/.bash_git ] && . ~/.bash_git
 # ------------------------------------------------------------------------------
 #

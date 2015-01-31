@@ -1,8 +1,8 @@
 #
 # ~/.bash_aliases
 #
-# Description: Separate file for alias
 #
+# Description: Separate file for alias
 #
 # Load it in ~/.bashrc with:
 # ------------------------------------------------------------------------------

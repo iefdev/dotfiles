@@ -1,6 +1,7 @@
 #
 # ~/.bash_profile
 #
+#
 # Content in .bashrc, and sourced in here.
 #
 # > @todo: Bring in the xtra lines from Arch,
