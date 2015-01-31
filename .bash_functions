@@ -13,7 +13,7 @@
 
 ## File & folders
 
-# locate in ext. disk (pics, docs etc) 
+# locate in ext. disk (pics, docs etc)
 #function Locate { locate $* | egrep "^/Volumes/NameOfDisk"; }
 
 # Make a dir and cd into it
@@ -24,7 +24,7 @@ function mkbakd() { _dir=`echo "$1" | sed 's/\/*$//g'`; ditto -v "$_dir"{,.bak};
 function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
-# Search/delete lines in history 
+# Search/delete lines in history
 function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
 # cd directory of "foo"...
@@ -34,7 +34,7 @@ function cd2() { cd $(dirname `which $1`); }
 function cdl() { cd "$1"; ls -Ahl; }
 
 # rsync folder2folder
-function rsyncdir() { 
+function rsyncdir() {
 	# removing trailing "/" and adding our own
 	# to make sure ther is one, and not end up with "//"
 	_from_dir=`echo "$1" | sed 's/\/*$//g'`;
@@ -82,7 +82,7 @@ function ytdl() { youtube-dl -ci "$1"; }
 
 # tar.gz ($1 = folder name)
 function tarGZ()
-{ 
+{
 	_dir=`echo "$1" | sed -e 's/\/$//g'`;
 	tar -zcvf "$_dir".tar.gz --exclude ".DS_Store" --exclude "._*" "$_dir";
 }
@@ -90,7 +90,7 @@ function untarGZ() { tar -zxvf "$1"; }
 
 # tar.bz2
 function tarBZ()
-{ 
+{
 	_dir=`echo "$1" | sed -e 's/\/$//g'`;
 	tar -jcvf "$_dir".tar.bz2 --exclude ".DS_Store" --exclude "._*" "$_dir";
 }
@@ -139,7 +139,7 @@ function patchfile() { patch < "$1"; }
 # Usage: patch1 patch_file
 function patch1() { patch -p0 < "$1"; }
 
-# version... 
+# version...
 # Usage: patch21 filetopatch patch_file
 function patch21() { patch "$1" < "$2"; }
 
@@ -170,4 +170,16 @@ function ctop()
 {
 	local nr=$1;
 	history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
+}
+
+# Thumbs to 250px
+function athumb()
+{
+	convert -resize 250x250 -quality 100 {,th_}$1;
+}
+
+function rmxattr()
+{
+	local _file="$1"
+	xattr -d $(xattr "$_file") "$_file";
 }

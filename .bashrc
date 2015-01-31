@@ -30,13 +30,13 @@ alias python='/usr/local/bin/python3'
 # ShellScripts
 _Sh="$HOME/ShellScripts"
 
-# xbin fo custom (self made) scripts
+# xbin for my own scripts
 _xbin="/usr/local/xbin"
 
 # export PATH.
 export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:$_Sh:/usr/local/bin:/usr/local/sbin:$_xbin:$PATH"
 
-# http://osxdaily.com/2013/04/03/keep-track-of-defaults-write-commands-used-in-mac-os-x-automatically/
+# Log "defaults ..." to separate file
 PROMPT_COMMAND='echo "$(history 1 | grep "defaults")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
 
 # Set architecture flags
@@ -46,10 +46,9 @@ export ARCHFLAGS="-arch x86_64"
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 
 # Bash color
-# Fix mmore later.... (http://it.toolbox.com/blogs/lim/how-to-fix-colors-on-mac-osx-terminal-37214)
-# http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+export GREP_COLOR='1;33'
 
 # Colors in man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -96,7 +95,7 @@ _host='\h'
 # root is red
 [ $UID == 0 ] && _grn=${_red} && _user='\u'
 
-# PS 1-4 
+# PS 1-4
 PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
 PS2=' :» '
 PS3=' :? '
@@ -128,8 +127,9 @@ PS4=' :+ '
 export HISTFILESIZE=15000
 export HISTSIZE=15000
 
-# No duplicates
-# ignoreboth (ignoredups + ignorespace)
+export HISTIGNORE='&:[ ]*#'
+
+# ignoreboth (= ignoredups + ignorespace)
 export HISTCONTROL=ignoreboth:erasedups
 
 shopt -s histappend
@@ -137,6 +137,22 @@ PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
 
 # Set the default editor
 export EDITOR=nano
+
+
+# Misc set & shopt settings
+# ------------------------------------------------------------------------------
+
+# Correct dir spellings
+shopt -q -s cdspell
+
+# Turn on the extended pattern matching features
+shopt -q -s extglob
+
+# Get immediate notification of background job termination
+set -o notify
+
+# Disable [CTRL-D] which is used to exit (logout) the shell
+set -o ignoreeof
 
 # bash 4.3
 [[ `$SHELL --version | grep 'version 4.3'` ]] && shopt -s globstar autocd

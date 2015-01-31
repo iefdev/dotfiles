@@ -51,5 +51,5 @@ _You can see more screenshots in the [Archey-OS-X][archey] repository_
 
 <!-- Markdown: links & images -->
 
-[scrap_maingrp]: https://raw.githubusercontent.com/iEFdev/dotfiles/master/myTerm_maingrp.jpg "Window group: maingrp ^⌘1"
+[scrap_maingrp]: https://raw.githubusercontent.com/iEFdev/dotfiles/master/myTerm/myTerm_maingrp.jpg "Window group: maingrp ^⌘1"
 [archey]: https://github.com/iEFdev/Archey-OS-X "Archey :: OSX"
