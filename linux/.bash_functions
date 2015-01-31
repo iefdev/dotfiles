@@ -1,12 +1,12 @@
 #
 # ~/.bash_functions
 #
-# Description: Separate file for bash functions and helpers
 #
+# Description: Separate file for bash functions and helpers
 #
 # Load it in: ~/.bashrc with
 # ------------------------------------------------------------------------------
-#   #Load: ~/.bash_functions
+#   # Load: ~/.bash_functions
 #   [ -f ~/.bash_functions ] && . ~/.bash_functions
 # ------------------------------------------------------------------------------
 #
