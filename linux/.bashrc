@@ -19,7 +19,7 @@ _Sh="$HOME/ShellScripts"
 _xbin="/usr/local/xbin"
 
 # export PATH.
-export PATH="$_Sh:/usr/local/bin:/usr/local/sbin:$_xbin:$PATH"
+export PATH="$_Sh:$_xbin:$PATH"
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
