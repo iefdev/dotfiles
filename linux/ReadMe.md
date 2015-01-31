@@ -1,6 +1,20 @@
 dotfiles :: Linux
 =================
 
-_Nothing here yet..._
+This is a set of the dotfiles I use with ArchLinux.
 
-I'll keep a set of my dotfiles I use in ArchLinux here. Most are the same. It's `more | less` minus the OS X stuff + a few Pacman aliases.
+_@ the time, same as before, minus the OS X stuff. Need to add the Pacman stuff + a few more_
+
+<br />
+
+notes
+-----
+
+Some aliases and functions are using `x-clip`.
+
+Look in your package manager, or download it [here][xclip].
+
+
+
+<!-- Markdown: link & image defs -->
+[xclip]: http://sourceforge.net/projects/xclip/ "xclip :: SourceForge"
