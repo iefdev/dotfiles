@@ -1,16 +1,8 @@
 # Adding session...
 history -a ~/.bash_history
 
-# Clean up
-# Need a few aliases...
-if [ -f ~/.bash_aliases ]; then
-
-	# Clean up download (hidden) history
-	cleanDL
-
-	# Clean up the Dropbox cache
-	[ -d ~/Dropbox/.dropbox.cache ] && cleanDBC
-fi
+# Delete the "hidden" download history
+sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'
 
 # Bye... (in Swedish ^^)
 say -v Samantha Hey dauh

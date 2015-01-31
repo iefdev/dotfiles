@@ -1,11 +1,13 @@
 #
 # ~/.bashrc
 #
+#
 # Aliases (except 1 python alias) and Functions are kept in their own files:
 # (~/.bash_aliases and ~/.bash_functions)
 #
 # This file is also sourced from ~/.bash_profile
 #
+
 
 # Apache 2.4
 _AP24="/usr/httpd/bin:/usr/httpd/sbin"
