@@ -46,7 +46,7 @@ export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:$_Sh:/usr/local/bin:/usr/local/
 #export PATH="$_autoconf:$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:$_Sh:/usr/local/bin:/usr/local/sbin:$_xbin:$PATH"
 
 # Log "defaults ..." to separate file
-PROMPT_COMMAND='echo "$(history 1 | grep -E '(sudo)? defaults ')" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
+PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
