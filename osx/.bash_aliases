@@ -105,6 +105,8 @@ alias fuck='sudo $(history -p \!\!)'
 # Need this one for: sudo <alias>
 alias sudo='sudo '
 
+# Open here...
+alias oh='open .'
 
 # .bash_xxxxxxx
 alias openBashrc='open ~/.bashrc'
