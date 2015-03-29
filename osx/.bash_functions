@@ -44,15 +44,6 @@ function rsyncdir() {
 	rsync -avzuc --delete "$_from_dir/" "$_to_dir/";
 }
 
-# Adminer :: Changing theme.
-function chgAdminer()
-{
-	_theme="$1";
-	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
-}
-
-# GPG
-function chksig() { gpg --verify "$1.sig" "$1"; }
 
 # Remove sticky bit
 function rmxattr()
@@ -93,6 +84,8 @@ function man2txt()
 # open man-page(s) in its own window. Use: "manx" instead of "man" (OS X)
 function manx() { local i; for i; do open x-man-page://$i; done; }
 
+# comandline search
+function ddg() { open -a Firefox "https://duckduckgo.com/?q=$1"; }
 
 # Compression
 # ------------------------------------------------------------------------------
@@ -113,13 +106,23 @@ function tarBZ()
 }
 function untarBZ() { tar -jxvf "$1"; }
 
+# tar.xz
+function tarXZ()
+{
+	_dir=`echo "$1" | sed -e 's/\/$//g'`;
+	tar -cvf - "$_dir" | xz -4e > "$_dir".tar.xz;
+	#tar -cvf - "$_dir" | xz -2e > "$_dir".tar.xz;
+}
+function untarXZ() { tar -jxvf "$1"; }
+
+
 # Function extract
 # (using 7za instead of 7z)
 extract ()
 {
 	if [ -f $1 ]; then
 		case $1 in
-			*.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
+			*.tar.xz | *.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
 			*.tar.gz | *.tgz) tar -zxvf $1 ;;
 			*.bz2) bunzip2 $1	;;
 			*.rar) unrar -e $1	;;
@@ -168,8 +171,16 @@ function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
 # Misc & Funsies
 # ------------------------------------------------------------------------------
 
-# comandline search
-function ddg() { open -a Safari "https://duckduckgo.com/?q=$1"; }
+# Adminer :: Changing theme.
+function chgAdminer()
+{
+	_theme="$1";
+	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
+}
+
+# GPG
+function chksig() { gpg --verify "$1.sig" "$1"; }
+
 
 # youtube-dl
 function ytdl() { youtube-dl -ci "$1"; }
@@ -186,4 +197,11 @@ function ctop()
 function athumb()
 {
 	convert -resize 250x250 -quality 100 {,th_}$1;
+}
+
+# Remove sticky bit
+function rmxattr()
+{
+	local _file="$1"
+	xattr -d $(xattr "$_file") "$_file";
 }
