@@ -9,11 +9,17 @@
 #
 
 
+# Fix for additional added manual path's...
+# OS X ssems to forget/ignore som of the paths added
+# to /etc/manpaths and /etc/manpaths.d/
+export MANPATH=
+if [ -x /usr/libexec/path_helper ]; then
+        eval `/usr/libexec/path_helper -s`
+fi
+
+
 #PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig"
 #export PKG_CONFIG_PATH
-
-# older version for php <_<
-_autoconf="/usr/local/autoconf-2.5.9/bin"
 
 # GCC 4.9.1
 _GCC="/usr/gcc-4.9/bin"
@@ -21,9 +27,8 @@ _GCC="/usr/gcc-4.9/bin"
 # Apache 2.4
 _AP24="/usr/httpd/bin:/usr/httpd/sbin"
 
-# PHP 5.6 (default)
-# + PHP 5.{4,6} in .bash_aliases
-_PHP="/usr/local/php56/bin"
+# PHP 5.6 (default), 5.4 in .bash_aliases
+_PHP="/usr/local/php56/bin:/usr/local/php56/sbin"
 
 # Git
 _GIT="/usr/local/git/bin"
@@ -35,15 +40,17 @@ _SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
 _PY="/Library/Frameworks/Python.framework/Versions/3.3/bin"
 alias python='/usr/local/bin/python3'
 
+# xbin for own custom scripts
+_xbin="/usr/local/xbin"
+
 # ShellScripts
 _Sh="$HOME/ShellScripts"
 
-# xbin for my own scripts
-_xbin="/usr/local/xbin"
-
 # export PATH.
-export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:$_Sh:/usr/local/bin:/usr/local/sbin:$_xbin:$PATH"
-#export PATH="$_autoconf:$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:$_Sh:/usr/local/bin:/usr/local/sbin:$_xbin:$PATH"
+export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
+
+# older version for php <_<
+#export PATH="/usr/local/autoconf-2.5.9/bin:$PATH"
 
 # Log "defaults ..." to separate file
 PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
@@ -148,7 +155,8 @@ export HISTIGNORE='&:[ ]*#'
 export HISTCONTROL=ignoreboth:erasedups
 
 shopt -s histappend
-PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+#PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
 
 # Set the default editor
 export EDITOR=nano

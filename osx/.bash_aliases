@@ -61,6 +61,8 @@ alias lsal='ls -Ahl'
 alias lsless='ls -Ahl | less'
 
 alias grep='grep -n --color=auto'
+alias egrep='egrep -n --color=auto'
+alias fgrep='fgrep -n --color=auto'
 
 alias forceTrash='rm -rv ~/.Trash/{.*,*}'
 
@@ -105,6 +107,8 @@ alias fuck='sudo $(history -p \!\!)'
 # Need this one for: sudo <alias>
 alias sudo='sudo '
 
+# Open here...
+alias oh='open .'
 
 # .bash_xxxxxxx
 alias openBashrc='open ~/.bashrc'
