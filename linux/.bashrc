@@ -101,7 +101,7 @@ export HISTIGNORE='&:[ ]*#'
 export HISTCONTROL=ignoreboth:erasedups
 
 shopt -s histappend
-PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Set the default editor
 export EDITOR=nano
@@ -123,5 +123,4 @@ set -o notify
 set -o ignoreeof
 
 # globstar & autocd
-shopt -q -s globstar
-shopt -q -s autocd
+shopt -q -s globstar autocd

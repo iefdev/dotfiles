@@ -22,7 +22,7 @@
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
 
 # Misc bak helpers (mbakd, for dirs)
-function mkbakd() { _dir=`echo "$1" | sed 's/\/*$//g'`; ditto -v "$_dir"{,.bak}; }
+#function mkbakd() { _dir=`echo "$1" | sed 's/\/*$//g'`; ditto -v "$_dir"{,.bak}; }
 function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
@@ -46,6 +46,9 @@ function rsyncdir() {
 
 # GPG
 function chksig() { gpg --verify "$1.sig" "$1"; }
+
+# Open
+open() { xdg-open "$@" > /dev/null 2>&1 ;}
 
 
 # Get this...
@@ -102,7 +105,7 @@ extract ()
 {
 	if [ -f $1 ]; then
 		case $1 in
-			*.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
+			*.tar.xz | *.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
 			*.tar.gz | *.tgz) tar -zxvf $1 ;;
 			*.bz2) bunzip2 $1	;;
 			*.rar) unrar -e $1	;;
