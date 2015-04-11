@@ -2,10 +2,11 @@
 # ~/.bashrc
 #
 #
-# Aliases (except 1 python alias) and Functions are kept in their own files:
+# Aliases (except 2) and Functions are kept in their own files:
 # (~/.bash_aliases and ~/.bash_functions)
 #
 # This file is also sourced from ~/.bash_profile
+# ------------------------------------------------------------------------------
 #
 
 
@@ -18,8 +19,14 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 
 
-#PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig"
-#export PKG_CONFIG_PATH
+# Paths
+# ------------------------------------------------------------------------------
+
+#export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+
+# Set architecture flags
+export ARCHFLAGS="-arch x86_64"
+alias arch="uname -m"
 
 # GCC 4.9.1
 _GCC="/usr/gcc-4.9/bin"
@@ -55,11 +62,12 @@ export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:/usr/local/bin:/usr/local/sbin:
 # Log "defaults ..." to separate file
 PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
 
-# Set architecture flags
-export ARCHFLAGS="-arch x86_64"
-
 # No .DS_Store etc in "tar"
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
+
+
+# Colors
+# ------------------------------------------------------------------------------
 
 # Bash color
 export CLICOLOR=1
