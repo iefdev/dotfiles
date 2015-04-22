@@ -28,8 +28,8 @@ fi
 export ARCHFLAGS="-arch x86_64"
 alias arch="uname -m"
 
-# GCC 4.9.1
-_GCC="/usr/gcc-4.9/bin"
+# GCC 4.9.2 (symlink: /usr/gcc -> /usr/gcc-4.9.2)
+_GCC="/usr/gcc/bin"
 
 # Apache 2.4
 _AP24="/usr/httpd/bin:/usr/httpd/sbin"
@@ -47,6 +47,9 @@ _SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
 _PY="/Library/Frameworks/Python.framework/Versions/3.3/bin"
 alias python='/usr/local/bin/python3'
 
+# Active Perl
+_PERL="/usr/local/ActivePerl-5.16/bin"
+
 # xbin for own custom scripts
 _xbin="/usr/local/xbin"
 
@@ -54,7 +57,7 @@ _xbin="/usr/local/xbin"
 _Sh="$HOME/ShellScripts"
 
 # export PATH.
-export PATH="$_AP24:$_PHP:$_GCC:$_GIT:$_SQL:$_PY:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
+export PATH="$_GCC:$_AP24:$_PHP:$_GIT:$_SQL:$_PY:$_PERL:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
 
 # older version for php <_<
 #export PATH="/usr/local/autoconf-2.5.9/bin:$PATH"
