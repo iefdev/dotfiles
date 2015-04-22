@@ -52,6 +52,9 @@ function rmxattr()
 	xattr -d $(xattr "$_file") "$_file";
 }
 
+# Set dir to 755, files to 644
+function fixfolder() { chmod u+rwX,go+rX "$1"; }
+
 
 # Get this...
 # ------------------------------------------------------------------------------
@@ -184,6 +187,13 @@ function chksig() { gpg --verify "$1.sig" "$1"; }
 
 # youtube-dl
 function ytdl() { youtube-dl -ci "$1"; }
+
+# ffmpeg - 320k mp3
+function 2mp3()
+{ 	
+	local output=$(echo "$1" | sed -e 's/\.\(.*\)$/\.mp3/');
+	ffmpeg -i "$1" -ab 320k "${output}";
+}
 
 # Most freq used commands
 # usage: ctop 15
