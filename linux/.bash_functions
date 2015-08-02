@@ -86,18 +86,36 @@ function man2txt()
 # tar.gz ($1 = folder name)
 function tarGZ()
 {
+	_pwd=`pwd`;
 	_dir=`echo "$1" | sed -e 's/\/$//g'`;
+	cd `dirname $_dir` && _dir=`basename $_dir`;
 	tar -zcvf "$_dir".tar.gz --exclude ".DS_Store" --exclude "._*" "$_dir";
+	cd $_pwd;
 }
 function untarGZ() { tar -zxvf "$1"; }
 
 # tar.bz2
 function tarBZ()
 {
+	_pwd=`pwd`;
 	_dir=`echo "$1" | sed -e 's/\/$//g'`;
+	cd `dirname $_dir` && _dir=`basename $_dir`;
 	tar -jcvf "$_dir".tar.bz2 --exclude ".DS_Store" --exclude "._*" "$_dir";
+	cd $_pwd;
 }
 function untarBZ() { tar -jxvf "$1"; }
+
+# tar.xz
+function tarXZ()
+{
+	_pwd=`pwd`;
+	_dir=`echo "$1" | sed -e 's/\/$//g'`;
+	cd `dirname $_dir` && _dir=`basename $_dir`;
+	tar -cvf - "$_dir" | xz -4e > "$_dir".tar.xz;
+	#tar -cvf - "$_dir" | xz -2e > "$_dir".tar.xz;
+	cd $_pwd;
+}
+function untarXZ() { tar -jxvf "$1"; }
 
 # Function extract
 # (using 7za instead of 7z)
