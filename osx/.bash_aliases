@@ -163,7 +163,7 @@ alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineE
 alias cleanDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # Read/Delete the Dropbox cache folder (= more space).
-alias readDBC='ls -Alh ~/Dropbox/.dropbox.cache/'
+alias readDBC='ls -Ahl ~/Dropbox/.dropbox.cache/'
 alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 
 # Clean Out LaunchPad
