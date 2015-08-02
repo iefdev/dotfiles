@@ -208,10 +208,3 @@ function athumb()
 {
 	convert -resize 250x250 -quality 100 {,th_}$1;
 }
-
-# Remove sticky bit
-function rmxattr()
-{
-	local _file="$1"
-	xattr -d $(xattr "$_file") "$_file";
-}
