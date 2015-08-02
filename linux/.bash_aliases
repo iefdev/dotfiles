@@ -158,13 +158,6 @@ alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 alias dbUpload='~/ShellScripts/dropbox_uploader.sh'
 
 
-# Misc stuff
-# ------------------------------------------------------------------------------
-
-# Links 2.8
-alias LinX='links -g'
-
-
 # Wget
 # ------------------------------------------------------------------------------
 
@@ -176,12 +169,18 @@ alias wgetc='wget -c'
 alias wgetnc='wget --no-check-certificate'
 
 
-# PHP
+# Misc stuff
 # ------------------------------------------------------------------------------
 
+# Links 2.8
+alias LinX='links -g'
 
-# MySQL
+
+
+
+# Srv & Dev
 # ------------------------------------------------------------------------------
+
 alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 alias openSqlHistory='open ~/.mysql_history'
 
