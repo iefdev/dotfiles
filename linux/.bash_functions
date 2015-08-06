@@ -183,8 +183,11 @@ function ytdl() { youtube-dl -ci "$1"; }
 # usage: ctop 15
 function ctop()
 {
-	local nr=$1;
-	history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
+	if [ -z $1 ]; then echo 'Usage: ctop <int>';
+	else
+		local nr=$1;
+		history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
+	fi
 }
 
 # Thumbs to 250px
