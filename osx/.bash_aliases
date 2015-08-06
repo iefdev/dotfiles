@@ -142,7 +142,8 @@ alias reInput='. ~/.inputrc'
 alias reNano='. /etc/nanorc'
 
 
-## Cleaning up stuff...
+# Cleaning up stuff...
+# ------------------------------------------------------------------------------
 
 # .DS_Store and ._files
 alias rmDS='find ./ -name ".DS_Store" -delete'
@@ -162,7 +163,7 @@ alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineE
 alias cleanDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # Read/Delete the Dropbox cache folder (= more space).
-alias readDBC='ls -Alh ~/Dropbox/.dropbox.cache/'
+alias readDBC='ls -Ahl ~/Dropbox/.dropbox.cache/'
 alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 
 # Clean Out LaunchPad
@@ -178,7 +179,8 @@ alias resetOpenWith='cd /System/Library/Frameworks/CoreServices.framework/Versio
 alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 
 
-## ShellScripts
+# ShellScripts
+# ------------------------------------------------------------------------------
 
 # Usage: cleanDisk "Name of Disk"
 alias cleanDisk='~/ShellScripts/cleanDisk.sh'
@@ -187,7 +189,19 @@ alias cleanDisk='~/ShellScripts/cleanDisk.sh'
 alias dbUpload='~/ShellScripts/dropbox_uploader.sh'
 
 
-## Misc stuff
+# Wget
+# ------------------------------------------------------------------------------
+
+# Wget continue
+# (with curl: curl -o <incomplete_local_file> -C - <URL>)
+alias wgetc='wget -c'
+
+# Wget no-check
+alias wgetnc='wget --no-check-certificate'
+
+
+# Misc stuff
+# ------------------------------------------------------------------------------
 
 # Check why it doesn't go to sleep
 alias whatsOpen='pmset -g assertions'
@@ -203,17 +217,6 @@ alias sse='open -a ScreenSaverEngine'
 #alias defLog='history | grep "defaults write" >> $HOME/ShellScripts/__defaultsLog.txt'
 alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
 
-
-## Wget
-
-# Wget continue
-# (with curl: curl -o <incomplete_local_file> -C - <URL>)
-alias wgetc='wget -c'
-
-# Wget no-check
-alias wgetnc='wget --no-check-certificate'
-
-
 # Password assistant
 alias passist='open -a Password\ Assistant'
 
@@ -221,19 +224,14 @@ alias passist='open -a Password\ Assistant'
 alias LinX='links -g'
 
 
-## PHP
-# @todo: clean up and se what I need.
+# Srv & Dev
+# ------------------------------------------------------------------------------
+
+# PHP 5.4 (5.6 is in PATH)
 alias php54='/usr/local/php54/bin/php'
 alias phpize54='/usr/local/php54/bin/phpize'
 alias pear54='/usr/local/php54/bin/pear'
 alias pecl54='/usr/local/php54/bin/pecl'
-
-# note: /usr/local/php56... is in PATH
-alias php56='/usr/local/php56/bin/php'
-alias phpize56='/usr/local/php56/bin/phpize'
-alias pear56='/usr/local/php56/bin/pear'
-alias php-fpm='/usr/local/php56/sbin/php-fpm'
-alias fpmctl='/usr/local/php56/sbin/fpmctl'
 
 
 # MySQL

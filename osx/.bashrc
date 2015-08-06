@@ -144,7 +144,7 @@ PS4=' :+ '
 # Load: .bash_functions
 [ -f ~/.bash_functions ] && . ~/.bash_functions
 
-#Load: ~/.bash_git
+# Load: ~/.bash_git
 [ -f ~/.bash_git ] && . ~/.bash_git
 
 # Load archey (if installed)
