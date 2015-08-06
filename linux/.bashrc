@@ -76,6 +76,9 @@ PS4=' :+ '
 # Load: .bash_aliases
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
+# Load: ~/.bash_pacman
+[ -f ~/.bash_pacman ] && . ~/.bash_pacman
+
 # Load: .bash_functions
 [ -f ~/.bash_functions ] && . ~/.bash_functions
 

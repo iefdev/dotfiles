@@ -208,12 +208,16 @@ function 2mp3()
 # usage: ctop 15
 function ctop()
 {
-	local nr=$1;
-	history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
+	if [ -z $1 ]; then echo 'Usage: ctop <int>';
+	else
+		local nr=$1;
+		history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
+	fi
 }
 
 # Thumbs to 250px
 function athumb()
 {
-	convert -resize 250x250 -quality 100 {,th_}$1;
+	local _ext=$(echo $1 | sed -e "s/${1%.*}//");	
+	convert -resize 250x250 -quality 100 $1 ${1%.*}_250px$_ext;
 }

@@ -1,5 +1,5 @@
 #
-# ~/.bash_profile
+# ~/.bash_logout
 #
 
 # Adding session...
