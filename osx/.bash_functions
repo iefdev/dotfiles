@@ -206,7 +206,8 @@ function ctop()
 # Thumbs to 250px
 function athumb()
 {
-	convert -resize 250x250 -quality 100 {,th_}$1;
+	local _ext=$(echo $1 | sed -e "s/${1%.*}//");	
+	convert -resize 250x250 -quality 100 $1 ${1%.*}_250px$_ext;
 }
 
 # Remove sticky bit
