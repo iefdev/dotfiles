@@ -147,7 +147,7 @@ alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
 alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
 # Read/Delete the Dropbox cache folder (= more space).
-alias readDBC='ls -Alh ~/Dropbox/.dropbox.cache/'
+alias readDBC='ls -Ahl ~/Dropbox/.dropbox.cache/'
 alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 
 
