@@ -1,8 +1,8 @@
 #
 # ~/.bash_git
 #
+#
 # Description: Separate file for git related stuff
-# 
 #
 # Load it in: ~/.bashrc with
 # ------------------------------------------------------------------------------
@@ -10,6 +10,7 @@
 #   [ -f ~/.bash_git ] && . ~/.bash_git
 # ------------------------------------------------------------------------------
 #
+
 
 # Function to get current branch
 function git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'; }
@@ -25,4 +26,42 @@ function gitio()
 {
 	local _url="$1";
 	echo -n $(curl -i http://git.io -F "url=$_url" | grep 'Location' | awk '{ print $2 }') | pbcopy;
+}
+
+# Function to create archives
+# Usage: gitArchive [zip|bz|xz|gz] (gz = default)
+function gitArchive ()
+{
+	# Only use inside a repo.
+	[ ! -d '.git' ] && echo -e "\e[1;31m :: \e[m\"`pwd`\" is not a git repository." && return 1;
+
+	local _ext=$1;
+	_branch=$(git symbolic-ref --short HEAD 2> /dev/null);
+	_repo=$(basename `git rev-parse --show-toplevel`);
+	[[ $_branch == 'master' ]] && _append='' || _append="-$_branch";
+	[[ -z $_ext ]] && _ext='gz';
+	[[ $_ext == 'zip' ]] && _ext='zip' || _ext="$_ext";
+
+	# File name, examples:
+	# master:       fooProject_2015-01-01
+	# branchname:   fooProject_2015-01-01-branchname
+	_output="${_repo}_$(date '+%F')$_append";
+
+	case $_ext in
+		# zip
+		zip)
+			git archive --format=zip -9 -o ../${_output}.$_ext --prefix=${_output}/ $_branch;
+			;;
+
+		# tar.bz
+		bz)
+			git archive --prefix=${_output}/ $_branch | bzip2 > ../${_output}.tar.$_ext;
+			;;
+
+		# tar.gz & tar.xz (default = gz)
+		# To use xz, add to config: git config --global tar.tar.xz.command "xz -c"
+		xz|gz|*)
+			git archive --format=tar.$_ext -o ../${_output}.tar.$_ext --prefix=${_output}/ $_branch;
+			;;
+	esac
 }
