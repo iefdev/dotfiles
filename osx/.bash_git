@@ -1,8 +1,8 @@
 #
 # ~/.bash_git
 #
+#
 # Description: Separate file for git related stuff
-# 
 #
 # Load it in: ~/.bashrc with
 # ------------------------------------------------------------------------------
