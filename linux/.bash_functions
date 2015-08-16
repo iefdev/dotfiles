@@ -190,9 +190,10 @@ function ctop()
 	fi
 }
 
-# Thumbs to 250px
+# Thumbs (defaults) to 250px. Max 500.
 function athumb()
 {
-	local _ext=$(echo $1 | sed -e "s/${1%.*}//");	
-	convert -resize 250x250 -quality 100 $1 ${1%.*}_250px$_ext;
+	[[ $2 && $2 -lt 501 ]] && _px=$2 || _px=250;
+	local _ext=$(echo $1 | sed -e "s/${1%.*}//");
+	convert -resize ${_px}x${_px} -quality 100 $1 ${1%.*}_${_px}px$_ext;
 }
