@@ -65,3 +65,12 @@ function gitArchive ()
 			;;
 	esac
 }
+
+# rbm: A flow function to ReBase and Merge
+function rbm()
+{
+	local _branch="$1";
+	[[ -z $_branch ]] && _branch='devel';
+	git checkout "$_branch" && git rebase master;
+	git checkout master && git merge "$_branch";
+}
