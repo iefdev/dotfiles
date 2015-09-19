@@ -191,9 +191,12 @@ function ctop()
 }
 
 # Thumbs (defaults) to 250px. Max 500.
-function athumb()
+function mkthumb()
 {
+	_msg="$FUNCNAME: Can't find 'convert'. Please install ImageMagick...";
+	[[ ! `type convert 2> /dev/null` ]] && echo $_msg && return 1;
 	[[ $2 && $2 -lt 501 ]] && _px=$2 || _px=250;
-	local _ext=$(echo $1 | sed -e "s/${1%.*}//");
-	convert -resize ${_px}x${_px} -quality 100 $1 ${1%.*}_${_px}px$_ext;
+	local _file=$(basename "$1");
+	_ext=$(echo $_file | sed -e "s/${_file%.*}//");
+	convert -resize ${_px}x${_px} -quality 100 "$1" "${1%.*}_${_px}px$_ext";
 }
