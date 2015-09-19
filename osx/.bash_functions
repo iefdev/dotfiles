@@ -199,8 +199,9 @@ function ytdl() { youtube-dl -ci "$1"; }
 
 # ffmpeg - 320k mp3
 function 2mp3()
-{ 	
-	local output=$(echo "$1" | sed -e 's/\.\(.*\)$/\.mp3/');
+{
+	[[ ! `type ffmpeg 2> /dev/null` ]] && echo $FUNCNAME: Please install 'ffmpeg'... && return 1;
+	local output="$(dirname "$1")/$(basename "$1" | sed -e 's/\.\(.*\)$/\.mp3/')";
 	ffmpeg -i "$1" -ab 320k "${output}";
 }
 
@@ -215,9 +216,37 @@ function ctop()
 	fi
 }
 
-# Thumbs to 250px
-function athumb()
+# Thumbs (defaults) to 250px. Max 500.
+function mkthumb()
 {
-	local _ext=$(echo $1 | sed -e "s/${1%.*}//");	
-	convert -resize 250x250 -quality 100 $1 ${1%.*}_250px$_ext;
+	_msg="$FUNCNAME: Can't find 'convert'. Please install ImageMagick...";
+	[[ ! `type convert 2> /dev/null` ]] && echo $_msg && return 1;
+	[[ $2 && $2 -lt 501 ]] && _px=$2 || _px=250;
+	local _file=$(basename "$1");
+	_ext=$(echo $_file | sed -e "s/${_file%.*}//");
+	convert -resize ${_px}x${_px} -quality 100 "$1" "${1%.*}_${_px}px$_ext";
 }
+
+# Detailed information on an IP address or hostname in bash via http://ipinfo.io: 
+# https://wiki.archlinux.org/index.php/Bash/Functions#IP_info
+ipInfo() {
+	[[ $1 == '' ]] && _ip=$(dig +short myip.opendns.com @resolver1.opendns.com) || _ip=$1;
+	if grep -P "(([1-9]\d{0,2})\.){3}(?2)" 2>/dev/null <<< "$_ip"; then
+		curl ipinfo.io/"$_ip"
+	else
+		ipawk=($(host "$_ip" | awk '/address/ { print $NF }'))
+		curl ipinfo.io/${ipawk[1]}
+	fi
+	echo
+}
+
+
+# Debugging
+# ------------------------------------------------------------------------------
+#
+
+# https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
+EC() {
+	echo -e "\e[1;31m :: \e[1;33m code: $? \e[m\n"
+}
+trap EC ERR

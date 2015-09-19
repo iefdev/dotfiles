@@ -69,6 +69,9 @@ alias forceTrash='rm -rv ~/.Trash/{.*,*}'
 # Echo PATH on separate lines
 alias lPath="echo $PATH | tr ':' '\n'"
 
+# tree, w colors
+alias tree='tree -C'
+
 # locate home dir (llocate)
 alias llocate='locate -d $HOME/Library/Locate/llocate.database'
 
