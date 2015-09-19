@@ -172,10 +172,6 @@ function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
 # Misc & Funsies
 # ------------------------------------------------------------------------------
 
-# OSX "say" for Linux
-# http://jacobsalmela.com/raspberry-pi-and-the-say-command-from-osx-how-to-make-your-pi-speak-at-will/
-function say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
-
 # youtube-dl
 function ytdl() { youtube-dl -ci "$1"; }
 
@@ -200,3 +196,27 @@ function mkthumb()
 	_ext=$(echo $_file | sed -e "s/${_file%.*}//");
 	convert -resize ${_px}x${_px} -quality 100 "$1" "${1%.*}_${_px}px$_ext";
 }
+
+# Detailed information on an IP address or hostname in bash via http://ipinfo.io: 
+# https://wiki.archlinux.org/index.php/Bash/Functions#IP_info
+ipInfo() {
+	[[ $1 == '' ]] && _ip=$(dig +short myip.opendns.com @resolver1.opendns.com) || _ip=$1;
+	if grep -P "(([1-9]\d{0,2})\.){3}(?2)" 2>/dev/null <<< "$_ip"; then
+		curl ipinfo.io/"$_ip"
+	else
+		ipawk=($(host "$_ip" | awk '/address/ { print $NF }'))
+		curl ipinfo.io/${ipawk[1]}
+	fi
+	echo
+}
+
+
+# Debugging
+# ------------------------------------------------------------------------------
+#
+
+# https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
+EC() {
+	echo -e "\e[1;31m :: \e[1;33m code: $? \e[m\n"
+}
+trap EC ERR
