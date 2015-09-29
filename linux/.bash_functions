@@ -27,17 +27,17 @@ function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
 
-# // @todo: check more… use open or gedit
+# @todo: open | gedit... for now open (see 'open' in .bash_aliases)
 # Usage: openBash [<letter>]
 # Empty = .bashrc ($1 = 1st letter after .bash_)
-#function  openBash()
-#{
-#	[[ $1 == 'i' ]] && open -e ~/.inputrc;
-#	[ -z $1 ] && open ~/.bashrc || \
-#	for file in $(ls -d .* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
-#		[[ $(echo $1 | cut -c 1) == $(echo $file | cut -c 7) ]] && open ~/$file && break;
-#	done;
-#}
+function  openBash()
+{
+	[[ $1 == 'i' ]] && open ~/.inputrc;
+	[ -z $1 ] && open ~/.bashrc || \
+	for file in $(ls -d ~/.* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
+		[[ $(echo $1 | cut -c 1) == $(echo `basename $file` | cut -c 7) ]] && open $file && break;
+	done;
+}
 
 # Usage: nanoBash [<letter>]
 # Empty = .bashrc ($1 = 1st letter after .bash_)
@@ -46,8 +46,8 @@ function nanoBash()
 	[[ $1 == 'i' ]] && nano ~/.inputrc;
 	[[ $1 == 'n' ]] && sudo nano /etc/nanorc;
 	[ -z $1 ] && nano ~/.bashrc || \
-	for file in $(ls -d .* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
-		[[ $(echo $1 | cut -c 1) == $(echo $file | cut -c 7) ]] && nano ~/$file && break;
+	for file in $(ls -d ~/.* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
+		[[ $(echo $1 | cut -c 1) == $(echo `basename $file` | cut -c 7) ]] && nano $file && break;
 	done;
 }
 
@@ -59,8 +59,8 @@ function reBash()
 	[[ $1 == 'i' ]] && . ~/.inputrc;
 	[[ $1 == 'n' ]] && . /etc/nanorc;
 	[ -z $1 ] && . ~/.bashrc || \
-	for file in $(ls -d .* | grep bash | egrep -v -e 'bashrc|history' | sed -e 's/.*\://'); do
-		[[ $(echo $1 | cut -c 1) == $(echo $file | cut -c 7) ]] && . ~/$file && break;
+	for file in $(ls -d ~/.* | grep bash | egrep -v -e 'bashrc|history' | sed -e 's/.*\://'); do
+		[[ $(echo $1 | cut -c 1) == $(echo `basename $file` | cut -c 7) ]] && . $file && break;
 	done;
 }
 
