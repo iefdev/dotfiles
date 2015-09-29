@@ -107,31 +107,8 @@ alias sudo='sudo '
 # Open here...
 alias oh='open .'
 
-
-# nano .bash_xxxxxx
-alias nanoBashrc='nano ~/.bashrc'
-alias nanoProfile='nano ~/.bash_profile'
-alias nanoAliases='nano ~/.bash_aliases'
-alias nanoFunc='nano ~/.bash_functions'
-alias nanoGit='nano ~/.bash_git'
-#alias nanoPacman='nano ~/.bash_pacman'
-#alias nanoYum='nano ~/.bash_yum'
-alias nanoHistory='nano ~/.bash_history'
-alias nanoLogout='nano ~/.bash_logout'
-
-# Reload .bash_xxx
-alias reBash='. ~/.bashrc'
-alias reProfile='. ~/.bash_profile'
-alias reAlias='. ~/.bash_aliases'
-alias reFunc='. ~/.bash_functions'
-alias reGit='. ~/.bash_git'
-#alias rePac='. ~/.bash_pacman'
-#alias reYum='. ~/.bash_yum'
-alias reLogout='. ~/.bash_logout'
-
 # Update Grub
 alias update-grub='sudo grub2-mkconfig -o /boot/grub2/grub.cfg'
-
 
 # copy, OS X style
 alias pbcopy='xclip -selection clipboard'

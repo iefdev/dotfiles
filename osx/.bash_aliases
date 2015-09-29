@@ -113,36 +113,6 @@ alias sudo='sudo '
 # Open here...
 alias oh='open .'
 
-# .bash_xxxxxxx
-alias openBashrc='open ~/.bashrc'
-alias openProfile='open ~/.bash_profile'
-alias openAliases='open ~/.bash_aliases'
-alias openFunc='open ~/.bash_functions'
-alias openGit='open ~/.bash_git'
-alias openHistory='open ~/.bash_history'
-alias openLogout='open ~/.bash_logout'
-alias openInputrc='open ~/.inputrc'
-
-# nano .bash_xxxxxx
-alias nanoBashrc='nano ~/.bashrc'
-alias nanoProfile='nano ~/.bash_profile'
-alias nanoAliases='nano ~/.bash_aliases'
-alias nanoFunc='nano ~/.bash_functions'
-alias nanoGit='nano ~/.bash_git'
-alias nanoHistory='nano ~/.bash_history'
-alias nanoLogout='nano ~/.bash_logout'
-alias nanoInputrc='nano ~/.inputrc'
-alias nanoNanorc='sudo nano /etc/nanorc'
-
-# Reload .bash_xxx
-alias reBash='. ~/.bashrc'
-alias reProfile='. ~/.bash_profile'
-alias reAlias='. ~/.bash_aliases'
-alias reFunc='. ~/.bash_functions'
-alias reGit='. ~/.bash_git'
-alias reLogout='. ~/.bash_logout'
-alias reInput='. ~/.inputrc'
-alias reNano='. /etc/nanorc'
 
 
 # Cleaning up stuff...

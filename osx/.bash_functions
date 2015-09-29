@@ -26,6 +26,44 @@ function mkbakd() { _dir=`echo "$1" | sed 's/\/*$//g'`; ditto -v "$_dir"{,.bak};
 function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
+
+# Usage: openBash [<letter>]
+# Empty = .bashrc ($1 = 1st letter after .bash_)
+function  openBash()
+{
+	[[ $1 == 'i' ]] && open -e ~/.inputrc;
+	[ -z $1 ] && open -e ~/.bashrc || \
+	for file in $(ls -d .* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
+		[[ $(echo $1 | cut -c 1) == $(echo $file | cut -c 7) ]] && open -e ~/$file && break;
+	done;
+}
+
+# Usage: nanoBash [<letter>]
+# Empty = .bashrc ($1 = 1st letter after .bash_)
+function nanoBash()
+{
+	[[ $1 == 'i' ]] && nano ~/.inputrc;
+	[[ $1 == 'n' ]] && sudo nano /etc/nanorc;
+	[ -z $1 ] && nano ~/.bashrc || \
+	for file in $(ls -d .* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
+		[[ $(echo $1 | cut -c 1) == $(echo $file | cut -c 7) ]] && nano ~/$file && break;
+	done;
+}
+
+# Usage: reBash [<letter>]
+# Empty = .bashrc ($1 = 1st letter after .bash_)
+function reBash()
+{
+	[[ $1 == 'h' ]] && return;
+	[[ $1 == 'i' ]] && . ~/.inputrc;
+	[[ $1 == 'n' ]] && . /etc/nanorc;
+	[ -z $1 ] && . ~/.bashrc || \
+	for file in $(ls -d .* | grep bash | egrep -v -e 'bashrc|history' | sed -e 's/.*\://'); do
+		[[ $(echo $1 | cut -c 1) == $(echo $file | cut -c 7) ]] && . ~/$file && break;
+	done;
+}
+
+
 # Search/delete lines in history
 function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
