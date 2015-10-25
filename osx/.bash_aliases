@@ -34,8 +34,8 @@ alias ln='ln -iv'
 alias cpa='rsync -avhP'
 
 alias c='clear'
-alias cx='clear && archey'
-alias cxH='cd && clear && archey'
+alias cx="clear && printf '\e[3J' && archey"
+alias cxH="cd && clear && printf '\e[3J' && archey"
 
 alias h='history'
 alias j='jobs -l'
@@ -119,8 +119,8 @@ alias oh='open .'
 # ------------------------------------------------------------------------------
 
 # .DS_Store and ._files
-alias rmDS='find ./ -name ".DS_Store" -delete'
-alias rmDF='find ./ -name "._*" -delete'
+alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
+alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
 # Kill/Flush (DNS)cache (10.7/8/9)
 alias flushDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;'

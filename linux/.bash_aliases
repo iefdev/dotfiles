@@ -33,8 +33,8 @@ alias ln='ln -iv'
 alias cpa='rsync -avhP'
 
 alias c='clear'
-alias cx='clear && archey'
-alias cxH='cd && clear && archey'
+alias cx="clear && printf '\e[3J' && archey"
+alias cxH="cd && clear && printf '\e[3J' && archey"
 
 alias h='history'
 alias j='jobs -l'
@@ -104,7 +104,8 @@ alias fuck='sudo $(history -p \!\!)'
 # Need this one for: sudo <alias>
 alias sudo='sudo '
 
-# Open here...
+# Open & open here...
+alias open='xgd-open'
 alias oh='open .'
 
 # Update Grub
