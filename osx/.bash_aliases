@@ -21,10 +21,11 @@ alias cdS='cd ~/ShellScripts'
 alias cdR='cd ~/Repos'
 alias cdT='cd ~/.Trash'
 alias cdL='cd /usr/local'
-alias www='cd ~/Sites'
+alias site='cd ~/Sites'
 alias srv='cd /srv'
-alias srw='cd /srv/www'
+alias www='cd /srv/www'
 alias ..='cd ..'
+alias ...='cd ../..'
 
 alias mv='mv -iv'
 alias cp='cp -iv'
@@ -113,6 +114,11 @@ alias sudo='sudo '
 # Open here...
 alias oh='open .'
 
+# +x on script
+alias mkrun='chmod +x'
+
+# Fix dir(s) with messy ACL: 750/644
+alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec chmod -v 644 {} \;'
 
 
 # Cleaning up stuff...
@@ -176,6 +182,9 @@ alias wgetnc='wget --no-check-certificate'
 # Misc stuff
 # ------------------------------------------------------------------------------
 
+# List disks
+alias disklist="mount | grep 'disk'"
+
 # Check why it doesn't go to sleep
 alias whatsOpen='pmset -g assertions'
 
@@ -195,6 +204,16 @@ alias passist='open -a Password\ Assistant'
 
 # Links 2.8
 alias LinX='links -g'
+
+# Rainbow Stream
+alias twistr='rainbowstream'
+alias twiot='rainbowstream -iot'
+
+# ImageMagick, v7 removes convert
+#alias convert='magick'
+
+# ImageOptim
+alias imageoptim='/Applications/ImageOptim.app/Contents/MacOS/ImageOptim'
 
 
 # Srv & Dev
@@ -258,3 +277,6 @@ else
 	# Python 2.*
 	alias pyWeb='cd ~/pyWeb && python -m SimpleHTTPServer 8000';
 fi
+
+# Upgrade pip
+alias pipup='pip install -U pip'

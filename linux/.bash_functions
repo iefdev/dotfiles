@@ -32,10 +32,10 @@ function mvbak() { mv -iv "$1"{,.bak}; }
 # Empty = .bashrc ($1 = 1st letter after .bash_)
 function  openBash()
 {
-	[[ $1 == 'i' ]] && open ~/.inputrc;
-	[ -z $1 ] && open ~/.bashrc || \
+	[[ $1 == 'i' ]] && open -e ~/.inputrc;
+	[ -z $1 ] && open -e ~/.bashrc || \
 	for file in $(ls -d ~/.* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
-		[[ $(echo $1 | cut -c 1) == $(echo `basename $file` | cut -c 7) ]] && open $file && break;
+		[[ $(echo $1 | cut -c 1) == $(echo `basename $file` | cut -c 7) ]] && open -e $file && break;
 	done;
 }
 
@@ -75,9 +75,10 @@ function cd2() { cd $(dirname `which $1`); }
 function cdl() { cd "$1"; ls -Ahl; }
 
 # rsync folder2folder
-function rsyncdir() {
+function rsyncdir()
+{
 	# removing trailing "/" and adding our own
-	# to make sure ther is one, and not end up with "//"
+	# to make sure there is one, and not end up with "//"
 	_from_dir=`echo "$1" | sed 's/\/*$//g'`;
 	_to_dir=`echo "$2" | sed 's/\/*$//g'`;
 	rsync -avzuc --delete "$_from_dir/" "$_to_dir/";
@@ -106,16 +107,13 @@ function wgetsub() { wget -r -l1 --no-parent "$1"; }
 
 # Manuals
 # ------------------------------------------------------------------------------
-# To avoid the d d o o u u b b l l e e and
-# spaced letters use: col -b
-# Usage:
-# manOut grep				// grep_manual.txt (in pwd)
-# manOut grep ~/foo/grep	// ~/foo/grep_manual.txt
+
+# To avoid the d d o o u u b b l l e e and spaced letters use: col -b
+# Usage: man2txt <foo> [ <path/to/output/file.txt> ]
 function man2txt()
 {
-	_path="$2";
-	if [[ "$2" == '' ]]; then _path="$1"; fi
-	man $1 grep | col -b > $_path_manual.txt
+	[ -z $2 ] && _file="man_${1}.txt" || _file="$2";
+	man $1 | col -b > $_file;
 }
 
 
@@ -158,7 +156,7 @@ function untarXZ() { tar -jxvf "$1"; }
 
 # Function extract
 # (using 7za instead of 7z)
-extract ()
+function extract ()
 {
 	if [ -f $1 ]; then
 		case $1 in
@@ -208,8 +206,27 @@ function patch21() { patch "$1" < "$2"; }
 function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
 
 
+# fail2ban
+# --------------------------------------------------------------------------
+# (help: fail2ban-client -h)
+function f2bclient() { sudo fail2ban-client $@; }
+
+
 # Misc & Funsies
 # ------------------------------------------------------------------------------
+
+# comandline search
+function ddg() { open Firefox "https://duckduckgo.com/?q=$1"; }
+
+# Adminer :: Changing theme.
+function chgAdminer()
+{
+	_theme="$1";
+	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
+}
+
+# GPG
+function chksig() { gpg --verify "$1.sig" "$1"; }
 
 # youtube-dl
 function ytdl() { youtube-dl -ci "$1"; }
@@ -231,17 +248,6 @@ function ctop()
 		local nr=$1;
 		history | awk '{print $2}' | awk 'BEGIN {FS=" | "} {print $1}' | sort | uniq -c | sort -rn | head -$nr;
 	fi
-}
-
-# Thumbs (defaults) to 250px. Max 500.
-function mkthumb()
-{
-	_msg="$FUNCNAME: Can't find 'convert'. Please install ImageMagick...";
-	[[ ! `type convert 2> /dev/null` ]] && echo $_msg && return 1;
-	[[ $2 && $2 -lt 501 ]] && _px=$2 || _px=250;
-	local _file=$(basename "$1");
-	_ext=$(echo $_file | sed -e "s/${_file%.*}//");
-	convert -resize ${_px}x${_px} -quality 100 "$1" "${1%.*}_${_px}px$_ext";
 }
 
 # Detailed information on an IP address or hostname in bash via http://ipinfo.io: 
