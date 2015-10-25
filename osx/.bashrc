@@ -26,7 +26,7 @@ fi
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
-alias arch="uname -m"
+#alias arch="uname -m"
 
 # GCC 5.2.0 (symlink: /usr/gcc -> /usr/gcc-5.2.0)
 _GCC="/usr/gcc/bin"
@@ -36,6 +36,7 @@ _AP24="/usr/httpd/bin:/usr/httpd/sbin"
 
 # PHP 5.6 (default), 5.4 in .bash_aliases
 _PHP="/usr/local/php56/bin:/usr/local/php56/sbin"
+_CPOS="$HOME/.composer/vendor/bin"
 
 # Git
 _GIT="/usr/local/git/bin"
@@ -57,7 +58,8 @@ _xbin="/usr/local/xbin"
 _Sh="$HOME/ShellScripts"
 
 # export PATH.
-export PATH="$_GCC:$_AP24:$_PHP:$_GIT:$_SQL:$_PY:$_PERL:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
+export PATH="$_GCC:$_AP24:$_PHP:$_CPOS:$_GIT:$_SQL:$_PY:$_PERL:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
+#export PATH="$_AP24:$_PHP:$_CPOS:$_GIT:$_SQL:$_PY:$_PERL:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
 
 # older version for php <_<
 #export PATH="/usr/local/autoconf-2.5.9/bin:$PATH"
@@ -74,7 +76,7 @@ export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 
 # Bash color
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+export LSCOLORS=Exfxcxdxbxegedabagacad
 export GREP_COLOR='1;33'
 
 # Colors in man pages
@@ -166,7 +168,7 @@ export HISTIGNORE='&:[ ]*#'
 export HISTCONTROL=ignoreboth:erasedups
 
 shopt -s histappend
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 #PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
 
 # Set the default editor

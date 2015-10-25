@@ -8,9 +8,17 @@
 # This file is also sourced from ~/.bash_profile
 #
 # > @todo: Bring in the xtra lines from Arch,
-# > this is still the osx version.
+# > this is still (pretty much) the osx version.
 #
 
+# Composer
+_CPOS="$HOME/.composer/vendor/bin"
+
+# Git
+#_GIT="/usr/local/git/bin"
+
+# MySql, PgSql
+#_SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
 
 # ShellScripts
 _Sh="$HOME/ShellScripts"
@@ -19,7 +27,7 @@ _Sh="$HOME/ShellScripts"
 _xbin="/usr/local/xbin"
 
 # export PATH.
-export PATH="$_Sh:$_xbin:$PATH"
+export PATH="$_CPOS:$_GIT:$_SQL:$_Sh:$_xbin:$PATH"
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
@@ -29,7 +37,7 @@ export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 
 # Bash color
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+export LSCOLORS=Exfxcxdxbxegedabagacad
 export GREP_COLOR='1;33'
 
 # Colors in man pages
@@ -104,7 +112,7 @@ export HISTIGNORE='&:[ ]*#'
 export HISTCONTROL=ignoreboth:erasedups
 
 shopt -s histappend
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Set the default editor
 export EDITOR=nano
