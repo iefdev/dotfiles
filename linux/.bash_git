@@ -28,6 +28,10 @@ function gitio()
 	echo -n $(curl -i http://git.io -F "url=$_url" | grep 'Location' | awk '{ print $2 }') | xclip -selection clipboard;
 }
 
+# Get/generate a .gitignore from: https://www.gitignore.io
+# renaming func gi -> gitign
+function gitign() { curl -L -s https://www.gitignore.io/api/\$@ ; }
+
 # Function to create archives
 # Usage: gitArchive [zip|bz|xz|gz] (gz = default)
 function gitArchive ()
@@ -66,6 +70,16 @@ function gitArchive ()
 	esac
 }
 
+# Function to list branches by date (bbd)
+# https://gist.github.com/ahmedelgabri/2684c4578c3fe5990c5a
+#
+# Usage: bbd "Sep 14"
+#        bbd "Sep"
+function bbd()
+{
+	git reflog --date=local | grep "$1 .* checkout: moving from .* to" | grep -o "[a-zA-Z0-9\-]*$" | sort | uniq;
+}
+
 # rbm: A flow function to ReBase and Merge
 function rbm()
 {
@@ -73,4 +87,15 @@ function rbm()
 	[[ -z $_branch ]] && _branch='devel';
 	git checkout "$_branch" && git rebase master;
 	git checkout master && git merge "$_branch";
+}
+
+# http://www.codetunnel.com/tips-for-working-with-git/
+function giterate()
+{
+	echo '';
+	for repo in */ ; do
+		echo "Repository: $repo";
+		git -C $repo "$@";
+		echo '';
+	done
 }
