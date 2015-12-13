@@ -33,7 +33,7 @@ function gitio()
 function gitign() { curl -L -s https://www.gitignore.io/api/\$@ ; }
 
 # Function to create archives
-# Usage: gitArchive [zip|bz|xz|gz] (gz = default)
+# Usage: gitArchive [zip|bz|xz|gz] (xz = default)
 function gitArchive ()
 {
 	# Only use inside a repo.
@@ -43,7 +43,7 @@ function gitArchive ()
 	_branch=$(git symbolic-ref --short HEAD 2> /dev/null);
 	_repo=$(basename `git rev-parse --show-toplevel`);
 	[[ $_branch == 'master' ]] && _append='' || _append="-$_branch";
-	[[ -z $_ext ]] && _ext='gz';
+	[[ -z $_ext ]] && _ext='xz';
 	[[ $_ext == 'zip' ]] && _ext='zip' || _ext="$_ext";
 
 	# File name, examples:
@@ -62,7 +62,7 @@ function gitArchive ()
 			git archive --prefix=${_output}/ $_branch | bzip2 > ../${_output}.tar.$_ext;
 			;;
 
-		# tar.gz & tar.xz (default = gz)
+		# tar.gz & tar.xz (default = xz)
 		# To use xz, add to config: git config --global tar.tar.xz.command "xz -c"
 		xz|gz|*)
 			git archive --format=tar.$_ext -o ../${_output}.tar.$_ext --prefix=${_output}/ $_branch;
