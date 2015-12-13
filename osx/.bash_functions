@@ -65,10 +65,10 @@ function reBash()
 
 
 # Search/delete lines in history
-function delHist() { sed -i "/$1/d" $HISTFILE; } 
+#function delHist() { sed -i "/$1/d" $HISTFILE; } 
 
 # osx version of sed wants '' 
-#function delHist() { sed -i '' "/$1/d" $HISTFILE; }
+function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
 # cd directory of "foo"...
 function cd2() { cd $(dirname `which $1`); }

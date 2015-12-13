@@ -117,7 +117,7 @@ alias oh='open .'
 # +x on script
 alias mkrun='chmod +x'
 
-# Fix dir(s) with messy ACL: 750/644
+# Fix dir(s) with messy ACL: 755/644
 alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec chmod -v 644 {} \;'
 
 
