@@ -152,7 +152,7 @@ function tarXZ()
 	#tar -cvf - "$_dir" | xz -2e > "$_dir".tar.xz;
 	cd $_pwd;
 }
-function untarXZ() { tar -jxvf "$1"; }
+function untarXZ() { tar -xvf "$1"; }
 
 # Function extract
 # (using 7za instead of 7z)
@@ -160,15 +160,16 @@ function extract ()
 {
 	if [ -f $1 ]; then
 		case $1 in
-			*.tar.xz | *.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
-			*.tar.gz | *.tgz) tar -zxvf $1 ;;
-			*.bz2) bunzip2 $1	;;
-			*.rar) unrar -e $1	;;
-			*.gz) gunzip $1		;;
-			*.tar) tar -xf $1	;;
-			*.zip) unzip $1		;;
-			*.Z) uncompress $1	;;
-			*.7z) 7za -x $1		;;
+			*.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
+			*.tar.xz) tar -xvf $1            ;;
+			*.tar.gz | *.tgz) tar -zxvf $1   ;;
+			*.bz2) bunzip2 $1                ;;
+			*.rar) unrar -e $1               ;;
+			*.gz) gunzip $1                  ;;
+			*.tar) tar -xf $1                ;;
+			*.zip) unzip $1                  ;;
+			*.Z) uncompress $1               ;;
+			*.7z) 7za -x $1                  ;;
 			*)
 				echo "'$1' cannot be extracted via extract()";
 				;;

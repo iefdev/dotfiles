@@ -28,7 +28,7 @@ fi
 export ARCHFLAGS="-arch x86_64"
 #alias arch="uname -m"
 
-# GCC 5.2.0 (symlink: /usr/gcc -> /usr/gcc-5.2.0)
+# GCC 5.3.0 (symlink: /usr/gcc -> /usr/gcc-5.3.0)
 _GCC="/usr/gcc/bin"
 
 # Apache 2.4
