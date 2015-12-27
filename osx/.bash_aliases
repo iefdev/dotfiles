@@ -219,11 +219,17 @@ alias imageoptim='/Applications/ImageOptim.app/Contents/MacOS/ImageOptim'
 # Srv & Dev
 # ------------------------------------------------------------------------------
 
-# PHP 5.4 (5.6 is in PATH)
+# PHP 5.4, 7.0 (5.6 is in PATH)
 alias php54='/usr/local/php54/bin/php'
 alias phpize54='/usr/local/php54/bin/phpize'
 alias pear54='/usr/local/php54/bin/pear'
 alias pecl54='/usr/local/php54/bin/pecl'
+
+alias php70='/usr/local/php70/bin/php'
+alias phpize70='/usr/local/php70/bin/phpize'
+alias pear70='/usr/local/php70/bin/pear'
+alias pecl70='/usr/local/php70/bin/pecl'
+alias fpmctl70='/usr/local/php70/sbin/fpmctl'
 
 
 # MySQL
