@@ -1,0 +1,22 @@
+#
+# ~/.bash_cheat
+#
+#
+# Description: Separate file for cheat (python script)
+#
+# Load it in: ~/.bashrc with
+# ------------------------------------------------------------------------------
+#   # Load: ~/.bash_cheat
+#   [ -f ~/.bash_cheat ] && . ~/.bash_cheat
+# ------------------------------------------------------------------------------
+#
+
+
+# Default dir
+export DEFAULT_CHEAT_DIR=~/.cheat.d
+
+# Colors
+export CHEATCOLORS=true
+
+# Load cheat.bash
+[ -f /usr/local/etc/bash_completion.d/cheat.bash ] && . /usr/local/etc/bash_completion.d/cheat.bash
