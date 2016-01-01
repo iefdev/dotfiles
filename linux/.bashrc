@@ -93,6 +93,9 @@ PS4=' :+ '
 #Load: ~/.bash_git
 [ -f ~/.bash_git ] && . ~/.bash_git
 
+# Load: ~/.bash_cheat
+[ -f ~/.bash_cheat ] && . ~/.bash_cheat
+
 # Load archey (if installed)
 [[ `which archey` && $UID != 0 ]] && archey
 
