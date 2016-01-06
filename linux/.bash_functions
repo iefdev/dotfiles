@@ -68,6 +68,9 @@ function reBash()
 # Search/delete lines in history
 function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
+# Search history with grep
+function hgrep() { history | grep "$1"; }
+
 # cd directory of "foo"...
 function cd2() { cd $(dirname `which $1`); }
 

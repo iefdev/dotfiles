@@ -70,6 +70,9 @@ function reBash()
 # osx version of sed wants '' 
 function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
+# Search history with grep
+function hgrep() { history | grep "$1"; }
+
 # cd directory of "foo"...
 function cd2() { cd $(dirname `which $1`); }
 
@@ -86,13 +89,15 @@ function rsyncdir()
 	rsync -avzuc --delete "$_from_dir/" "$_to_dir/";
 }
 
-
 # Remove sticky bit
 function rmxattr()
 {
 	local _file="$1"
 	xattr -d $(xattr "$_file") "$_file";
 }
+
+# Reveal program in Finder
+function whichR() { open -R `which $1`; }
 
 
 # Get this...
@@ -125,6 +130,7 @@ function manx() { local i; for i; do open x-man-page://$i; done; }
 
 # comandline search
 function ddg() { open -a Firefox "https://duckduckgo.com/?q=$1"; }
+
 
 # Compression
 # ------------------------------------------------------------------------------
