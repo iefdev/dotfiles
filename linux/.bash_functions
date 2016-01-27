@@ -123,58 +123,55 @@ function man2txt()
 # Compression
 # ------------------------------------------------------------------------------
 
-# tar.gz ($1 = folder name)
-function tarGZ()
+# Create compressed archive: gz, bz2, xz (default)
+function mktar ()
 {
-	_pwd=`pwd`;
-	_dir=`echo "$1" | sed -e 's/\/$//g'`;
-	cd `dirname $_dir` && _dir=`basename $_dir`;
-	tar -zcvf "$_dir".tar.gz --exclude ".DS_Store" --exclude "._*" "$_dir";
-	cd $_pwd;
-}
-function untarGZ() { tar -zxvf "$1"; }
+	[[ ! -d $1 && ! -f $1 ]] && local _ext=$1 && shift || _ext='xz';
+	local _dir=`echo "$1" | sed -e 's/\/$//g'`;
+	local _excludes='--exclude ".DS_Store" --exclude "._*"'
+	if [ -e $1 ]; then
+		(cd `dirname ${_dir}` && _path=${_dir} && _dir=`basename ${_dir}`;
+		case $_ext in
+			gz) tar -zcvf "${_dir}".tar.${_ext} ${_excludes} "${_dir}";  ;;
+			bz2) tar -jcvf "${_dir}".tar.${_ext} ${_excludes} "${_dir}"; ;;
+			xz) # exmaple: use -2e for less compression
+			    tar -cvf - "${_dir}" | xz -6e > "${_dir}".tar.${_ext};   ;;
+			*)
+				echo "${FUNCNAME}: Could not create '${_dir}.tar.${_ext}'";
+				cat << INFO
+Usage: ${FUNCNAME} [gz|bz2|xz] <files/directory>
+       ${FUNCNAME} bz2 ${_path}
+       ${FUNCNAME} ${_path} (defaults to xz)
 
-# tar.bz2
-function tarBZ()
-{
-	_pwd=`pwd`;
-	_dir=`echo "$1" | sed -e 's/\/$//g'`;
-	cd `dirname $_dir` && _dir=`basename $_dir`;
-	tar -jcvf "$_dir".tar.bz2 --exclude ".DS_Store" --exclude "._*" "$_dir";
-	cd $_pwd;
+INFO
+				return 1;
+				;;
+		esac
+		)
+	else
+		echo "'$1' is not a valid file/directory";
+	fi
 }
-function untarBZ() { tar -jxvf "$1"; }
-
-# tar.xz
-function tarXZ()
-{
-	_pwd=`pwd`;
-	_dir=`echo "$1" | sed -e 's/\/$//g'`;
-	cd `dirname $_dir` && _dir=`basename $_dir`;
-	tar -cvf - "$_dir" | xz -4e > "$_dir".tar.xz;
-	#tar -cvf - "$_dir" | xz -2e > "$_dir".tar.xz;
-	cd $_pwd;
-}
-function untarXZ() { tar -xvf "$1"; }
 
 # Function extract
 # (using 7za instead of 7z)
 function extract ()
 {
 	if [ -f $1 ]; then
+		local _dir="`dirname $1`";
 		case $1 in
-			*.tar.bz2 | *.tbz2) tar -jxvf $1 ;;
-			*.tar.xz) tar -xvf $1            ;;
-			*.tar.gz | *.tgz) tar -zxvf $1   ;;
-			*.bz2) bunzip2 $1                ;;
-			*.rar) unrar -e $1               ;;
-			*.gz) gunzip $1                  ;;
-			*.tar) tar -xf $1                ;;
-			*.zip) unzip $1                  ;;
-			*.Z) uncompress $1               ;;
-			*.7z) 7za -x $1                  ;;
+			*.tar.bz2 | *.tbz2) tar -jxvf $1 -C ${_dir} ;;
+			*.tar.xz) tar -xvf $1 -C ${_dir}            ;;
+			*.tar.gz | *.tgz) tar -zxvf $1 -C ${_dir}   ;;
+			*.bz2) bunzip2 -kf $1                       ;;
+			*.rar) (cd ${_dir} && unrar x $1)           ;;
+			*.gz) gunzip -kvf $1                        ;;
+			*.tar) tar -xf $1 -C ${_dir}                ;;
+			*.zip) unzip -f $1 -d ${_dir}               ;;
+			*.Z) (cd ${_dir} && uncompress $1)          ;;
+			*.7z) (cd ${_dir} && 7za x $1)              ;;
 			*)
-				echo "'$1' cannot be extracted via extract()";
+				echo "${FUNCNAME}: '$1' cannot be extracted. ${_ext} is not supported.";
 				;;
 		esac;
 	else
@@ -254,7 +251,7 @@ function ctop()
 	fi
 }
 
-# Detailed information on an IP address or hostname in bash via http://ipinfo.io: 
+# Detailed information on an IP address or hostname in bash via http://ipinfo.io:
 # https://wiki.archlinux.org/index.php/Bash/Functions#IP_info
 ipInfo() {
 	[[ $1 == '' ]] && _ip=$(dig +short myip.opendns.com @resolver1.opendns.com) || _ip=$1;
