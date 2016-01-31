@@ -236,8 +236,7 @@ function ytdl() { youtube-dl -ci "$1"; }
 function 2mp3()
 {
 	[[ ! `type ffmpeg 2> /dev/null` ]] && echo "$FUNCNAME: Please install 'ffmpeg'..." && return 1;
-	local output="$(dirname "$1")/$(basename "$1" | sed -e 's/\.\(.*\)$/\.mp3/')";
-	ffmpeg -i "$1" -ab 320k "${output}";
+	ffmpeg -i "$1" -ab 320k $(echo "${1%.*}.mp3" | sed 's/[[:space:]]/_/g');
 }
 
 # Most freq used commands
