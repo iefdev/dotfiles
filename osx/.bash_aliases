@@ -215,6 +215,9 @@ alias twiot='rainbowstream -iot'
 # ImageOptim
 alias imageoptim='/Applications/ImageOptim.app/Contents/MacOS/ImageOptim'
 
+# mkspace
+alias mkspace='echo -e "\v\v"'
+
 
 # Srv & Dev
 # ------------------------------------------------------------------------------

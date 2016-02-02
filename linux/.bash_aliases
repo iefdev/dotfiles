@@ -173,6 +173,9 @@ alias twiot='rainbowstream -iot'
 # ImageMagick, v7 removes convert
 #alias convert='magick'
 
+# mkspace
+alias mkspace='echo -e "\v\v"'
+
 
 # Srv & Dev
 # ------------------------------------------------------------------------------
