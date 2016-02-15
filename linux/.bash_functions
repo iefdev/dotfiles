@@ -217,7 +217,7 @@ function f2bclient() { sudo fail2ban-client $@; }
 # ------------------------------------------------------------------------------
 
 # comandline search
-function ddg() { open Firefox "https://duckduckgo.com/?q=$1"; }
+function ddg() { Firefox "https://duckduckgo.com/?q=$1"; }
 
 # Adminer :: Changing theme.
 function chgAdminer()

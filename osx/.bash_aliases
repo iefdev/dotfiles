@@ -271,15 +271,11 @@ alias PostgreSQL='sudo /Library/StartupItems/PostgreSQL/PostgreSQL'
 # Start with: pyWeb
 # Stop with: ctrl+C
 #
-# (think I'll will move this to a function instead)
-
-# Check version
-py3=`python -c 'import sys; print(sys.version_info[:3])' | sed 's/.*\(3\).*/\1/'`
 
 # Create folder: ~/pyWeb
 [[ ! -d ~/pyWeb ]] && mkdir ~/pyWeb && echo '<pre>pyWeb &hellip;</pre>' > ~/pyWeb/index.html
 
-if [[ $py3 == "3" ]]; then
+if [[ $(python -c 'import sys; print(sys.version_info[0])') == "3" ]]; then
 	# Python 3.*
 	alias pyWeb='cd ~/pyWeb && python -m http.server 8000';
 else
