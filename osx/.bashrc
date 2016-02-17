@@ -9,129 +9,41 @@
 # ------------------------------------------------------------------------------
 #
 
-
-# Fix for additional added manual path's...
-# OS X ssems to forget/ignore som of the paths added
-# to /etc/manpaths and /etc/manpaths.d/
-export MANPATH=
-if [ -x /usr/libexec/path_helper ]; then
-        eval `/usr/libexec/path_helper -s`
-fi
-
-
-# Paths
-# ------------------------------------------------------------------------------
-
-#export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
-
-# Set architecture flags
-export ARCHFLAGS="-arch x86_64"
-#alias arch="uname -m"
-
-# GCC 5.3.0 (symlink: /usr/gcc -> /usr/gcc-5.3.0)
-_GCC="/usr/gcc/bin"
-
-# Apache 2.4
-_AP24="/usr/httpd/bin:/usr/httpd/sbin"
-
-# PHP 5.6 (default), 5.4 in .bash_aliases
-_PHP="/usr/local/php56/bin:/usr/local/php56/sbin"
-_CPOS="$HOME/.composer/vendor/bin"
-
-# Git
-_GIT="/usr/local/git/bin"
-
-# MySql, PgSql
-_SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
-
-# PATH for Python 3.3 + alias
-_PY="/Library/Frameworks/Python.framework/Versions/3.3/bin"
-alias python='/usr/local/bin/python3'
-
-# Active Perl
-_PERL="/usr/local/ActivePerl-5.16/bin"
-
-# xbin for own custom scripts
-_xbin="/usr/local/xbin"
-
-# ShellScripts
-_Sh="$HOME/ShellScripts"
-
-# export PATH.
-export PATH="$_GCC:$_AP24:$_PHP:$_CPOS:$_GIT:$_SQL:$_PY:$_PERL:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
-#export PATH="$_AP24:$_PHP:$_CPOS:$_GIT:$_SQL:$_PY:$_PERL:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
-
-# older version for php <_<
-#export PATH="/usr/local/autoconf-2.5.9/bin:$PATH"
-
-# Log "defaults ..." to separate file
-PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
-
-# No .DS_Store etc in "tar"
-export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
+# Load: ~/.bash_exports (PATH's and misc exports)
+#   [ -f ~/.bash_exports ] && . ~/.bash_exports
 
 
 # Colors
 # ------------------------------------------------------------------------------
 
-# Bash color
-export CLICOLOR=1
-export LSCOLORS=Exfxcxdxbxegedabagacad
-export GREP_COLOR='1;33'
-
-# Colors in man pages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;38;5;75m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[0;38;5;246m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[04;38;5;83m'
+red=$(tput setaf 1) # red
+grn=$(tput setaf 2) # green
+ylw=$(tput setaf 3) # yellow
+blu=$(tput setaf 4) # blue
+pur=$(tput setaf 5) # purple
+cyn=$(tput setaf 6) # cyan
+gry=$(tput setaf 7) # grey
+bold=$(tput bold)
+clear=$(tput sgr 0)
 
 
-#
-# Fix host issue (as superuser): "man scutil" + /etc/hostconfig (foobar.dev)
-#
-# Read                        |  Set new name
-# ----------------------------|-------------------------------------------------
-# scutil --get LocalHostName  |  sudo scutil --set LocalHostName Shortname
-# scutil --get ComputerName   |  sudo scutil --set ComputerName "Shortname's Mac Pro"
-# scutil --get HostName       |  sudo scutil --set HostName foobar.dev
-#
-# Example: - Hostname: `foobar.dev`
+# User, Hostname and PS{1..4}
 # ------------------------------------------------------------------------------
-# Set with `scutil`:
-#	sudo scutil --set HostName foobar.dev
-#
-# In `/etc/hostconfig`, add:
-#	HOSTNAME=foobar.dev
-# ------------------------------------------------------------------------------
-#
-
-
-# Bash name(s)
-# ------------------------------------------------------------------------------
-
-# colors used in PS1
-_grn='\[\e[0;32m\]'    # green
-_gry='\[\e[0;37m\]'    # grey
-_red='\[\e[0;31m\]'    # red
-_def='\[\e[m\]'        # default (clear)
 
 # user & host
 _user='\u'
-#_host='\h'
-_host='\H'
+_host='\H'          # \h = without ext
 
+# @todo: Make a funktion, if possible
 # Tmp names (to hide real names for screenshots/casts etc)
 #_user='test'
 #_host='fooBar'
 
-# root is red
-[ $UID == 0 ] && _grn=${_red} && _user='\u'
+[[ $UID == 0 ]] && _user='${red}\u'
+[[ $SUDO_USER ]] && _user='${ylw}${_user}'
 
 # PS 1-4
-PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
+PS1="[${grn}${_user}${clear}@${_host}] ${gry}\W${clear}\$ "
 PS2=' :» '
 PS3=' :? '
 PS4=' :+ '
@@ -158,6 +70,9 @@ PS4=' :+ '
 
 # Misc xtras
 # ------------------------------------------------------------------------------
+
+# Trim dir to 1. (~/.../folder)
+export PROMPT_DIRTRIM=1
 
 # Date & time to history
 #export HISTTIMEFORMAT='%F %T '

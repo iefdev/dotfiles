@@ -11,68 +11,41 @@
 # > this is still (pretty much) the osx version.
 #
 
-# Composer
-_CPOS="$HOME/.composer/vendor/bin"
-
-# Git
-#_GIT="/usr/local/git/bin"
-
-# MySql, PgSql
-#_SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
-
-# ShellScripts
-_Sh="$HOME/ShellScripts"
-
-# xbin for my own scripts
-_xbin="/usr/local/xbin"
-
-# export PATH.
-export PATH="$_CPOS:$_GIT:$_SQL:$_Sh:$_xbin:$PATH"
-
-# Set architecture flags
-export ARCHFLAGS="-arch x86_64"
-
-# No .DS_Store etc in "tar"
-export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
-
-# Bash color
-export CLICOLOR=1
-export LSCOLORS=Exfxcxdxbxegedabagacad
-export GREP_COLOR='1;33'
-
-# Colors in man pages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;38;5;75m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[0;38;5;246m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[04;38;5;83m'
+# Load: ~/.bash_exports (PATH's and misc exports)
+[ -f ~/.bash_exports ] && . ~/.bash_exports
 
 
-# Bash name(s)
+# Colors
 # ------------------------------------------------------------------------------
 
-# colors used in PS1
-_grn='\[\e[0;32m\]'    # green
-_gry='\[\e[0;37m\]'    # grey
-_red='\[\e[0;31m\]'    # red
-_def='\[\e[m\]'        # default (clear)
+red=$(tput setaf 1) # red
+grn=$(tput setaf 2) # green
+ylw=$(tput setaf 3) # yellow
+blu=$(tput setaf 4) # blue
+pur=$(tput setaf 5) # purple
+cyn=$(tput setaf 6) # cyan
+gry=$(tput setaf 7) # grey
+bold=$(tput bold)
+clear=$(tput sgr 0)
+
+
+# User, Hostname and PS{1..4}
+# ------------------------------------------------------------------------------
 
 # user & host
 _user='\u'
-#_host='\h'
-_host='\H'
+_host='\H'          # \h = without ext
 
+# @todo: Make a funktion, if possible
 # Tmp names (to hide real names for screenshots/casts etc)
 #_user='test'
 #_host='fooBar'
 
-# root is red
-[ $UID == 0 ] && _grn=${_red} && _user='\u'
+[[ $UID == 0 ]] && _user='${red}\u'
+[[ $SUDO_USER ]] && _user='${ylw}${_user}'
 
 # PS 1-4
-PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
+PS1="[${grn}${_user}${clear}@${_host}] ${gry}\W${clear}\$ "
 PS2=' :» '
 PS3=' :? '
 PS4=' :+ '
@@ -102,6 +75,9 @@ PS4=' :+ '
 
 # Misc xtras
 # ------------------------------------------------------------------------------
+
+# Trim dir to 1. (~/.../folder)
+export PROMPT_DIRTRIM=1
 
 # Date & time to history
 #export HISTTIMEFORMAT='%F %T '

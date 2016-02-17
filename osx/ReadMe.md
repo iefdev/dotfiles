@@ -1,12 +1,10 @@
-dotfiles :: OS X
-================
+# dotfiles :: OS X
 
 This is a set of the dotfiles I use with OS X.
 
 <br />
 
-hostname
---------
+## hostname
 
 In OS X, sometimes the hostname in Terminal ends up with a long serie of numbers and letters (ISP related).
 
@@ -33,10 +31,13 @@ In `/etc/hostconfig`, add:
 
 	HOSTNAME=foobar.dev
 
+...or in Terminal:
+	echo -e '\nHOSTNAME=foobar.dev' | sudo tee -a /etc/hostconfig
+
 
 If you use a hostname with a dot _(like: foobar.dev)_. `PS1` will display different when using `\h` or `\H`:
 
-	\h		# diplays foobar
-	\H		# diplays foobar.dev
+	\h		# foobar
+	\H		# foobar.dev
 
 <!-- Markdown: link & image defs -->
