@@ -32,6 +32,7 @@ In `/etc/hostconfig`, add:
 	HOSTNAME=foobar.dev
 
 ...or in Terminal:
+
 	echo -e '\nHOSTNAME=foobar.dev' | sudo tee -a /etc/hostconfig
 
 
