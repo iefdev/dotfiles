@@ -18,15 +18,15 @@
 # Colors
 # ------------------------------------------------------------------------------
 
-red=$(tput setaf 1) # red
-grn=$(tput setaf 2) # green
-ylw=$(tput setaf 3) # yellow
-blu=$(tput setaf 4) # blue
-pur=$(tput setaf 5) # purple
-cyn=$(tput setaf 6) # cyan
-gry=$(tput setaf 7) # grey
-bold=$(tput bold)
-clear=$(tput sgr 0)
+_red='\[\033[0;31m\]' # red
+_grn='\[\033[0;32m\]' # green
+_ylw='\[\033[0;33m\]' # yellow
+_blu='\[\033[0;34m\]' # blue
+_pur='\[\033[0;35m\]' # purple
+_cyn='\[\033[0;36m\]' # cyan
+_gry='\[\033[0;37m\]' # gray
+_bold='\[\033[1m\]'   # bold
+_def='\[\033[0m\]'    # default
 
 
 # User, Hostname and PS{1..4}
@@ -41,11 +41,11 @@ _host='\H'          # \h = without ext
 #_user='test'
 #_host='fooBar'
 
-[[ $UID == 0 ]] && _user='${red}\u'
-[[ $SUDO_USER ]] && _user='${ylw}${_user}'
+[[ $UID == 0 ]] && _user='${_red}\u'
+[[ $SUDO_USER ]] && _user='${_ylw}${_user}'
 
 # PS 1-4
-PS1="[${grn}${_user}${clear}@${_host}] ${gry}\W${clear}\$ "
+PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
 PS2=' :» '
 PS3=' :? '
 PS4=' :+ '
