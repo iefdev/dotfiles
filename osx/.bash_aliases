@@ -285,3 +285,18 @@ fi
 
 # Upgrade pip
 alias pipup='pip install -U pip'
+
+
+# Macports
+# --------------------------------------------------------------------------
+alias portup='sudo port -v selfupdate'
+alias portupout='port -v upgrade outdated'
+alias portforceup='sudo port upgrade -n --force'
+alias fail2ban.start='sudo port load fail2ban'
+alias fail2ban.stop='sudo port unload fail2ban'
+
+
+# GnuPG
+# --------------------------------------------------------------------------
+alias gpg.restart="gpgconf --kill gpg-agent && gpgconf --launch gpg-agent"
+alias gpg.chk="echo RELOADAGENT | gpg-connect-agent"
