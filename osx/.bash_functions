@@ -225,6 +225,14 @@ function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
 function f2bclient() { sudo fail2ban-client $@; }
 
 
+# GPG
+# --------------------------------------------------------------------------
+function chksig() { gpg2 --verify "$1.sig" "$1"; }
+function chkasc() { gpg2 --verify "$1.asc" "$1"; }
+function mksig() { gpg2 -u 0x$1 -abo "$2.sig" "$2"; }
+function mkasc() { gpg2 -u 0x$1 -ab "$2"; }
+
+
 # Misc & Funsies
 # ------------------------------------------------------------------------------
 
@@ -234,9 +242,6 @@ function chgAdminer()
 	_theme="$1";
 	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
 }
-
-# GPG
-function chksig() { gpg --verify "$1.sig" "$1"; }
 
 
 # youtube-dl
@@ -272,6 +277,17 @@ ipInfo() {
 	fi
 	echo
 }
+
+# JpegOptim. 1 file
+function jpegopt()
+{
+	local _f="$1";
+	local _q="$2";
+	[[ -z $2 ]] && _q='80' || _q="$2";
+	jpegoptim -m${_q} -ftPv -s "$1";
+}
+
+function jpgopt() { mkjpg "$1" && jpegopt "${1%.*}.jpg"; }
 
 
 # Debugging
