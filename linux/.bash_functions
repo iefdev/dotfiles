@@ -277,6 +277,9 @@ function jpegopt()
 
 function jpgopt() { mkjpg "$1" && jpegopt "${1%.*}.jpg"; }
 
+# Weather
+function wttr() { curl -4 wttr.in/$1; }
+
 
 # Debugging
 # ------------------------------------------------------------------------------
