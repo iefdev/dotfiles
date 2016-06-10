@@ -34,6 +34,7 @@ alias ln='ln -iv'
 alias cpa='rsync -avhP'
 
 alias c='clear'
+alias k="clear && printf '\e[3J'"
 alias cx="clear && printf '\e[3J' && archey"
 alias cxH="cd && clear && printf '\e[3J' && archey"
 
@@ -170,9 +171,6 @@ alias LinX='links -g'
 alias twistr='rainbowstream'
 alias twiot='rainbowstream -iot'
 
-# ImageMagick, v7 removes convert
-#alias convert='magick'
-
 # mkspace
 alias mkspace='echo -e "\v\v"'
 
@@ -184,33 +182,11 @@ alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 alias openSqlHistory='open ~/.mysql_history'
 
 
-#
-# pyWeb
-# --------------------------------------------------------------------------
-# With Python you can start a simple web server to text files.
-# Can be used/started from any folder, but this one uses one folder: (~/pyWeb)
-#
-# Based on version of Python, it will chose an alias.
-# --------------------------------------------------------------------------
-# URL (examples)     : http://localhost:8000/
-#                    : http://localhost:8000/index.html
-#                    : http://127.0.0.1:8000/test.html
-#                    : (or outside IP)
-# --------------------------------------------------------------------------
-# Start with: pyWeb
-# Stop with: ctrl+C
-#
-
-# Create folder: ~/pyWeb
-[[ ! -d ~/pyWeb ]] && mkdir ~/pyWeb && echo '<pre>pyWeb &hellip;</pre>' > ~/pyWeb/index.html
-
-if [[ $(python -c 'import sys; print(sys.version_info[0])') == "3" ]]; then
-	# Python 3.*
-	alias pyWeb='cd ~/pyWeb && python -m http.server 8000';
-else
-	# Python 2.*
-	alias pyWeb='cd ~/pyWeb && python -m SimpleHTTPServer 8000';
-fi
-
 # Upgrade pip
 alias pipup='pip install -U pip'
+
+
+# GnuPG
+# --------------------------------------------------------------------------
+#alias gpg.restart="gpgconf --kill gpg-agent && gpgconf --launch gpg-agent"
+#alias gpg.chk="echo RELOADAGENT | gpg-connect-agent"

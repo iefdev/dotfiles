@@ -35,6 +35,7 @@ alias ln='ln -iv'
 alias cpa='rsync -avhP'
 
 alias c='clear'
+alias k="clear && printf '\e[3J'"
 alias cx="clear && printf '\e[3J' && archey"
 alias cxH="cd && clear && printf '\e[3J' && archey"
 
@@ -194,9 +195,7 @@ alias whatHW='networksetup -listallhardwareports'
 # Screen Saver Engine
 alias sse='open -a ScreenSaverEngine'
 
-# Add to defaults to custom history log
-# moving to: .bashrc (see PROMT_COMMAND)
-#alias defLog='history | grep "defaults write" >> $HOME/ShellScripts/__defaultsLog.txt'
+# the defaults log
 alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
 
 # Password assistant
@@ -208,9 +207,6 @@ alias LinX='links -g'
 # Rainbow Stream
 alias twistr='rainbowstream'
 alias twiot='rainbowstream -iot'
-
-# ImageMagick, v7 removes convert
-#alias convert='magick'
 
 # ImageOptim
 alias imageoptim='/Applications/ImageOptim.app/Contents/MacOS/ImageOptim'
@@ -254,34 +250,6 @@ alias PostgreSQL='sudo /Library/StartupItems/PostgreSQL/PostgreSQL'
 #/usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data
 #alias pgsqlLogStart='/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start'
 
-
-#
-# pyWeb
-# --------------------------------------------------------------------------
-# Python (bundled in OS X) you can start a simple web server to text files.
-# Can be used/started from any folder, but this one uses one folder: (~/pyWeb)
-#
-# OS X comes with `Python 2.*` and since I've upgraded to python 3, I use this.
-# --------------------------------------------------------------------------
-# URL (examples)     : http://localhost:8000/
-#                    : http://localhost:8000/index.html
-#                    : http://127.0.0.1:8000/test.html
-#                    : (or outside IP)
-# --------------------------------------------------------------------------
-# Start with: pyWeb
-# Stop with: ctrl+C
-#
-
-# Create folder: ~/pyWeb
-[[ ! -d ~/pyWeb ]] && mkdir ~/pyWeb && echo '<pre>pyWeb &hellip;</pre>' > ~/pyWeb/index.html
-
-if [[ $(python -c 'import sys; print(sys.version_info[0])') == "3" ]]; then
-	# Python 3.*
-	alias pyWeb='cd ~/pyWeb && python -m http.server 8000';
-else
-	# Python 2.*
-	alias pyWeb='cd ~/pyWeb && python -m SimpleHTTPServer 8000';
-fi
 
 # Upgrade pip
 alias pipup='pip install -U pip'
