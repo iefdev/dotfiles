@@ -36,7 +36,6 @@ _def='\[\033[0m\]'    # default
 _user='\u'
 _host='\H'          # \h = without ext
 
-# @todo: Make a funktion, if possible
 # Tmp names (to hide real names for screenshots/casts etc)
 #_user='test'
 #_host='fooBar'
