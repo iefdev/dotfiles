@@ -257,9 +257,15 @@ alias pipup='pip install -U pip'
 
 # Macports
 # --------------------------------------------------------------------------
-alias portup='sudo port -v selfupdate'
+alias portup='sudo port -v selfupdate && echo -e "\v--->  Outdated:\n" && port echo outdated''
 alias portupout='port -v upgrade outdated'
 alias portforceup='sudo port upgrade -n --force'
+
+alias lsLeaves='port echo leaves'
+alias rmLeaves='sudo port uninstall leaves'
+alias lsInactive='port echo inactive'
+alias rmInactive='sudo port uninstall inactive'
+
 alias fail2ban.start='sudo port load fail2ban'
 alias fail2ban.stop='sudo port unload fail2ban'
 
