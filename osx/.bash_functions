@@ -132,66 +132,6 @@ function manx() { local i; for i; do open x-man-page://$i; done; }
 function ddg() { open -a Firefox "https://duckduckgo.com/?q=$1"; }
 
 
-# Compression
-# ------------------------------------------------------------------------------
-
-# Create compressed archive: gz, bz2, xz (default)
-function mktar ()
-{
-	[[ ! -d $1 && ! -f $1 ]] && local _ext=$1 && shift || _ext='xz';
-	local _dir=`echo "$1" | sed -e 's/\/$//g'`;
-	local _excludes='--exclude ".DS_Store" --exclude "._*"'
-	if [ -e $1 ]; then
-		(cd `dirname ${_dir}` && _path=${_dir} && _dir=`basename ${_dir}`;
-		case $_ext in
-			gz) tar -zcvf "${_dir}".tar.${_ext} ${_excludes} "${_dir}";  ;;
-			bz2) tar -jcvf "${_dir}".tar.${_ext} ${_excludes} "${_dir}"; ;;
-			xz) # exmaple: use -2e for less compression
-			    tar -cvf - "${_dir}" | xz -6e > "${_dir}".tar.${_ext};   ;;
-			*)
-				echo "${FUNCNAME}: Could not create '${_dir}.tar.${_ext}'";
-				cat << INFO
-Usage: ${FUNCNAME} [gz|bz2|xz] <files/directory>
-       ${FUNCNAME} bz2 ${_path}
-       ${FUNCNAME} ${_path} (defaults to xz)
-
-INFO
-				return 1;
-				;;
-		esac
-		)
-	else
-		echo "'$1' is not a valid file/directory";
-	fi
-}
-
-# Function extract
-# (using 7za instead of 7z)
-function extract ()
-{
-	if [ -f $1 ]; then
-		local _dir="`dirname $1`";
-		case $1 in
-			*.tar.bz2 | *.tbz2) tar -jxvf $1 -C ${_dir} ;;
-			*.tar.xz) tar -xvf $1 -C ${_dir}            ;;
-			*.tar.gz | *.tgz) tar -zxvf $1 -C ${_dir}   ;;
-			*.bz2) bunzip2 -kf $1                       ;;
-			*.rar) (cd ${_dir} && unrar x $1)           ;;
-			*.gz) gunzip -kvf $1                        ;;
-			*.tar) tar -xf $1 -C ${_dir}                ;;
-			*.zip) unzip -f $1 -d ${_dir}               ;;
-			*.Z) (cd ${_dir} && uncompress $1)          ;;
-			*.7z) (cd ${_dir} && 7za x $1)              ;;
-			*)
-				echo "${FUNCNAME}: '$1' cannot be extracted. ${_ext} is not supported.";
-				;;
-		esac;
-	else
-		echo "'$1' is not a valid file";
-	fi
-}
-
-
 # Diff & Patching
 # ------------------------------------------------------------------------------
 
@@ -279,16 +219,8 @@ function chgAdminer()
 	sudo ln -s /usr/share/webapps/adminer/{themes/$_theme,adminer}.css
 }
 
-
 # youtube-dl
 function ytdl() { youtube-dl -ci "$1"; }
-
-# ffmpeg - 320k mp3
-function 2mp3()
-{
-	[[ ! `type ffmpeg 2> /dev/null` ]] && echo "$FUNCNAME: Please install 'ffmpeg'..." && return 1;
-	ffmpeg -i "$1" -ab 320k $(echo "${1%.*}.mp3" | sed 's/[[:space:]]/_/g');
-}
 
 # Most freq used commands
 # usage: ctop 15
