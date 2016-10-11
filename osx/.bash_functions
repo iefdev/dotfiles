@@ -22,7 +22,7 @@
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
 
 # Misc bak helpers (mbakd, for dirs)
-function mkbakd() { _dir=`echo "$1" | sed 's/\/*$//g'`; ditto -v "$_dir"{,.bak}; }
+function mkbakd() { _dir=`echo "${1%/}"'`; ditto -v "${_dir}"{,.bak}; }
 function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
@@ -84,9 +84,7 @@ function rsyncdir()
 {
 	# removing trailing "/" and adding our own
 	# to make sure there is one, and not end up with "//"
-	_from_dir=`echo "$1" | sed 's/\/*$//g'`;
-	_to_dir=`echo "$2" | sed 's/\/*$//g'`;
-	rsync -avzuc --delete "$_from_dir/" "$_to_dir/";
+	rsync -avzuc --delete "${1%/}/ ${2%/}/";
 }
 
 # Remove sticky bit
@@ -127,9 +125,6 @@ function man2txt()
 
 # open man-page(s) in its own window. Use: "manx" instead of "man" (OS X)
 function manx() { local i; for i; do open x-man-page://$i; done; }
-
-# comandline search
-function ddg() { open -a Firefox "https://duckduckgo.com/?q=$1"; }
 
 
 # Diff & Patching
@@ -221,6 +216,9 @@ function chgAdminer()
 
 # youtube-dl
 function ytdl() { youtube-dl -ci "$1"; }
+function spdl() { /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/svtplay-dl -r "$1"; }
+alias svtplay-dl='/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/svtplay-dl'
+
 
 # Most freq used commands
 # usage: ctop 15
@@ -246,17 +244,6 @@ ipInfo() {
 	echo
 }
 
-# JpegOptim. 1 file
-function jpegopt()
-{
-	local _f="$1";
-	local _q="$2";
-	[[ -z $2 ]] && _q='80' || _q="$2";
-	jpegoptim -m${_q} -ftPv -s "$1";
-}
-
-function jpgopt() { mkjpg "$1" && jpegopt "${1%.*}.jpg"; }
-
 # Weather
 function wttr() { curl -4 wttr.in/$1; }
 
@@ -267,6 +254,6 @@ function wttr() { curl -4 wttr.in/$1; }
 
 # https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
 EC() {
-	echo -e "\e[1;31m :: \e[1;33m code: $? \e[m\n"
+	echo -e "\e[1;31m${FUNCNAME}:\e[1;33m code: $? \e[m\n"
 }
 trap EC ERR

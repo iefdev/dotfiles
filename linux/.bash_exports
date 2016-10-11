@@ -15,12 +15,6 @@
 # Composer
 _CPOS="$HOME/.composer/vendor/bin"
 
-# Git
-#_GIT="/usr/local/git/bin"
-
-# MySql, PgSql
-#_SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
-
 # ShellScripts
 _Sh="$HOME/ShellScripts"
 
@@ -28,7 +22,7 @@ _Sh="$HOME/ShellScripts"
 _xbin="/usr/local/xbin"
 
 # export PATH.
-export PATH="$_CPOS:$_GIT:$_SQL:$_Sh:$_xbin:$PATH"
+export PATH="$_CPOS:usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"

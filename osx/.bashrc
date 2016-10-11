@@ -27,7 +27,7 @@ _bold='\[\033[1m\]'   # bold
 _def='\[\033[0m\]'    # default
 
 
-# User, Hostname and PS{1..4}
+# User, Hostname and PS{0..4}
 # ------------------------------------------------------------------------------
 
 # user & host
@@ -41,14 +41,15 @@ _host='\H'          # \h = without ext
 [[ $UID == 0 ]] && _user='${_red}\u'
 [[ $SUDO_USER ]] && _user='${_ylw}${_user}'
 
-# PS 1-4
+# PS 0-4
+#PS0=''
 PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
 PS2=' :» '
 PS3=' :? '
 PS4=' :+ '
 
 
-# Load .bash_* files + Archey
+# Load .bash_* files, Archey and bash completion
 # ------------------------------------------------------------------------------
 
 # Load: .bash_aliases
@@ -64,7 +65,12 @@ PS4=' :+ '
 [ -f ~/.bash_cheat ] && . ~/.bash_cheat
 
 # Load archey (if installed)
-[[ `which archey` && $UID != 0 ]] && archey
+# If not running interactively, don't do anything
+[[ ! -z "$PS1" && `which archey` && $UID != 0 ]] && archey
+
+# bash completion (MacPorts)
+bashCompl='/opt/local/etc/profile.d/bash_completion.sh';
+[ -f ${bashCompl} ] && . ${bashCompl} &> /dev/null;
 
 
 # Misc xtras
@@ -86,7 +92,6 @@ export HISTCONTROL=ignoreboth:erasedups
 
 shopt -s histappend
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-#PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
 
 # Set the default editor
 export EDITOR=nano
@@ -107,5 +112,5 @@ set -o notify
 # Disable [CTRL-D] which is used to exit (logout) the shell
 set -o ignoreeof
 
-# bash 4.3
-[[ `$SHELL --version | grep 'version 4.3'` ]] && shopt -s globstar autocd
+# bash >=4
+[ ${BASH_VERSINFO[0]} -gt 3 ] && shopt -s globstar autocd

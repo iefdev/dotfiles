@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 #
-# Aliases (except 1 python alias) and Functions are kept in their own files:
+# Aliases (except 2) and Functions are kept in their own files:
 # (~/.bash_aliases and ~/.bash_functions)
 #
 # This file is also sourced from ~/.bash_profile
@@ -29,7 +29,7 @@ _bold='\[\033[1m\]'   # bold
 _def='\[\033[0m\]'    # default
 
 
-# User, Hostname and PS{1..4}
+# User, Hostname and PS{0..4}
 # ------------------------------------------------------------------------------
 
 # user & host
@@ -43,7 +43,8 @@ _host='\H'          # \h = without ext
 [[ $UID == 0 ]] && _user='${_red}\u'
 [[ $SUDO_USER ]] && _user='${_ylw}${_user}'
 
-# PS 1-4
+# PS 0-4
+#PS0=''
 PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
 PS2=' :» '
 PS3=' :? '
@@ -62,14 +63,15 @@ PS4=' :+ '
 # Load: .bash_functions
 [ -f ~/.bash_functions ] && . ~/.bash_functions
 
-#Load: ~/.bash_git
+# Load: ~/.bash_git
 [ -f ~/.bash_git ] && . ~/.bash_git
 
 # Load: ~/.bash_cheat
 [ -f ~/.bash_cheat ] && . ~/.bash_cheat
 
 # Load archey (if installed)
-[[ `which archey` && $UID != 0 ]] && archey
+# If not running interactively, don't do anything
+[[ ! -z "$PS1" && `which archey` && $UID != 0 ]] && archey
 
 
 # Misc xtras

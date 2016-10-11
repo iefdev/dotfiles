@@ -33,6 +33,9 @@ alias ln='ln -iv'
 # alt cp with rsync (testing)
 alias cpa='rsync -avhP'
 
+# alt cp with rsync (testing)
+alias cpa='rsync -avhP'
+
 alias c='clear'
 alias k="clear && printf '\e[3J'"
 alias cx="clear && printf '\e[3J' && archey"
@@ -135,16 +138,9 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
 alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
-# Read/Delete the Dropbox cache folder (= more space).
-alias readDBC='ls -Ahl ~/Dropbox/.dropbox.cache/'
-alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
-
 
 # ShellScripts
 # ------------------------------------------------------------------------------
-
-# Dropbox Uploader
-alias dbUpload='~/ShellScripts/dropbox_uploader.sh'
 
 
 # Wget
@@ -164,7 +160,7 @@ alias wgetnc='wget --no-check-certificate'
 # List disks
 alias disklist="mount | grep 'disk'"
 
-# Links 2.8
+# Links
 alias LinX='links -g'
 
 # Rainbow Stream

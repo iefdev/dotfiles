@@ -34,6 +34,9 @@ alias ln='ln -iv'
 # alt cp with rsync (testing)
 alias cpa='rsync -avhP'
 
+# alt cp with rsync (testing)
+alias cpa='rsync -avhP'
+
 alias c='clear'
 alias k="clear && printf '\e[3J'"
 alias cx="clear && printf '\e[3J' && archey"
@@ -94,9 +97,6 @@ alias ping='ping -c 3'
 # Do not wait interval 1 second, go fast #
 alias fastping='ping -c 20 -s.2'
 
-# Alias for web2png.sh
-alias web2png='~/ShellScripts/web2png.sh'
-
 # Pwd+copy
 alias cwd='pwd | pbcopy'
 
@@ -125,7 +125,7 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 # Cleaning up stuff...
 # ------------------------------------------------------------------------------
 
-# .DS_Store and ._files
+# .DS_Store and ._files (universal UNIX way)
 alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
 alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
@@ -141,10 +141,6 @@ alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineE
 
 # Delete the "hidden" download history
 alias cleanDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-
-# Read/Delete the Dropbox cache folder (= more space).
-alias readDBC='ls -Ahl ~/Dropbox/.dropbox.cache/'
-alias cleanDBC='rm -rf ~/Dropbox/.dropbox.cache/*'
 
 # Clean Out LaunchPad
 alias cleanLPad="sqlite3 ~/Library/Application\ Support/Dock/*.db \"DELETE from apps; DELETE from groups WHERE title <> ''; DELETE from items WHERE rowid > 2;\"; killall Dock"
@@ -165,8 +161,8 @@ alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/Launch
 # Usage: cleanDisk "Name of Disk"
 alias cleanDisk='~/ShellScripts/cleanDisk.sh'
 
-# Dropbox Uploader
-alias dbUpload='~/ShellScripts/dropbox_uploader.sh'
+# Alias for web2png.sh
+alias web2png='~/ShellScripts/web2png.sh'
 
 
 # Wget
@@ -201,7 +197,7 @@ alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
 # Password assistant
 alias passist='open -a Password\ Assistant'
 
-# Links 2.8
+# Links X11
 alias LinX='links -g'
 
 # Rainbow Stream
@@ -230,25 +226,20 @@ alias pear70='/usr/local/php70/bin/pear'
 alias pecl70='/usr/local/php70/bin/pecl'
 alias fpmctl70='/usr/local/php70/sbin/fpmctl'
 
+# Composer
+alias phpmem="php -r \"echo ini_get('memory_limit').PHP_EOL;\""
+alias memposer='php -d memory_limit=-1 $(which composer)'
+
 
 # MySQL
-alias mysql='/usr/local/mysql/bin/mysql'
-alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
-
-alias mysql.server='sudo /usr/local/mysql/support-files/mysql.server'
-
+alias mysql.server='sudo /opt/local/share/mariadb-10.1/support-files/mysql.server'
 alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 alias openSqlHistory='open ~/.mysql_history'
 
 
 # PostgreSQL
-# /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
-alias psql='/usr/local/pgsql/bin/psql'
-alias postgres='/usr/local/pgsql/bin/postgres'
-alias PostgreSQL='sudo /Library/StartupItems/PostgreSQL/PostgreSQL'
-
-#/usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data
-#alias pgsqlLogStart='/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start'
+# Usage: postgres.server (initdb|start|stop|restart|reload|status)
+alias postgres.server='/opt/local/etc/LaunchDaemons/org.macports.postgresql95-server/postgres.server'
 
 
 # Upgrade pip
@@ -257,14 +248,20 @@ alias pipup='pip install -U pip'
 
 # Macports
 # --------------------------------------------------------------------------
-alias portup='sudo port -v selfupdate && echo -e "\v--->  Outdated:\n" && port echo outdated''
-alias portupout='port -v upgrade outdated'
-alias portforceup='sudo port upgrade -n --force'
+alias portup='sudo port -v selfupdate && echo -e "\v--->  Outdated:\n" && port echo outdated'
+alias portupout='sudo port upgrade outdated'
+alias portout='port echo installed'
 
 alias lsLeaves='port echo leaves'
 alias rmLeaves='sudo port uninstall leaves'
 alias lsInactive='port echo inactive'
 alias rmInactive='sudo port uninstall inactive'
+
+alias lsDistBuild='ls -Ahl /opt/local/var/macports/{distfiles,build}'
+alias rmBuild='sudo rm -rvf /opt/local/var/macports/build/*'
+alias rmDist='sudo rm -rvf /opt/local/var/macports/distfiles/*'
+
+alias setReq='sudo port setrequested'
 
 alias fail2ban.start='sudo port load fail2ban'
 alias fail2ban.stop='sudo port unload fail2ban'

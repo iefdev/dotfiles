@@ -3,7 +3,7 @@ dotfiles
 
 _Just some of my dotfiles..._
 
-Since I use both OS X and ArchLinux, I have split up the dotfiles into separate folders.
+Since I use both OS X, ArchLinux and Fedora, I have split up the dotfiles into separate folders.
 
 - [Linux dotfiles][arch]
 - [OS X dotfiles][osx]
