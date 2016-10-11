@@ -34,9 +34,6 @@ alias ln='ln -iv'
 # alt cp with rsync (testing)
 alias cpa='rsync -avhP'
 
-# alt cp with rsync (testing)
-alias cpa='rsync -avhP'
-
 alias c='clear'
 alias k="clear && printf '\e[3J'"
 alias cx="clear && printf '\e[3J' && archey"
