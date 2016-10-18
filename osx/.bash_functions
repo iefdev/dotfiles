@@ -97,6 +97,13 @@ function rmxattr()
 # Reveal program in Finder
 function whichR() { open -R `which $1`; }
 
+# lsbom - /var/db/receipts
+function lsReceipts() { lsbom -flspf /var/db/receipts/$1; }
+
+# Search and delete (recursively), using find. $1 = the regexp.
+function searchFiles() { find . -name "$1" -type f; }
+function rmFiles() { find . -name "$1" -type f -delete; }
+
 
 # Get this...
 # ------------------------------------------------------------------------------
