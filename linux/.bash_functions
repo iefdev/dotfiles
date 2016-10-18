@@ -88,6 +88,10 @@ function rsyncdir()
 # Open
 open() { xdg-open "$@" > /dev/null 2>&1 ;}
 
+# Search and delete (recursively), using find. $1 = the regexp.
+function searchFiles() { find . -name "$1" -type f; }
+function rmFiles() { find . -name "$1" -type f -delete; }
+
 
 # Get this...
 # ------------------------------------------------------------------------------
