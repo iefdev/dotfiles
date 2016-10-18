@@ -71,7 +71,7 @@ PS4=' :+ '
 
 # Load archey (if installed)
 # If not running interactively, don't do anything
-[[ ! -z "$PS1" && `which archey` && $UID != 0 ]] && archey
+[[ ! -z "$PS1" && `type archey 2> /dev/null` && $UID != 0 ]] && archey
 
 
 # Misc xtras
