@@ -84,7 +84,7 @@ function rsyncdir()
 {
 	# removing trailing "/" and adding our own
 	# to make sure there is one, and not end up with "//"
-	rsync -avzuc --delete "${1%/}/ ${2%/}/";
+	rsync -avzuc --delete "${1%/}/" "${2%/}/";
 }
 
 # Remove sticky bit
