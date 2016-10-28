@@ -167,39 +167,6 @@ function patchalot() { for file in $(ls *.patch); do patch -p0 < $file; done; }
 function f2bclient() { sudo fail2ban-client $@; }
 
 
-#
-# pyWeb
-# --------------------------------------------------------------------------
-# Python (bundled in OS X) you can start a simple web server to text files.
-# Can be used/started from any folder, but this one uses one folder: (~/pyWeb)
-#
-# OS X comes with `Python 2.*` and since I've upgraded to python 3, I use this.
-# --------------------------------------------------------------------------
-# URL (examples)     : http://localhost:8000/
-#                    : http://localhost:8000/index.html
-#                    : http://127.0.0.1:8000/test.html
-#                    : (or outside IP)
-# --------------------------------------------------------------------------
-# Start with: pyWeb
-# Stop with: ctrl+C
-#
-function pyWeb() {
-	# Create folder: ~/pyWeb
-	[[ ! -d ~/pyWeb ]] && mkdir ~/pyWeb && echo '<pre>pyWeb &hellip;</pre>' > ~/pyWeb/index.html
-
-	echo 'You can stop the server with: "ctrl+C" at anytime.';
-
-	if [[ $(python -c 'import sys; print(sys.version_info[0])') == "3" ]]; then
-		# Python 3.*
-		cd ~/pyWeb && python -m http.server 8000;
-		#open http://localhost:8000/
-	else
-		# Python 2.*
-		cd ~/pyWeb && python -m SimpleHTTPServer 8000;
-	fi
-}
-
-
 # GPG
 # --------------------------------------------------------------------------
 function chksig() { gpg2 --verify "$1.sig" "$1"; }
