@@ -189,7 +189,7 @@ function ctop()
 
 # Detailed information on an IP address or hostname in bash via http://ipinfo.io:
 # https://wiki.archlinux.org/index.php/Bash/Functions#IP_info
-ipInfo() {
+function ipInfo() {
 	[[ $1 == '' ]] && _ip=$(dig +short myip.opendns.com @resolver1.opendns.com) || _ip=$1;
 	if grep -P "(([1-9]\d{0,2})\.){3}(?2)" 2>/dev/null <<< "$_ip"; then
 		curl ipinfo.io/"$_ip"
@@ -209,7 +209,7 @@ function wttr() { curl -4 wttr.in/$1; }
 #
 
 # https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
-EC() {
+function EC() {
 	echo -e "\e[1;31m${FUNCNAME}:\e[1;33m code: $? \e[m\n"
 }
 trap EC ERR
