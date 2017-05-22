@@ -136,6 +136,10 @@ alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
 alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 
 
+# OS X “purge”
+alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
+
+
 # ShellScripts
 # ------------------------------------------------------------------------------
 
