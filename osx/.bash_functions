@@ -104,6 +104,10 @@ function lsReceipts() { lsbom -flspf /var/db/receipts/$1; }
 function searchFiles() { find . -name "$1" -type f; }
 function rmFiles() { find . -name "$1" -type f -delete; }
 
+function adminstall() { sudo install -v -m 0755 -o 0 -g 0 ${@}; }
+function badminstall() { sudo install -vb -m 0755 -o 0 -g 0 ${@}; }
+function bBadminstall() { sudo install -vb -B .$(date '+%Y%m%d').bak -m 0755 -o 0 -g 0 ${@}; }
+
 
 # Get this...
 # ------------------------------------------------------------------------------
