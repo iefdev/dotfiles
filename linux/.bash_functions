@@ -158,10 +158,10 @@ function f2bclient() { sudo fail2ban-client $@; }
 
 # GPG
 # --------------------------------------------------------------------------
-function chksig() { gpg2 --verify "$1.sig" "$1"; }
-function chkasc() { gpg2 --verify "$1.asc" "$1"; }
-function mksig() { gpg2 -u 0x$1 -abo "$2.sig" "$2"; }
-function mkasc() { gpg2 -u 0x$1 -ab "$2"; }
+function chksig() { gpg --verify "$1.sig" "$1"; }
+function chkasc() { gpg --verify "$1.asc" "$1"; }
+function mksig() { gpg -u 0x$1 -abo "$2.sig" "$2"; }
+function mkasc() { gpg -u 0x$1 -ab "$2"; }
 
 
 # Misc & Funsies
