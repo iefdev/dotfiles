@@ -246,17 +246,23 @@ alias pipup='pip install -U pip'
 # Macports
 # --------------------------------------------------------------------------
 alias portup='sudo port -v selfupdate && echo -e "\v--->  Outdated:\n" && port echo outdated'
-alias portupout='sudo port upgrade outdated'
-alias portout='port echo installed'
+alias portout='echo -e "--->  Outdated:\n" && port echo outdated'
+alias portupgrade='sudo port upgrade'
+alias portupall='sudo port upgrade outdated and not go'
+#alias portupall='sudo port upgrade outdated and not \( go mongo-tools \)'
 
+alias portclean='sudo port clean --all'
+alias portmaintainer='port info --maintainer'
+
+alias lsOutdated='port echo outdated'
+alias lsPorts='port echo installed'
 alias lsLeaves='port echo leaves'
 alias rmLeaves='sudo port uninstall leaves'
 alias lsInactive='port echo inactive'
 alias rmInactive='sudo port uninstall inactive'
 
 alias lsDistBuild='ls -Ahl /opt/local/var/macports/{distfiles,build}'
-alias rmBuild='sudo rm -rvf /opt/local/var/macports/build/*'
-alias rmDist='sudo rm -rvf /opt/local/var/macports/distfiles/*'
+alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
 
 alias setReq='sudo port setrequested'
 

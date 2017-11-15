@@ -22,7 +22,7 @@
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
 
 # Misc bak helpers (mbakd, for dirs)
-#function mkbakd() { _dir=`echo "${1%/}"'`; ditto -v "${_dir}"{,.bak}; }
+#function mkbakd() { _dir=`echo "${1%/}"`; ditto -v "${_dir}"{,.bak}; }
 function mkbak() { cp -iv "$1"{,.bak}; }
 function mvbak() { mv -iv "$1"{,.bak}; }
 
@@ -162,6 +162,12 @@ function chksig() { gpg --verify "$1.sig" "$1"; }
 function chkasc() { gpg --verify "$1.asc" "$1"; }
 function mksig() { gpg -u 0x$1 -abo "$2.sig" "$2"; }
 function mkasc() { gpg -u 0x$1 -ab "$2"; }
+function signFile()
+{
+	[[ ! -f ${2} ]] && { echo "Usage: $FUNCNAME <id> <file> [sig]"; return 1; }
+	[[ -z ${3} ]] && _out="-o ${2}.asc" || _out='';
+	gpg2 -u "${1}" -sb ${2} file;
+}
 
 
 # Misc & Funsies
