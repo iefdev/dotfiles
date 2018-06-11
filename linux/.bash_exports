@@ -30,6 +30,9 @@ export ARCHFLAGS="-arch x86_64"
 # No .DS_Store etc in "tar"
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 
+# Gzip defaults...
+export GZIP="-8v --name"
+
 
 # Bash colors
 # ------------------------------------------------------------------------------

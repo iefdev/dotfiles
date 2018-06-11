@@ -1,14 +1,7 @@
 #
 # ~/.bash_cheat
 #
-#
 # Description: Separate file for cheat (python script)
-#
-# Load it in: ~/.bashrc with
-# ------------------------------------------------------------------------------
-#   # Load: ~/.bash_cheat
-#   [ -f ~/.bash_cheat ] && . ~/.bash_cheat
-# ------------------------------------------------------------------------------
 #
 
 

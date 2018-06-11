@@ -182,6 +182,11 @@ alias openSqlHistory='open ~/.mysql_history'
 # Upgrade pip
 alias pipup='pip install -U pip'
 
+# Py-env - activate
+alias mkvenv='python3 -m venv ./.venv'
+alias vOn='. ./.venv/bin/activate'
+alias vOff='deactivate'
+
 
 # GnuPG
 # --------------------------------------------------------------------------

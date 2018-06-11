@@ -3,14 +3,17 @@
 #
 #
 # Aliases (except 2) and Functions are kept in their own files:
-# (~/.bash_aliases and ~/.bash_functions)
+# (~/.bash.d/bash_aliases and ~/.bash.d/bash_functions)
 #
 # This file is also sourced from ~/.bash_profile
 # ------------------------------------------------------------------------------
 #
 
-# Load: ~/.bash_exports (PATH's and misc exports)
-[ -f ~/.bash_exports ] && . ~/.bash_exports
+# DARWIN
+[[ `uname -s` == 'Darwin' ]] && DARWIN=1;
+
+# Load: ~/.bash.d/bash_exports (PATH's and misc exports)
+[ -f ~/.bash.d/bash_exports ] && . ~/.bash.d/bash_exports
 
 
 # Colors
@@ -49,28 +52,24 @@ PS3=' :? '
 PS4=' :+ '
 
 
-# Load .bash_* files, Archey and bash completion
+# Load .bash_* files from ~/.bash.d/, Archey and bash completion
 # ------------------------------------------------------------------------------
 
-# Load: .bash_aliases
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+# Bash files to load
+bash_files=( ruby aliases functions git cheat opo venv );
 
-# Load: .bash_functions
-[ -f ~/.bash_functions ] && . ~/.bash_functions
-
-# Load: ~/.bash_git
-[ -f ~/.bash_git ] && . ~/.bash_git
-
-# Load: ~/.bash_cheat
-[ -f ~/.bash_cheat ] && . ~/.bash_cheat
+bash_file_prefix=`echo ~/.bash.d/bash_`
+for _file in ${bash_files[@]}; do
+    [ -f ${bash_file_prefix}${_file} ] && . ${bash_file_prefix}${_file};
+done
 
 # Load archey (if installed)
 # If not running interactively, don't do anything
-[[ ! -z "$PS1" && `type archey 2> /dev/null` && $UID != 0 ]] && archey
+[[ -n "$PS1" && `type archeyX 2> /dev/null` && $UID != 0 ]] && archeyX
 
 # bash completion (MacPorts)
 bashCompl='/opt/local/etc/profile.d/bash_completion.sh';
-[ -f ${bashCompl} ] && . ${bashCompl} &> /dev/null;
+[ -f ${bashCompl} ] && . ${bashCompl};
 
 
 # Misc xtras
@@ -94,6 +93,7 @@ shopt -s histappend
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Set the default editor
+export VISUAL=nano
 export EDITOR=nano
 
 
@@ -114,3 +114,17 @@ set -o ignoreeof
 
 # bash >=4
 [ ${BASH_VERSINFO[0]} -gt 3 ] && shopt -s globstar autocd
+
+# Tabs: PL/1 format (columns 1, 5, 9, 13, 17, etc...)
+tabs -np
+
+
+# Debugging and
+# ------------------------------------------------------------------------------
+#
+
+# https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
+EC() {
+	echo -e "\e[1;31m${FUNCNAME}:\e[1;33m code: $? \e[m\n"
+}
+trap EC ERR

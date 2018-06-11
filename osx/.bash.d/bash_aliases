@@ -1,14 +1,5 @@
 #
-# ~/.bash_aliases
-#
-#
-# Description: Separate file for alias
-#
-# Load it in ~/.bashrc with:
-# ------------------------------------------------------------------------------
-#   # Load: ~/.bash_aliases
-#   [ -f ~/.bash_aliases ] && . ~/.bash_aliases
-# ------------------------------------------------------------------------------
+# ~/.bash.d/bash_aliases
 #
 
 
@@ -36,8 +27,8 @@ alias cpa='rsync -avhP'
 
 alias c='clear'
 alias k="clear && printf '\e[3J'"
-alias cx="clear && printf '\e[3J' && archey"
-alias cxH="cd && clear && printf '\e[3J' && archey"
+alias cx="clear && printf '\e[3J' && archeyX"
+alias cxH="cd && clear && printf '\e[3J' && archeyX"
 
 alias h='history'
 alias j='jobs -l'
@@ -227,20 +218,26 @@ alias fpmctl70='/usr/local/php70/sbin/fpmctl'
 alias phpmem="php -r \"echo ini_get('memory_limit').PHP_EOL;\""
 alias memposer='php -d memory_limit=-1 $(which composer)'
 
+# Httpd: Use `apachectl' to manage httpd. This just (un)loads the LaunchDaemon
+alias httpd.load='sudo launchctl load -w /Library/LaunchDaemons/srv.apache.httpd.plist'
+alias httpd.unload='sudo launchctl unload -w /Library/LaunchDaemons/srv.apache.httpd.plist'
 
 # MySQL
 alias mysql.server='sudo /opt/local/share/mariadb-10.1/support-files/mysql.server'
 alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 alias openSqlHistory='open ~/.mysql_history'
 
-
 # PostgreSQL
 # Usage: postgres.server (initdb|start|stop|restart|reload|status)
 alias postgres.server='/opt/local/etc/LaunchDaemons/org.macports.postgresql95-server/postgres.server'
 
-
 # Upgrade pip
 alias pipup='pip install -U pip'
+
+# Py-env - activate
+alias mkvenv='python3 -m venv ./.venv'
+alias vOn='. ./.venv/bin/activate'
+alias vOff='deactivate'
 
 
 # Macports

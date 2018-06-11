@@ -56,17 +56,24 @@ _xbin="/usr/local/xbin"
 # ShellScripts
 _Sh="$HOME/ShellScripts"
 
+# Python/pip
+_pbin="/opt/local/pbin"
+
 # export PATH.
-export PATH="$_MP:$_AP24:$_PHP:$_CPOS:$_SQL:$_PERL:$_ST:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
+export PATH="$_AP24:$_MP:$_PHP:$_CPOS:$_SQL:$_PERL:$_ST:/usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$_pbin:$PATH"
 
 # older version for php <_<
 #export PATH="/usr/local/autoconf-2.5.9/bin:$PATH"
 
 # Log "defaults ..." to separate file
-PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
+export PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
 
 # No .DS_Store etc in "tar"
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
+
+# Gzip defaults...
+#export GZIP="-8v --name"
+export GZIP="-8v -N"
 
 
 # Additional MANPATH's
@@ -90,8 +97,3 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[0;38;5;246m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[04;38;5;83m'
-
-
-# Android SDK
-_pt="$HOME/OnePlus1/pt/platform-tools"
-[ -d "${_pt}" ] && export PATH="${_pt}:$PATH"
