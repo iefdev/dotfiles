@@ -69,10 +69,10 @@ function reBash()
 function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
 # Search history with grep
-function hgrep() { history | grep "$1"; }
+function hgrep() { history | grep -v 'grep' | egrep --color=auto "$@"; }
 
 # cd directory of "foo"...
-function cd2() { cd $(dirname `which $1`); }
+function cd2() { cd $(dirname $(which $1)); }
 
 # cd directory and list
 function cdl() { cd "$1"; ls -Ahl; }

@@ -70,10 +70,10 @@ function delHist() { sed -i "/$1/d" $HISTFILE; }
 #function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
 # Search history with grep
-function hgrep() { history | grep "$1"; }
+function hgrep() { history | grep -v 'grep' | egrep --color=auto "$@"; }
 
 # cd directory of "foo"...
-function cd2() { cd $(dirname `which $1`); }
+function cd2() { cd $(dirname $(which $1)); }
 
 # cd directory and list
 function cdl() { cd "$1"; ls -Ahl; }
@@ -94,7 +94,7 @@ function rmxattr()
 }
 
 # Reveal program in Finder
-function whichR() { open -R `which $1`; }
+function whichR() { open -R $(which $1); }
 
 # lsbom - /var/db/receipts
 function lsReceipts() { lsbom -flspf /var/db/receipts/$1; }
