@@ -99,3 +99,12 @@ function giterate()
 		echo '';
 	done
 }
+
+# Sign commit/tag and push
+# Usage: versionBump v1.2.3
+function versionBump()
+{
+    local _v="$1";
+    git commit -a -S -m "Version bump: ${_v}";
+    git tag -s "${_v}" -m "${PWD##*/}, ${_v}";
+}
