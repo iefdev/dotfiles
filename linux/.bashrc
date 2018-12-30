@@ -32,20 +32,28 @@ _def='\[\033[0m\]'    # default
 # User, Hostname and PS{0..4}
 # ------------------------------------------------------------------------------
 
-# user & host
-_user='\u'
-_host='\H'          # \h = without ext
-
-# Tmp names (to hide real names for screenshots/casts etc)
-#_user='test'
-#_host='fooBar'
-
-[[ $UID == 0 ]] && _user='${_red}\u'
-[[ $SUDO_USER ]] && _user='${_ylw}${_user}'
+# user color
+_uCol="${_grn}"
+[[ $UID == 0 ]] && _uCol="${_red}"
+[[ $SUDO_USER ]] && set -e && _uCol="${_ylw}"
 
 # PS 0-4
-#PS0=''
-PS1="[${_grn}${_user}${_def}@${_host}] ${_gry}\W${_def}\$ "
+function setPS1 () {
+    [[ $# = 1 ]] || exit 255;
+    case "${1}" in
+        none)     export PS1="";                                                  ;;
+        off)      export PS1="\$ ";                                               ;;
+        demo)     export PS1="[${_uCol}demo${_def}@fooBar] ${_gry}\W${_def}\$ ";  ;;
+        test)     export PS1="[${_uCol}test${_def}@foooBar] ${_gry}\W${_def}\$ "; ;;
+        basic)    export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";             ;;
+        _default) export PS1="[${_uCol}${_user}${_def}@\h ${_gry}\W]${_def}\$ ";  ;;
+        default)  export PS1="[${_uCol}\u${_def}@\h] ${_gry}\W${_def}\$ ";        ;;
+        full)     export PS1="[${_uCol}\u${_def}@\H] ${_gry}\W${_def}\$ ";        ;;
+    esac
+}
+
+#PS0='Command started at: \t\n'
+setPS1 default
 PS2=' :» '
 PS3=' :? '
 PS4=' :+ '
