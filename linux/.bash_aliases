@@ -11,9 +11,12 @@
 # ------------------------------------------------------------------------------
 #
 
+# sudo with aliases
+alias sudo='sudo ';
+
 
 # File & folders
-# ------------------------------------------------------------------------------
+# --------------------
 
 # Alias to cd the folder:
 alias cdD='cd ~/Desktop'
@@ -35,8 +38,8 @@ alias cpa='rsync -avhP'
 
 alias c='clear'
 alias k="clear && printf '\e[3J'"
-alias cx="clear && printf '\e[3J' && archey"
-alias cxH="cd && clear && printf '\e[3J' && archey"
+alias cx="clear && printf '\e[3J' && archeyX"
+alias cxH="cd && clear && printf '\e[3J' && archeyX"
 
 alias h='history'
 alias j='jobs -l'
@@ -103,9 +106,6 @@ alias suno='sudo nano'
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
 
-# Need this one for: sudo <alias>
-alias sudo='sudo '
-
 # Open & open here...
 alias open='xgd-open'
 alias oh='open .'
@@ -129,7 +129,7 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 
 
 # Cleaning up stuff...
-# ------------------------------------------------------------------------------
+# --------------------
 
 # .DS_Store and ._files (universal UNIX way)
 alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
@@ -140,12 +140,8 @@ alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
 alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
 
 
-# ShellScripts
-# ------------------------------------------------------------------------------
-
-
 # Wget
-# ------------------------------------------------------------------------------
+# --------------------
 
 # Wget continue
 # (with curl: curl -o <incomplete_local_file> -C - <URL>)
@@ -156,7 +152,11 @@ alias wgetnc='wget --no-check-certificate'
 
 
 # Misc stuff
-# ------------------------------------------------------------------------------
+# --------------------
+
+# Gzip fix
+# https://www.gnu.org/software/gzip/manual/gzip.html#index-Environment
+alias gzip='gzip -8v -N'
 
 # List disks
 alias disklist="mount | grep 'disk'"
@@ -171,9 +171,18 @@ alias twiot='rainbowstream -iot'
 # mkspace
 alias mkspace='echo -e "\v\v"'
 
+# vim + w/o plugins and xtras
+alias vimc='vim --clean'
+
+# ffmpeg cleaner output
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+
 
 # Srv & Dev
-# ------------------------------------------------------------------------------
+# --------------------
+
+alias tailSrv='tail -f /var/log/httpd/access_log'
 
 alias mysqlstatus='ps aux | grep mysql | grep -v grep'
 alias openSqlHistory='open ~/.mysql_history'
@@ -181,11 +190,6 @@ alias openSqlHistory='open ~/.mysql_history'
 
 # Upgrade pip
 alias pipup='pip install -U pip'
-
-# Py-env - activate
-alias mkvenv='python3 -m venv ./.venv'
-alias vOn='. ./.venv/bin/activate'
-alias vOff='deactivate'
 
 
 # GnuPG

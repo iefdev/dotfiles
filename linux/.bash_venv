@@ -1,0 +1,14 @@
+#
+# ~/.bash.d/bash_venv
+#
+# Description: Separate file for Python venv
+#
+
+# Create venv (default: .venv)
+function mkvenv() { python3 -m venv "./.${1:-venv}"; }
+
+# vOn - activate or switch between venv's
+function vOn() { deactivate &> /dev/null; . "./.${1:-venv}/bin/activate"; }
+
+# vOff
+alias vOff='deactivate'

@@ -47,7 +47,7 @@ function setPS1 () {
         demo)     export PS1="[${_uCol}demo${_def}@fooBar] ${_gry}\W${_def}\$ ";  ;;
         test)     export PS1="[${_uCol}test${_def}@foooBar] ${_gry}\W${_def}\$ "; ;;
         basic)    export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";             ;;
-        _default) export PS1="[${_uCol}${_user}${_def}@\h ${_gry}\W]${_def}\$ ";  ;;
+        _default) export PS1="[${_uCol}\u${_def}@\h ${_gry}\W]${_def}\$ ";        ;;
         default)  export PS1="[${_uCol}\u${_def}@\h] ${_gry}\W${_def}\$ ";        ;;
         full)     export PS1="[${_uCol}\u${_def}@\H] ${_gry}\W${_def}\$ ";        ;;
     esac
@@ -89,8 +89,8 @@ export PROMPT_DIRTRIM=1
 # Date & time to history
 #export HISTTIMEFORMAT='%F %T '
 
-export HISTFILESIZE=15000
-export HISTSIZE=15000
+export HISTFILESIZE=500000
+export HISTSIZE=500000
 
 export HISTIGNORE='&:[ ]*#'
 
@@ -101,8 +101,8 @@ shopt -s histappend
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Set the default editor
-export VISUAL=nano
-export EDITOR=nano
+export VISUAL="vim --clean"
+export EDITOR="vim --clean"
 
 
 # Misc set & shopt settings
@@ -123,13 +123,9 @@ set -o ignoreeof
 # bash >=4
 [ ${BASH_VERSINFO[0]} -gt 3 ] && shopt -s globstar autocd
 
-# Tabs: PL/1 format (columns 1, 5, 9, 13, 17, etc...)
-tabs -np
-
 
 # Debugging and
 # ------------------------------------------------------------------------------
-#
 
 # https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
 EC() {

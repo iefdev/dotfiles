@@ -2,9 +2,12 @@
 # ~/.bash.d/bash_aliases
 #
 
+# sudo with aliases
+alias sudo='sudo ';
+
 
 # File & folders
-# ------------------------------------------------------------------------------
+# --------------------
 
 # Alias to cd the folder:
 alias cdD='cd ~/Desktop'
@@ -97,9 +100,6 @@ alias suno='sudo nano'
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
 
-# Need this one for: sudo <alias>
-alias sudo='sudo '
-
 # Open here...
 alias oh='open .'
 
@@ -111,7 +111,7 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 
 
 # Cleaning up stuff...
-# ------------------------------------------------------------------------------
+# --------------------
 
 # .DS_Store and ._files (universal UNIX way)
 alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
@@ -143,18 +143,13 @@ alias resetOpenWith='cd /System/Library/Frameworks/CoreServices.framework/Versio
 alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 
 
-# ShellScripts
-# ------------------------------------------------------------------------------
-
-# Usage: cleanDisk "Name of Disk"
-alias cleanDisk='~/ShellScripts/cleanDisk.sh'
-
-# Alias for web2png.sh
-alias web2png='~/ShellScripts/web2png.sh'
+# OS X “purge”
+[[ $(uname -s) == 'Linux' ]] && alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
+alias purgeH='purge && cxH'
 
 
 # Wget
-# ------------------------------------------------------------------------------
+# --------------------
 
 # Wget continue
 # (with curl: curl -o <incomplete_local_file> -C - <URL>)
@@ -165,7 +160,11 @@ alias wgetnc='wget --no-check-certificate'
 
 
 # Misc stuff
-# ------------------------------------------------------------------------------
+# --------------------
+
+# Gzip fix
+# https://www.gnu.org/software/gzip/manual/gzip.html#index-Environment
+alias gzip='gzip -8v -N'
 
 # List disks
 alias disklist="mount | grep 'disk'"
@@ -192,15 +191,21 @@ alias LinX='links -g'
 alias twistr='rainbowstream'
 alias twiot='rainbowstream -iot'
 
-# ImageOptim
-alias imageoptim='/Applications/ImageOptim.app/Contents/MacOS/ImageOptim'
-
 # mkspace
 alias mkspace='echo -e "\v\v"'
 
+# vim + w/o plugins and xtras
+alias vimc='vim --clean'
+
+# ffmpeg cleaner output
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+
 
 # Srv & Dev
-# ------------------------------------------------------------------------------
+# --------------------
+
+alias tailSrv='tail -f /var/log/httpd/access_log'
 
 # PHP 5.4, 7.0 (5.6 is in PATH)
 alias php54='/usr/local/php54/bin/php'
@@ -234,10 +239,14 @@ alias postgres.server='/opt/local/etc/LaunchDaemons/org.macports.postgresql95-se
 # Upgrade pip
 alias pipup='pip install -U pip'
 
-# Py-env - activate
-alias mkvenv='python3 -m venv ./.venv'
-alias vOn='. ./.venv/bin/activate'
-alias vOff='deactivate'
+# To quit rake preview (Octopress)
+alias killRake='killall fsevent_watch'
+
+# DNSCrypt Proxy
+alias dcp.load='sudo launchctl load -w /Library/LaunchDaemons/dnscrypt-proxy.plist'
+alias dcp.unload='sudo launchctl unload -w /Library/LaunchDaemons/dnscrypt-proxy.plist'
+alias dcp.reload='dcp.unload && sleep 5 && dcp.load && echo ":: DNSCrypt Proxy Reloaded"'
+#alias dcp.remove='sudo launchctl remove dnscrypt-proxy'
 
 
 # Macports

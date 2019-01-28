@@ -1,14 +1,7 @@
 #
 # ~/.bash_git
 #
-#
 # Description: Separate file for git related stuff
-#
-# Load it in: ~/.bashrc with
-# ------------------------------------------------------------------------------
-#   # Load: ~/.bash_git
-#   [ -f ~/.bash_git ] && . ~/.bash_git
-# ------------------------------------------------------------------------------
 #
 
 
@@ -101,10 +94,22 @@ function giterate()
 }
 
 # Sign commit and tag
-# Usage: versionBump  v1.2.3
+# Usage: versionBump v1.2.3
 function versionBump()
 {
     local _v="$1";
     git commit -a -S -m "Version bump: ${_v}";
     git tag -s "${_v}" -m "${PWD##*/}, ${_v}";
+}
+
+# Git commits between dates (fallback to current date)
+# https://davidwalsh.name/search-git-dates
+# Usage: ciBetween [ yyyy-mm-dd ] [ yyyy-mm-dd ]
+function ciBetween()
+{
+    local _from="$1";
+    local _to="$2";
+    [ -z ${_from} ] && _from=`date '+%F'`;
+    [ -z ${_to} ] && _to=`date '+%F'`;
+    git log --after="${_from}" --before="${_to}" --oneline;
 }

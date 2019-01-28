@@ -13,7 +13,7 @@
 
 
 # File & folders
-# ------------------------------------------------------------------------------
+# --------------------
 
 # locate in ext. disk (pics, docs etc)
 #function Locate { locate $* | egrep "^/Volumes/NameOfDisk"; }
@@ -65,6 +65,9 @@ function reBash()
 }
 
 
+# Delete empty lines in a file
+function mtLines() { [ -f "$1" ] && sed -i '/^$/d' "$1"; }
+
 # Search/delete lines in history
 function delHist() { sed -i '' "/$1/d" $HISTFILE; }
 
@@ -75,7 +78,12 @@ function hgrep() { history | grep -v 'grep' | egrep --color=auto "$@"; }
 function cd2() { cd $(dirname $(which $1)); }
 
 # cd directory and list
-function cdl() { cd "$1"; ls -Ahl; }
+function cdl() {
+    local _dir="$1"
+    local _dir="${_dir:=$HOME}"
+    [ -d "$_dir" ] && cd "$_dir" >/dev/null && ls || \
+    echo "${0}: ${FUNCNAME}: ${_dir}: Directory not found";
+}
 
 # rsync folder2folder
 function rsyncdir()
@@ -94,25 +102,24 @@ function rmFiles() { find . -name "$1" -type f -delete; }
 
 function adminstall() { sudo install -v -m 0755 -o 0 -g 0 ${@}; }
 function badminstall() { sudo install -vb -m 0755 -o 0 -g 0 ${@}; }
-function bBadminstall() { sudo install -vb -B .$(date '+%Y%m%d').bak -m 0755 -o 0 -g 0 ${@}; }
+function Badminstall() { sudo install -vb -B .$(date '+%Y%m%d').bak -m 0755 -o 0 -g 0 ${@}; }
 
 
 # Get this...
-# ------------------------------------------------------------------------------
+# --------------------
 
 # Get site with wget
-function wgets()
-{
-	if [ $2 ]; then logFile="-o $2"; else logFile=''; fi
-	wget --convert-links -r "$1" $logFile;
-}
+function wgetSite() { [ -n "$2" ] && _log="-o $2"; wget -ckpr "$1" $_log; }
 
-# Get site with wget
-function wgetsub() { wget -r -l1 --no-parent "$1"; }
+# Get subdir of site with wget
+# -np (--no-parent)
+# -nH (--no-host-directories)
+function wgetSub() { wget -ckpr -np "$1"; }
+function wget2dir() { wget -ckpr -np -nH "$1"; }
 
 
 # Manuals
-# ------------------------------------------------------------------------------
+# --------------------
 
 # To avoid the d d o o u u b b l l e e and spaced letters use: col -b
 # Usage: man2txt <foo> [ <path/to/output/file.txt> ]
@@ -124,7 +131,7 @@ function man2txt()
 
 
 # Diff & Patching
-# ------------------------------------------------------------------------------
+# --------------------
 
 # Create a patch file
 # Usage: mkpatch original_file.ext my_modified.ext [patchname]
@@ -171,10 +178,18 @@ function signFile()
 
 
 # Misc & Funsies
-# ------------------------------------------------------------------------------
+# --------------------
 
 # comandline search
 function ddg() { firefox "https://duckduckgo.com/?q=$1"; }
+
+# Fix PDF file - title, author
+# Usage: fixPDF "I'm a title" /path/to/pdf.
+function fixPDF() {
+    local _title="${1}";
+    local _file="${2}";
+    exiftool -overwrite_original -Author="" -Title="${_title}" "${_file}";
+}
 
 # Adminer :: Changing theme.
 function chgAdminer()
@@ -199,13 +214,14 @@ function ctop()
 
 # Detailed information on an IP address or hostname in bash via http://ipinfo.io:
 # https://wiki.archlinux.org/index.php/Bash/Functions#IP_info
+# use “/json” incase users-agent set in ~/.curlrc
 function ipInfo() {
 	[[ $1 == '' ]] && _ip=$(dig +short myip.opendns.com @resolver1.opendns.com) || _ip=$1;
 	if grep -P "(([1-9]\d{0,2})\.){3}(?2)" 2>/dev/null <<< "$_ip"; then
-		curl ipinfo.io/"$_ip"
+		curl https://ipinfo.io/"$_ip/json"
 	else
 		ipawk=($(host "$_ip" | awk '/address/ { print $NF }'))
-		curl ipinfo.io/${ipawk[1]}
+		curl https://ipinfo.io/${ipawk[1]}/json
 	fi
 	echo
 }
@@ -214,12 +230,9 @@ function ipInfo() {
 function wttr() { curl -4 wttr.in/$1; }
 
 
-# Debugging
-# ------------------------------------------------------------------------------
-#
-
-# https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
-function EC() {
-	echo -e "\e[1;31m${FUNCNAME}:\e[1;33m code: $? \e[m\n"
-}
-trap EC ERR
+# check %Sd
+#function whatDisk()
+#{
+#    [[ -n "$1" ]] && _p="$1" || _p=.;
+#    stat -f %Sd "${_p}";
+#}

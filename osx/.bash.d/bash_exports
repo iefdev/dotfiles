@@ -69,11 +69,9 @@ export PATH="$_AP24:$_MP:$_PHP:$_CPOS:$_SQL:$_PERL:$_ST:/usr/local/bin:/usr/loca
 export PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> $HOME/ShellScripts/__defaultsLog.txt'
 
 # No .DS_Store etc in "tar"
+# 10.4 + 10.5+
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
-
-# Gzip defaults...
-#export GZIP="-8v --name"
-export GZIP="-8v -N"
+export COPYFILE_DISABLE=true
 
 
 # Additional MANPATH's

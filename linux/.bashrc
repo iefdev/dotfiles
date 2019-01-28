@@ -46,7 +46,7 @@ function setPS1 () {
         demo)     export PS1="[${_uCol}demo${_def}@fooBar] ${_gry}\W${_def}\$ ";  ;;
         test)     export PS1="[${_uCol}test${_def}@foooBar] ${_gry}\W${_def}\$ "; ;;
         basic)    export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";             ;;
-        _default) export PS1="[${_uCol}${_user}${_def}@\h ${_gry}\W]${_def}\$ ";  ;;
+        _default) export PS1="[${_uCol}\u${_def}@\h ${_gry}\W]${_def}\$ ";        ;;
         default)  export PS1="[${_uCol}\u${_def}@\h] ${_gry}\W${_def}\$ ";        ;;
         full)     export PS1="[${_uCol}\u${_def}@\H] ${_gry}\W${_def}\$ ";        ;;
     esac
@@ -77,9 +77,12 @@ PS4=' :+ '
 # Load: ~/.bash_cheat
 [ -f ~/.bash_cheat ] && . ~/.bash_cheat
 
+# Load: ~/.bash_venv
+[ -f ~/.bash_venv ] && . ~/.bash_venv
+
 # Load archey (if installed)
 # If not running interactively, don't do anything
-[[ ! -z "$PS1" && `type archey 2> /dev/null` && $UID != 0 ]] && archey
+[[ -n "$PS1" && `type archeyX 2> /dev/null` && $UID != 0 ]] && archeyX
 
 
 # Misc xtras
@@ -91,8 +94,8 @@ export PROMPT_DIRTRIM=1
 # Date & time to history
 #export HISTTIMEFORMAT='%F %T '
 
-export HISTFILESIZE=15000
-export HISTSIZE=15000
+export HISTFILESIZE=500000
+export HISTSIZE=500000
 
 export HISTIGNORE='&:[ ]*#'
 
@@ -103,7 +106,8 @@ shopt -s histappend
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Set the default editor
-export EDITOR=nano
+export VISUAL="vim --clean"
+export EDITOR="vim --clean"
 
 
 # Misc set & shopt settings
@@ -123,3 +127,13 @@ set -o ignoreeof
 
 # globstar & autocd
 shopt -q -s globstar autocd
+
+
+# Debugging and
+# ------------------------------------------------------------------------------
+
+# https://wiki.archlinux.org/index.php/Bash/Functions#Display_error_codes
+EC() {
+	echo -e "\e[1;31m${FUNCNAME}:\e[1;33m code: $? \e[m\n"
+}
+trap EC ERR

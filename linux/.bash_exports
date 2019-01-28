@@ -28,10 +28,16 @@ export PATH="$_CPOS:usr/local/bin:/usr/local/sbin:$_xbin:$_Sh:$PATH"
 export ARCHFLAGS="-arch x86_64"
 
 # No .DS_Store etc in "tar"
+# 10.4 + 10.5+
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
+export COPYFILE_DISABLE=true
 
-# Gzip defaults...
-export GZIP="-8v --name"
+
+# Additional MANPATH's
+# ------------------------------------------------------------------------------
+
+# Macports
+#export MANPATH=/path/to/share/man:$MANPATH
 
 
 # Bash colors
