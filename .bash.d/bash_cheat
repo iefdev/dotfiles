@@ -1,0 +1,22 @@
+#
+# ~/.bash_cheat
+#
+# Description: Separate file for cheat (python script)
+#
+
+
+# Default dir
+export DEFAULT_CHEAT_DIR=~/.cheat.d
+
+# Colors
+export CHEATCOLORS=true
+
+
+if [[ $(uname -s) == 'Linux' ]]; then
+    _cheat_bash='/etc/bash_completion.d/cheat.bash'
+else
+    _cheat_bash='/opt/local/etc/bash_completion.d/cheat.bash'
+fi
+
+# Load cheat.bash
+[ -f ${_cheat_bash} ] && . ${_cheat_bash}

@@ -1,0 +1,329 @@
+#
+# ~/.bash.d/bash_aliases
+#
+
+# sudo with aliases
+alias sudo='sudo ';
+
+
+# File & folders
+# --------------------
+
+# Alias to cd the folder:
+alias cdD='cd ~/Desktop'
+alias cdS='cd ~/ShellScripts'
+alias cdR='cd ~/Repos'
+alias cdT='cd ~/.Trash'
+alias cdL='cd /usr/local'
+alias sites='cd ~/Sites'
+alias srv='cd /srv'
+alias www='cd /srv/www'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias mv='mv -iv'
+alias cp='cp -iv'
+alias ln='ln -iv'
+
+# alt cp with rsync (testing)
+alias cpa='rsync -avhP'
+
+alias c='clear'
+alias k="clear && printf '\e[3J'"
+alias cx="clear && printf '\e[3J' && archeyX"
+alias cxH="cd && clear && printf '\e[3J' && archeyX"
+
+alias h='history'
+alias j='jobs -l'
+alias x='exit'
+alias q='exit'
+
+# top, show cpu and memory. 20 processes. (exit with: q)
+alias top20='top -o cpu -O +rsize -s 5 -n 20'
+
+# show 10 largest files/dirs in current directory
+alias lsTop10='du -cks * | sort -rn | head -11'
+
+# show the largest one
+alias lsTop='du -ks * | sort -n'
+
+# Prevents errors when path is not created.
+alias mkdir='mkdir -pv'
+alias rmdir='rm -rv'
+alias rm='rm -v'
+alias ls="ls $([[ $(uname -s) == 'Linux' ]] && echo '--color=auto' || echo '-G')"
+alias ls.='ls -d .*'
+alias ls1='ls -A1'
+alias ll='ls -hl'
+alias lsal='ls -Ahl'
+alias lsless='ls -Ahl | less'
+
+alias grep='grep -n --color=auto'
+alias egrep='egrep -n --color=auto'
+alias fgrep='fgrep -n --color=auto'
+
+if [[ $(uname -s) == 'Darwin' ]]; then
+    # OS X
+    alias forceTrash='rm -rv ~/.Trash/{.*,*}'
+
+    # locate home dir (llocate)
+    alias llocate='locate -d $HOME/Library/Locate/llocate.database'
+
+    # Update databases for (l)locate
+    alias llocateupd='$HOME/Library/Locate/llocate.updatedb'
+    alias locateupd='sudo /usr/libexec/locate.updatedb'
+else
+    #Linux
+    alias locateupd='sudo updatedb'
+fi
+
+# Echo PATH on separate lines
+alias lPath="echo $PATH | tr ':' '\n'"
+
+# tree, w colors
+alias tree='tree -C'
+
+# Get external IP
+alias myIP='dig +short myip.opendns.com @resolver1.opendns.com'
+
+# qip netstat info
+alias qip='netstat -rn | grep default'	# ip + interface
+alias whatPorts='netstat -tulanp'	# open ports ($: whatPorts tcp)
+
+# 3 ping is ok..
+alias ping='ping -c 3'
+
+# Do not wait interval 1 second, go fast #
+alias fastping='ping -c 20 -s.2'
+
+# Pwd+copy
+alias cwd='pwd | pbcopy'
+
+# Mimic su
+alias su='sudo bash'
+
+# Admin Nano
+alias suno='sudo nano'
+
+# Fuck
+alias fuck='sudo $(history -p \!\!)'
+
+# Linux
+if [[ $(uname -s) == 'Linux' ]]; then
+    # Update Grub
+    alias update-grub='sudo grub2-mkconfig -o /boot/grub2/grub.cfg'
+
+    # copy, OS X style
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+    alias pbselect='xclip -selection primary -o'
+
+    #alias pbcopy='xsel --clipboard --input'
+    #alias pbpaste='xsel --clipboard --output'
+
+    alias open='xgd-open'
+fi
+
+# Open here...
+alias oh='open .'
+
+# +x on script
+alias mkrun='chmod +x'
+
+# Fix dir(s) with messy ACL: 755/644
+alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec chmod -v 644 {} \;'
+
+
+# Cleaning up stuff...
+# --------------------
+
+# .DS_Store and ._files (universal UNIX way)
+alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
+alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
+
+# OS X only
+if [[ $(uname -s) == 'Darwin' ]]; then
+    # Kill/Flush (DNS)cache (10.7/8/9)
+    alias flushDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;'
+
+    # Kill/Flush (DNS)cache (10.10)
+    # Read more: http://osxdaily.com/2008/03/21/how-to-flush-your-dns-cache-in-mac-os-x/
+    alias flushdns='sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;'
+
+    # Read the "hidden" download history
+    alias readDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'select LSQuarantineDataURLString from LSQuarantineEvent' | uniq | more"
+
+    # Delete the "hidden" download history
+    alias cleanDL="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+    # Clean Out LaunchPad
+    alias cleanLPad="sqlite3 ~/Library/Application\ Support/Dock/*.db \"DELETE from apps; DELETE from groups WHERE title <> ''; DELETE from items WHERE rowid > 2;\"; killall Dock"
+
+    # Reset LaunchPad
+    alias resetLPad='rm ~/Library/Application\ Support/Dock/*.db && killall Dock'
+
+    # Reset LaunchServises
+    alias resetOpenWith='cd /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/ && ./lsregister -kill -domain local -domain system -domain user'
+
+    # Fix broken "open with" menu
+    alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
+fi
+
+# OS X “purge”
+[[ $(uname -s) == 'Linux' ]] && alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
+alias purgeH='purge && cxH'
+
+
+# Wget
+# --------------------
+
+# Wget continue
+# (with curl: curl -o <incomplete_local_file> -C - <URL>)
+alias wgetc='wget -c'
+
+# Wget no-check
+alias wgetnc='wget --no-check-certificate'
+
+
+# Misc stuff
+# --------------------
+
+if [[ $(uname -s) == 'Darwin' ]]; then
+    # Firefox - fix version in Info.plist
+    alias firefix="sed -i '/<string>10.9/s/9/6/' /Applications/Firefox.app/Contents/Info.plist"
+
+    alias firefox='open -a Firefox'
+fi
+
+# MWF
+alias mwf='firefox "https://forum.macworld.se/"'
+
+# Gzip fix
+# https://www.gnu.org/software/gzip/manual/gzip.html#index-Environment
+alias gzip='gzip -8v -N'
+
+# List disks
+alias disklist="mount | grep 'disk'"
+
+# OS X only
+if [[ $(uname -s) == 'Darwin' ]]; then
+    # Check why it doesn't go to sleep
+    alias whatsOpen='pmset -g assertions'
+
+    # List connected hardware
+    alias whatHW='networksetup -listallhardwareports'
+
+    # Screen Saver Engine
+    alias sse='open -a ScreenSaverEngine'
+
+    # Password assistant
+    alias passist='open -a Password\ Assistant'
+fi
+
+# the defaults log
+alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
+
+# Links X11
+alias LinX='links -g'
+
+# Rainbow Stream
+alias twistr='rainbowstream'
+alias twiot='rainbowstream -iot'
+
+# mkspace
+alias mkspace='echo -e "\v\v"'
+
+# vim + w/o plugins and xtras
+alias vimc='vim --clean'
+
+# ffmpeg cleaner output
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+
+
+# Srv & Dev
+# --------------------
+
+# Upgrade pip
+alias pipup='pip install -U pip'
+
+# To quit rake preview (Octopress)
+alias killRake='killall fsevent_watch'
+
+# Composer
+alias phpmem="php -r \"echo ini_get('memory_limit').PHP_EOL;\""
+alias memposer='php -d memory_limit=-1 $(which composer)'
+
+# Open stuff...
+# --------------------
+# Folders
+alias cdO='cd /srv/www/ief.dev/octopress/'
+alias cdP='cd /srv/www/ief.dev/pelican/'
+
+# MySQL
+alias mysqlstatus='ps aux | grep mysql | grep -v grep'
+alias openSqlHistory='open ~/.mysql_history'
+
+# OS X only
+if [[ $(uname -s) == 'Darwin' ]]; then
+    alias mysql.server='sudo /opt/local/share/mariadb-10.1/support-files/mysql.server'
+
+    alias tailSrv='tail -f /var/log/httpd/access_log'
+
+    # PHP 5.4, 7.0 (5.6 is in PATH)
+    alias php54='/usr/local/php54/bin/php'
+    alias phpize54='/usr/local/php54/bin/phpize'
+    alias pear54='/usr/local/php54/bin/pear'
+    alias pecl54='/usr/local/php54/bin/pecl'
+
+    alias php70='/usr/local/php70/bin/php'
+    alias phpize70='/usr/local/php70/bin/phpize'
+    alias pear70='/usr/local/php70/bin/pear'
+    alias pecl70='/usr/local/php70/bin/pecl'
+    alias fpmctl70='/usr/local/php70/sbin/fpmctl'
+
+    # Httpd: Use `apachectl' to manage httpd. This just (un)loads the LaunchDaemon
+    alias httpd.load='sudo launchctl load -w /Library/LaunchDaemons/srv.apache.httpd.plist'
+    alias httpd.unload='sudo launchctl unload -w /Library/LaunchDaemons/srv.apache.httpd.plist'
+    alias httpd.reload='httpd.unload && sleep 5 && httpd.load && echo ":: Apache Reloaded"'
+    #alias httpd.remove='sudo launchctl remove srv.apache.http'
+
+    # PostgreSQL
+    # Usage: postgres.server (initdb|start|stop|restart|reload|status)
+    alias postgres.server='/opt/local/etc/LaunchDaemons/org.macports.postgresql95-server/postgres.server'
+
+    # DNSCrypt Proxy
+    alias dcp.load='sudo launchctl load -w /Library/LaunchDaemons/dnscrypt-proxy.plist'
+    alias dcp.unload='sudo launchctl unload -w /Library/LaunchDaemons/dnscrypt-proxy.plist'
+    alias dcp.reload='dcp.unload && sleep 5 && dcp.load && echo ":: DNSCrypt Proxy Reloaded"'
+    #alias dcp.remove='sudo launchctl remove dnscrypt-proxy'
+
+
+    # Macports
+    # --------------------
+    alias portout='echo -e "\v--->  Outdated:\n" && port echo outdated'
+    alias portsync='sudo port -v sync && portout'
+    alias portup='sudo port -v selfupdate && portout'
+    alias portupgrade='sudo port upgrade'
+    alias portupall='sudo port upgrade outdated'
+    alias portclean='sudo port clean'
+
+    alias lsPorts='port echo installed'
+    alias lsLeaves='port echo leaves'
+    alias rmLeaves='sudo port uninstall leaves'
+    alias lsInactive='port echo inactive'
+    alias rmInactive='sudo port uninstall inactive'
+
+    alias lsDistBuild='ls -Ahl /opt/local/var/macports/{distfiles,build}'
+    alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
+
+    alias setReq='sudo port setrequested'
+
+    alias fail2ban.start='sudo port load fail2ban'
+    alias fail2ban.stop='sudo port unload fail2ban'
+fi
+
+# GnuPG
+# --------------------
+alias gpg.restart="gpgconf --kill gpg-agent && gpgconf --launch gpg-agent"
+alias gpg.chk="echo RELOADAGENT | gpg-connect-agent"
