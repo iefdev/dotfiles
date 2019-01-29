@@ -1,17 +1,42 @@
 # dotfiles
 
-> Just some of my dotfiles...
+Since I use both Mac and GNU/Linux, the commands/functions/aliases for each platform are different. Earlier I kept the dotfiles in 2 separate folder here (osx, linux), but I have merged them now to be able to use the same set of files on all computers. You'll notice a few if statements throughout the files, like:
 
-Since I use both OS X, ArchLinux and Fedora, I have split up the dotfiles into separate folders.
+```bash
+[[ $(uname -s) == 'Darwin' ]] && ...
+[[ $(uname -s) == 'Linux' ]] && ...
+etc.
+```
 
-- [Linux dotfiles][arch]
-- [OS X dotfiles][osx]
+To clean up the home folder… Except the standard bash files, the additional files lives in a subfolder: `~/.bash.d/bash_*`. To load them - just add the last part of the name into the `bash_file` array:
+
+```bash
+bash_files=( ruby aliases functions git cheat opo venv );
+```
+
 
 - - -
 
-Some of the content _(functions/aliases)_ are sometime being removed and moved to their own scripts instead. You'll most likely find those scripts in the [junkyard][jy].
+
+Some of the content _(functions/aliases)_ are sometimes being removed and moved to their own scripts instead. You'll most likely find those scripts in the [junkyard][jy].
+
+
+
+### Notes
+
+###### Linux
+
+At the moment… `bash_dnf` and `bash_yum` are empty.
+
+Some aliases and functions are using `x-clip`. Look in your package manager, or download it [here][xclip].
+
+
+
+###### OS X / macOS
+
+...
+
 
 <!-- Markdown: link and img defs -->
-[arch]: https://gitlab.com/iEFdev/dotfiles/tree/master/linux "dotfiles :: Linux"
-[osx]: https://gitlab.com/iEFdev/dotfiles/tree/master/osx "dotfiles :: OS X"
 [jy]: https://gitlab.com/iEFdev/junkyard "Junkyard"
+[xclip]: http://sourceforge.net/projects/xclip/ "xclip :: SourceForge"
