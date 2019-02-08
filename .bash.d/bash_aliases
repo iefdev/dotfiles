@@ -297,30 +297,6 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     alias dcp.unload='sudo launchctl unload -w /Library/LaunchDaemons/dnscrypt-proxy.plist'
     alias dcp.reload='dcp.unload && sleep 5 && dcp.load && echo ":: DNSCrypt Proxy Reloaded"'
     #alias dcp.remove='sudo launchctl remove dnscrypt-proxy'
-
-
-    # Macports
-    # --------------------
-    alias portout='echo -e "\v--->  Outdated:\n" && port echo outdated'
-    alias portsync='sudo port -v sync && portout'
-    alias portup='sudo port -v selfupdate && portout'
-    alias portupgrade='sudo port upgrade'
-    alias portupall='sudo port upgrade outdated'
-    alias portclean='sudo port clean'
-
-    alias lsPorts='port echo installed'
-    alias lsLeaves='port echo leaves'
-    alias rmLeaves='sudo port uninstall leaves'
-    alias lsInactive='port echo inactive'
-    alias rmInactive='sudo port uninstall inactive'
-
-    alias lsDistBuild='ls -Ahl /opt/local/var/macports/{distfiles,build}'
-    alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
-
-    alias setReq='sudo port setrequested'
-
-    alias fail2ban.start='sudo port load fail2ban'
-    alias fail2ban.stop='sudo port unload fail2ban'
 fi
 
 # GnuPG

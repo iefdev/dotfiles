@@ -63,18 +63,16 @@ PS4=' :+ '
 # Load .bash_* files from ~/.bash.d/, Archey and bash completion
 # ------------------------------------------------------------------------------
 
+# Bash files to load
 if [[ $(uname -s) == 'Darwin' ]]; then
-    #bash_files=( ruby aliases functions git cheat opo venv );
+    bash_files=( ruby aliases functions git macports cheat opo venv );
     bashCompl='/opt/local/etc/profile.d/bash_completion.sh';
 else
     # pacman, dnf, yum etc
     #pkg_manager='pacman'
-    #bash_files=( ruby aliases functions git cheat opo venv );
+    bash_files=( ruby aliases functions git cheat opo venv );
     bashCompl='/etc/profile.d/bash_completion.sh'
 fi
-
-# Bash files to load
-bash_files=( ruby aliases functions git cheat opo venv );
 
 bash_file_prefix=`echo ~/.bash.d/bash_`
 for _file in ${bash_files[@]}; do
