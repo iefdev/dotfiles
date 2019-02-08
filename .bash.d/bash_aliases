@@ -17,7 +17,7 @@ alias cdT='cd ~/.Trash'
 alias cdL='cd /usr/local'
 alias sites='cd ~/Sites'
 alias srv='cd /srv'
-alias www='cd /srv/www'
+alias srw='cd /srv/www'
 alias ..='cd ..'
 alias ...='cd ../..'
 
