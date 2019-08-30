@@ -8,7 +8,8 @@
 # --------------------
 alias portout='echo -e "\v--->  Outdated:\n" && port echo outdated'
 alias portsync='sudo port -v sync && portout'
-alias portup='sudo port -v selfupdate && portout'
+alias portup='portsync'
+#alias portup='sudo port -v selfupdate && portout'
 alias portupgrade='sudo port upgrade'
 alias portupall='sudo port upgrade outdated'
 alias portclean='sudo port clean'
@@ -24,8 +25,59 @@ alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
 
 alias setReq='sudo port setrequested'
 
+
+# Bootstrap version: curl only (+ dependencies)
+# ---------------------------------------------
+alias boort='/opt/bootstrap/bin/port'
+
+alias boortout='echo -e "\v--->  Outdated:\n" && boort echo outdated'
+alias boortsync='sudo boort -v sync && boortout'
+alias boortup='boortsync'
+alias boortupgrade='sudo boort upgrade'
+alias boortupall='sudo boort upgrade outdated'
+alias boortclean='sudo boort clean'
+
+alias lsBoorts='boort echo installed'
+alias lsBLeaves='boort echo leaves'
+alias rmBLeaves='sudo boort uninstall leaves'
+alias lsBInactive='boort echo inactive'
+alias rmBInactive='sudo boort uninstall inactive'
+
+alias lsBoortBuild='ls -Ahl /opt/bootstrap/var/macports/{distfiles,build}'
+alias rmBoortBuild='sudo rm -rvf /opt/bootstrap/var/macports/{distfiles,build}/*'
+
+
+# Port loads
+# --------------------
 alias fail2ban.start='sudo port load fail2ban'
 alias fail2ban.stop='sudo port unload fail2ban'
 
+alias mysql.load='sudo port load mariadb-10.1-server'
+alias mysql.unload='sudo port unload mariadb-10.1-server'
+alias mysql.reload='mysql.unload && sleep 5 && mysql.load && echo ":: MariaDB Reloaded"'
+
+
 # For MacPorts GitHub PR template
 alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)\"; echo \"Xcode $(xcodebuild -version | awk '{print $NF}' | tr '\n' ' ')\""
+
+
+# Go (port notes Lion)
+# --------------------
+# go has the following notes:
+# go had to be specially patched and built to work on your platform.
+#
+# It likely won't work out of the box when building other projects,
+# so make sure change your environment to use the following variables:
+#
+GO_EXTLINK_ENABLED="1"
+#
+# to always force go to use the external gcc or clang linker and
+#
+GO_LDFLAGS="\"-extldflags=-L/opt/local/lib -Wl,-headerpad_max_install_names -lMacportsLegacySupport\""
+#
+# to force-link any binary against the legacy support library.
+#
+# Use exactly the quoting provided here, even if it may look odd, or compilation will fail.
+#
+# Failure to do so will leave you unable to create binaries that use features not natively
+# available on your system, either directly or through a go core dependency.
