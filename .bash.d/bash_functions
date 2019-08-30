@@ -11,6 +11,9 @@
 # Make a dir and cd into it
 function mkdircd() { mkdir -p "$1" && cd "$1"; }
 
+# Make dirs from file
+function mkdirff() { xargs -I {} mkdir -pv "{}" < "$1"; }
+
 # Misc bak helpers (mbakd, for dirs)
 [[ $(uname -s) == 'Darwin' ]] && function mkbakd() { _dir=`echo "${1%/}"`; ditto -v "${_dir}"{,.bak}; }
 function mkbak() { cp -iv "$1"{,.bak}; }
