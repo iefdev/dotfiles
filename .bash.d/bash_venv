@@ -1,14 +1,24 @@
 #
 # ~/.bash.d/bash_venv
 #
-# Description: Separate file for Python venv
+# Description: Separate file for Python(3) venv
+#
+# Usage:
+#   mkvenv              // .venv (python3)
+#   mkvenv foo          // .foo (python3)
+#
+#   mkvenv venv 3.6     // .venv3.6 (python3.6)
+#
+#   venv.start          // .venv
+#   venv.start venv3.6  // .venv3.6
 #
 
 # Create venv (default: .venv)
-function mkvenv() { python3 -m venv "./.${1:-venv}"; }
+function mkvenv() { python${2:-3} -m venv "./.${1:-venv}${2:-}"; }
 
-# vOn - activate or switch between venv's
-function vOn() { deactivate &> /dev/null; . "./.${1:-venv}/bin/activate"; }
+# venv.start - activate or switch between venv's
+function venv.start() { deactivate &> /dev/null; . "./.${1:-venv}/bin/activate"; }
 
-# vOff
-alias vOff='deactivate'
+# venv.stop
+alias venv.stop='deactivate'
+
