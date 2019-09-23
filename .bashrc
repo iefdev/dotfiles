@@ -44,6 +44,7 @@ function setPS1 () {
     case "${1}" in
         none)     export PS1="";                                                  ;;
         off)      export PS1="\$ ";                                               ;;
+        dir)      export PS1="${_gry}\W${_def}\$ ";                               ;;
         demo)     export PS1="[${_uCol}demo${_def}@fooBar] ${_gry}\W${_def}\$ ";  ;;
         test)     export PS1="[${_uCol}test${_def}@foooBar] ${_gry}\W${_def}\$ "; ;;
         basic)    export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";             ;;
@@ -81,7 +82,9 @@ done
 
 # Load archey (if installed)
 # If not running interactively, don't do anything
-[[ -n "$PS1" && `type archeyX 2> /dev/null` && $UID != 0 ]] && archeyX
+if [[ -n "$PS1" && $UID != 0 ]]; then
+    [[ `type archeyX 2> /dev/null` ]] && archeyX
+fi
 
 # bash completion
 [ -f ${bashCompl} ] && . ${bashCompl};
@@ -128,7 +131,7 @@ set -o notify
 set -o ignoreeof
 
 # bash >=4
-[ ${BASH_VERSINFO[0]} -gt 3 ] && shopt -s globstar autocd
+[[ ${BASH_VERSINFO[0]} -gt 3 ]] && shopt -s globstar autocd
 
 
 # Debugging and
