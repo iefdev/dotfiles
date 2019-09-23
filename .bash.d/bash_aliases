@@ -25,18 +25,18 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias ln='ln -iv'
 
-# alt cp with rsync (testing)
-alias cpa='rsync -avhP'
+# cp with rsync
+alias cprsync='rsync -avhP '
 
 alias c='clear'
 alias k="clear && printf '\e[3J'"
-alias cx="clear && printf '\e[3J' && archeyX"
-alias cxH="cd && clear && printf '\e[3J' && archeyX"
+alias cx='clear && k && archeyX'
+alias cxH='cd && cx'
 
 alias h='history'
 alias j='jobs -l'
 alias x='exit'
-alias q='exit'
+alias q='x'
 
 # top, show cpu and memory. 20 processes. (exit with: q)
 alias top20='top -o cpu -O +rsize -s 5 -n 20'
@@ -54,13 +54,13 @@ alias rm='rm -v'
 alias ls="ls $([[ $(uname -s) == 'Linux' ]] && echo '--color=auto' || echo '-G')"
 alias ls.='ls -d .*'
 alias ls1='ls -A1'
-alias ll='ls -hl'
-alias lsal='ls -Ahl'
-alias lsless='ls -Ahl | less'
+alias ll='ls -Ahl'
+alias lsless='ll | less'
+alias lstar='tar -tvf '
 
-alias grep='grep -n --color=auto'
-alias egrep='egrep -n --color=auto'
-alias fgrep='fgrep -n --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 
 if [[ $(uname -s) == 'Darwin' ]]; then
     # OS X
@@ -78,13 +78,13 @@ else
 fi
 
 # Echo PATH on separate lines
-alias lPath="echo $PATH | tr ':' '\n'"
+alias lPath="printenv PATH | tr ':' '\n'"
 
 # tree, w colors
 alias tree='tree -C'
 
 # Get external IP
-alias myIP='dig +short myip.opendns.com @resolver1.opendns.com'
+alias myIP='wget -qO- ifconfig.co'
 
 # qip netstat info
 alias qip='netstat -rn | grep default'	# ip + interface
@@ -100,10 +100,11 @@ alias fastping='ping -c 20 -s.2'
 alias cwd='pwd | pbcopy'
 
 # Mimic su
-alias su='sudo bash'
+#alias su='sudo bash'
 
-# Admin Nano
+# Admin Nano/Vim
 alias suno='sudo nano'
+alias suvi='sudo vim'
 
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
@@ -130,7 +131,7 @@ alias oh='open .'
 # +x on script
 alias mkrun='chmod +x'
 
-# Fix dir(s) with messy ACL: 755/644
+# Fix dir(s) with messy ACL -> 755/644
 alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec chmod -v 644 {} \;'
 
 
@@ -169,6 +170,7 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 fi
 
+
 # OS X “purge”
 [[ $(uname -s) == 'Linux' ]] && alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
 alias purgeH='purge && cxH'
@@ -188,22 +190,24 @@ alias wgetnc='wget --no-check-certificate'
 # Misc stuff
 # --------------------
 
+alias cal='gcal --starting-day=1'
+
 if [[ $(uname -s) == 'Darwin' ]]; then
     # Firefox - fix version in Info.plist
     alias firefix="sed -i '/<string>10.9/s/9/6/' /Applications/Firefox.app/Contents/Info.plist"
 
     alias firefox='open -a Firefox'
+    alias gedit='open -a gedit'
 fi
-
-# MWF
-alias mwf='firefox "https://forum.macworld.se/"'
 
 # Gzip fix
 # https://www.gnu.org/software/gzip/manual/gzip.html#index-Environment
-alias gzip='gzip -8v -N'
+alias gzip='gzip -9v -N'
 
 # List disks
-alias disklist="mount | grep 'disk'"
+#alias disklist="mount | grep 'disk'"
+alias disklist="mount | grep 'disk' | awk '{ print \$1 \" »» \" \$3 }'"
+alias diskspace='df -Hl'
 
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
@@ -218,6 +222,9 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 
     # Password assistant
     alias passist='open -a Password\ Assistant'
+
+    alias tray.open='drutil tray eject'
+    alias tray.close='drutil tray close'
 fi
 
 # the defaults log
@@ -226,23 +233,28 @@ alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
 # Links X11
 alias LinX='links -g'
 
-# Rainbow Stream
-alias twistr='rainbowstream'
-alias twiot='rainbowstream -iot'
-
 # mkspace
 alias mkspace='echo -e "\v\v"'
 
 # vim + w/o plugins and xtras
-alias vimc='vim --clean'
+alias vi='vim --clean'
 
 # ffmpeg cleaner output
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
 
+# youtube-dl
+_ytdl_confd="~/.config/youtube-dl"
+alias ytdl.up='sudo youtube-dl -U'
+alias ytdl.conf="open ${_ytdl_confd}/config"
+alias ytdl.help="open ${_ytdl_confd}/help.txt"
+
 
 # Srv & Dev
 # --------------------
+
+# htpasswd: bcrypt, cost: 12
+alias pwdB12='htpasswd -b -B -C 12 '
 
 # Upgrade pip
 alias pipup='pip install -U pip'
@@ -287,6 +299,11 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     alias httpd.unload='sudo launchctl unload -w /Library/LaunchDaemons/srv.apache.httpd.plist'
     alias httpd.reload='httpd.unload && sleep 5 && httpd.load && echo ":: Apache Reloaded"'
     #alias httpd.remove='sudo launchctl remove srv.apache.http'
+
+    # MySQL
+    alias mysql.server='sudo /opt/local/share/mariadb-10.2/support-files/mysql.server'
+    alias mysql.status='ps aux | grep mysql | grep -v grep'
+    alias mysql.history='open ~/.mysql_history'
 
     # PostgreSQL
     # Usage: postgres.server (initdb|start|stop|restart|reload|status)
