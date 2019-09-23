@@ -46,19 +46,38 @@ alias rmBInactive='sudo boort uninstall inactive'
 alias lsBoortBuild='ls -Ahl /opt/bootstrap/var/macports/{distfiles,build}'
 alias rmBoortBuild='sudo rm -rvf /opt/bootstrap/var/macports/{distfiles,build}/*'
 
+alias setBReq='sudo boort setrequested'
+
 
 # Port loads
 # --------------------
 alias fail2ban.start='sudo port load fail2ban'
 alias fail2ban.stop='sudo port unload fail2ban'
 
-alias mysql.load='sudo port load mariadb-10.1-server'
-alias mysql.unload='sudo port unload mariadb-10.1-server'
-alias mysql.reload='mysql.unload && sleep 5 && mysql.load && echo ":: MariaDB Reloaded"'
+_mariadb='mariadb-10.2-server'
+alias mysql.load="sudo port load ${_mariadb}"
+alias mysql.unload="sudo port unload ${_mariadb}"
+alias mysql.reload="sudo port reload ${_mariadb} && echo :: MariaDB Reloaded"
 
 
 # For MacPorts GitHub PR template
 alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)\"; echo \"Xcode $(xcodebuild -version | awk '{print $NF}' | tr '\n' ' ')\""
+
+
+# Portfiles
+# --------------------
+
+# mpchksum <portname>
+function mpchksum()
+{
+    local _file="/opt/local/var/macports/distfiles/${1}/${1}*";
+    cd $(dirname ${_file});
+    for p in rmd160 sha256; do
+        openssl dgst -r -${p} $(basename ${_file}) | awk -v p="${p}" '{print p "\t" $1 " \\"}';
+    done;
+    stat -x ${_file} | egrep 'File|Size';
+    echo -e '---\n';
+}
 
 
 # Go (port notes Lion)
