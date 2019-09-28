@@ -79,8 +79,7 @@ function cd2() { cd $(dirname $(which ${1})); }
 
 # cd directory and list (from Arch Wiki)
 function cdl() {
-    local _dir="${1}"
-    local _dir="${_dir:=$HOME}"
+    local _dir="${1:=$HOME}"
     [ -d "${_dir}" ] && cd "${_dir}" >/dev/null && ls || \
     echo "${0}: ${FUNCNAME}: ${_dir}: Directory not found";
 }
@@ -163,7 +162,7 @@ function man2txt()
 # Usage: mkpatch original_file.ext my_modified.ext [patchname]
 function mkpatch()
 {
-    diff -Naur "${1}" "${2}" > "${3:-2}.patch";
+    diff -Naur "${1}" "${2}" > "${3:-$(basename ${2})}.patch";
 }
 
 # Apply patch
