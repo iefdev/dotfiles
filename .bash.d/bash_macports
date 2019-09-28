@@ -71,12 +71,13 @@ alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)
 function mpchksum()
 {
     local _file="/opt/local/var/macports/distfiles/${1}/${1}*";
-    cd $(dirname ${_file});
+    (cd $(dirname ${_file});
+    echo "# $(basename ${_file})";
     for p in rmd160 sha256; do
         openssl dgst -r -${p} $(basename ${_file}) | awk -v p="${p}" '{print p "\t" $1 " \\"}';
     done;
-    stat -x ${_file} | egrep 'File|Size';
-    echo -e '---\n';
+    stat -x ${_file} | grep 'Size' | awk '{print "size\t" $2}';
+    echo -e '---\n';)
 }
 
 
