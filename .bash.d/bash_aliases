@@ -25,9 +25,6 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias ln='ln -iv'
 
-# cp with rsync
-alias cprsync='rsync -avhP '
-
 alias c='clear'
 alias k="clear && printf '\e[3J'"
 alias cx='clear && k && archeyX'
@@ -37,6 +34,9 @@ alias h='history'
 alias j='jobs -l'
 alias x='exit'
 alias q='x'
+
+alias rsync.cp='rsync -avhP '
+alias rsync.hax='rsync -avz -HAX '
 
 # top, show cpu and memory. 20 processes. (exit with: q)
 alias top20='top -o cpu -O +rsize -s 5 -n 20'
@@ -96,9 +96,6 @@ alias ping='ping -c 3'
 # Do not wait interval 1 second, go fast #
 alias fastping='ping -c 20 -s.2'
 
-# Pwd+copy
-alias cwd='pwd | pbcopy'
-
 # Mimic su
 #alias su='sudo bash'
 
@@ -117,12 +114,14 @@ if [[ $(uname -s) == 'Linux' ]]; then
     # copy, OS X style
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
-    alias pbselect='xclip -selection primary -o'
 
     #alias pbcopy='xsel --clipboard --input'
     #alias pbpaste='xsel --clipboard --output'
 
     alias open='xgd-open'
+else
+    # remove last line from pbcopy
+    alias pbcopy='ghead -c -1 | pbcopy'
 fi
 
 # Open here...
