@@ -41,12 +41,6 @@ alias rsync.hax='rsync -avz -HAX '
 # top, show cpu and memory. 20 processes. (exit with: q)
 alias top20='top -o cpu -O +rsize -s 5 -n 20'
 
-# show 10 largest files/dirs in current directory
-alias lsTop10='du -cks * | sort -rn | head -11'
-
-# show the largest one
-alias lsTop='du -ks * | sort -n'
-
 # Prevents errors when path is not created.
 alias mkdir='mkdir -pv'
 alias rmdir='rm -rv'
@@ -57,6 +51,10 @@ alias ls1='ls -A1'
 alias ll='ls -Ahl'
 alias lsless='ll | less'
 alias lstar='tar -tvf '
+
+alias gls='gls --color=auto'
+alias glt='gls -1FSAhs'
+alias lt='du -sh * | sort -r'
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -138,8 +136,8 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 # --------------------
 
 # .DS_Store and ._files (universal UNIX way)
-alias rmDS='find ./ "-name" ".DS_Store" -exec rm {} \;'
-alias rmDF='find ./ "-name" "._*" -exec rm {} \;'
+alias rmDS='find . -type f -name .DS_Store -exec rm -v {} \;'
+alias rmDF='find . -type f -name ._* -exec rm -v {} \;'
 
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
@@ -204,8 +202,7 @@ fi
 alias gzip='gzip -9v -N'
 
 # List disks
-#alias disklist="mount | grep 'disk'"
-alias disklist="mount | grep 'disk' | awk '{ print \$1 \" »» \" \$3 }'"
+alias disklist="mount | egrep ^/dev/ | awk '{ print \$1 \" »» \" \$3 }' | sort"
 alias diskspace='df -Hl'
 
 # OS X only
