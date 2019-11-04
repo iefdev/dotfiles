@@ -196,7 +196,7 @@ function signFile()
 {
     [[ ! -f ${2} ]] && { echo "Usage: ${FUNCNAME} <id> <file> [sig]"; return 1; }
     [[ -z ${3} ]] && _out="-o ${2}.asc" || _out='';
-    gpg2 -u "${1}" -sb ${2} file;
+    gpg -u "${1}" -sb ${2} file;
 }
 
 
