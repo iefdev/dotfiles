@@ -67,6 +67,8 @@ alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)
 # Portfiles
 # --------------------
 
+alias pindex='(cd /opt/ports/ && sudo portindex)'
+
 # mpchksum <portname>
 function mpchksum()
 {
@@ -101,3 +103,16 @@ GO_LDFLAGS="\"-extldflags=-L/opt/local/lib -Wl,-headerpad_max_install_names -lMa
 #
 # Failure to do so will leave you unable to create binaries that use features not natively
 # available on your system, either directly or through a go core dependency.
+
+
+# Backup
+# --------------------
+# date -I == date +%F
+function mpbak()
+{
+    _dest_folder="${1:-/path/to/default/folder}";
+    (cd /opt;
+    for b in ports local; do
+       sudo rsync -avz -HAX ./${b}/ ${_dest_folder}/${b}_$(date -I).bak/
+    done;)
+}
