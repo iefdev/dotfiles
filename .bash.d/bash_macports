@@ -59,6 +59,9 @@ alias mysql.load="sudo port load ${_mariadb}"
 alias mysql.unload="sudo port unload ${_mariadb}"
 alias mysql.reload="sudo port reload ${_mariadb} && echo :: MariaDB Reloaded"
 
+alias mysql.status='ps aux | grep mysql | grep -v grep'
+alias mysql.history='open ~/.mysql_history'
+
 
 # For MacPorts GitHub PR template
 alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)\"; echo \"Xcode $(xcodebuild -version | awk '{print $NF}' | tr '\n' ' ')\""

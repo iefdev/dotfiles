@@ -21,6 +21,10 @@ alias srw='cd /srv/www'
 alias ..='cd ..'
 alias ...='cd ../..'
 
+# xtras
+alias cdA='cd ~/Repos/_Forks/Archey-X'
+alias cdM='cd ~/Repos/_Forks/macports-ports'
+
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias ln='ln -iv'
@@ -60,6 +64,8 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+alias unzip='tar -xvf'
+
 if [[ $(uname -s) == 'Darwin' ]]; then
     # OS X
     alias forceTrash='rm -rv ~/.Trash/{.*,*}'
@@ -81,8 +87,9 @@ alias lPath="printenv PATH | tr ':' '\n'"
 # tree, w colors
 alias tree='tree -C'
 
-# Get external IP
-alias myIP='wget -qO- ifconfig.co'
+# Get internal/external IP
+alias iIP="ifconfig | grep inet\ | grep -v 127 | awk '{print \$2}'"
+alias eIP='wget -qO- ifconfig.co'
 
 # qip netstat info
 alias qip='netstat -rn | grep default'	# ip + interface
@@ -104,6 +111,9 @@ alias suvi='sudo vim'
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
 
+alias tmux='tmux -2uv'
+
+
 # Linux
 if [[ $(uname -s) == 'Linux' ]]; then
     # Update Grub
@@ -116,8 +126,14 @@ if [[ $(uname -s) == 'Linux' ]]; then
     #alias pbcopy='xsel --clipboard --input'
     #alias pbpaste='xsel --clipboard --output'
 
+    # convert richtext in clipboard to plaintext
+    alias pbplain='xsel -b | xsel -b'
+
     alias open='xgd-open'
 else
+    # convert to plaintext
+    alias pbplain='pbpaste | pbcopy'
+
     # remove last line from pbcopy
     alias pbcopy='ghead -c -1 | pbcopy'
 fi
@@ -135,12 +151,15 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 # Cleaning up stuff...
 # --------------------
 
-# .DS_Store and ._files (universal UNIX way)
+# .DS_Store and ._files
 alias rmDS='find . -type f -name .DS_Store -exec rm -v {} \;'
 alias rmDF='find . -type f -name ._* -exec rm -v {} \;'
 
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
+    # fix dns
+    #alias fixDNS='for p in 1 2; do sudo networksetup -setdnsservers "Ethernet ${p}" 127.0.0.1; sudo networksetup -setsearchdomains "Ethernet ${p}" $(hostname); done;';
+
     # Kill/Flush (DNS)cache (10.7/8/9)
     alias flushDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;'
 
@@ -184,17 +203,25 @@ alias wgetc='wget -c'
 alias wgetnc='wget --no-check-certificate'
 
 
+# Ncurses
+# --------------------
+# Fix for display issues with ncurses 6+
+
+alias 2048="TERM=nsterm 2048"
+alias bmon="TERM=nsterm bmon"
+
+
 # Misc stuff
 # --------------------
 
-alias cal='gcal --starting-day=1'
+alias gcal='gcal --starting-day=1'
 
 if [[ $(uname -s) == 'Darwin' ]]; then
     # Firefox - fix version in Info.plist
     alias firefix="sed -i '/<string>10.9/s/9/6/' /Applications/Firefox.app/Contents/Info.plist"
 
-    alias firefox='open -a Firefox'
-    alias gedit='open -a gedit'
+    alias firefox='open -a Firefox '
+    alias gedit='open -a gedit '
 fi
 
 # Gzip fix
@@ -241,6 +268,7 @@ alias ffprobe='ffprobe -hide_banner'
 
 # youtube-dl
 _ytdl_confd="~/.config/youtube-dl"
+alias ytdl='youtube-dl '
 alias ytdl.up='sudo youtube-dl -U'
 alias ytdl.conf="open ${_ytdl_confd}/config"
 alias ytdl.help="open ${_ytdl_confd}/help.txt"
@@ -268,9 +296,6 @@ alias memposer='php -d memory_limit=-1 $(which composer)'
 alias cdO='cd /srv/www/ief.dev/octopress/'
 alias cdP='cd /srv/www/ief.dev/pelican/'
 
-# MySQL
-alias mysqlstatus='ps aux | grep mysql | grep -v grep'
-alias openSqlHistory='open ~/.mysql_history'
 
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
@@ -310,6 +335,9 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     alias dcp.unload='sudo launchctl unload -w /Library/LaunchDaemons/dnscrypt-proxy.plist'
     alias dcp.reload='dcp.unload && sleep 5 && dcp.load && echo ":: DNSCrypt Proxy Reloaded"'
     #alias dcp.remove='sudo launchctl remove dnscrypt-proxy'
+
+    # Icefloor (pf):
+    alias ice.dump='clear; sudo /usr/sbin/tcpdump -vlnettti pflog0'
 fi
 
 # GnuPG

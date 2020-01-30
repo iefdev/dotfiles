@@ -4,6 +4,10 @@
 # Description: Separate file for bash functions and helpers
 #
 
+# Bashing
+# --------------------
+function printfn() { printf '%s\n' "$*"; }
+
 
 # File & folders
 # --------------------
@@ -13,6 +17,7 @@ function mkdircd() { mkdir -p "${1}" && cd "${1}"; }
 
 # Make dirs from file
 function mkdirff() { xargs -I {} mkdir -pv "{}" < "${1}"; }
+function ytdl.ff() { xargs -I {} youtube-dl "{}" < "${1}"; }
 
 # Misc bak helpers (mbakd, for dirs)
 [[ $(uname -s) == 'Darwin' ]] && function mkbakd() { _dir=`echo "${1%/}"`; ditto -v "${_dir}"{,.bak}; }
@@ -42,7 +47,7 @@ function editBash()
     [[ ${1} == 'n' ]] && sudo ${2:-vim} /etc/nanorc && return;
     [ -z ${1} ] && ${2:-vim} ~/.bashrc || \
     for file in $(ls -d ~/.bash.d/* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
-        [[ $(echo ${1} | cut -c 1) == $(echo `basename ${file}` | cut -c 6) ]] && nano ${file} && break;
+        [[ $(echo ${1} | cut -c 1) == $(echo `basename ${file}` | cut -c 6) ]] && ${2:-vim} ${file} && break;
     done;
 }
 
@@ -159,11 +164,8 @@ function man2txt()
 # --------------------
 
 # Create a patch file
-# Usage: mkpatch original_file.ext my_modified.ext [patchname]
-function mkpatch()
-{
-    diff -Naur "${1}" "${2}" > "${3:-$(basename ${2})}.patch";
-}
+# Usage: mkpatch file.ext.orig file.ext [patchname]
+function mkpatch() { diff -Naur "${1}" "${2}" > "${3:-$(basename ${2})}.patch"; }
 
 # Apply patch
 function patchfile() { patch < "${1}"; }
@@ -217,8 +219,6 @@ function fixPDF() {
 # Adminer :: Changing theme.
 function chgAdminer() { sudo ln -s /usr/share/webapps/adminer/{themes/${1},adminer}.css; }
 
-# youtube-dl
-function ytdl() { youtube-dl -ci "$@"; }
 
 if [[ $(uname -s) == 'Darwin' ]]; then
     function spdl() { /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/svtplay-dl -r "${1}"; }
@@ -252,7 +252,21 @@ ipInfo()
 }
 
 # Weather
-function wttr() { curl -4 "wttr.in/${1}"; }
+function wttr() { curl -4 "wttr.in/${1:-Hometown}"; }
 
 # Not in Linux
 [[ $(uname -s) == 'Darwin' ]] && function whatDisk() { stat -f %Sd "${1:-.}"; }
+
+
+# ffmpeg
+# --------------------
+
+function mk720()
+{
+    ffmpeg -i "$1" \
+           -vf scale=720:-2 \
+           -c:v libx264 -crf ${2:-20} \
+           -preset:v medium \
+           -c:a libfdk_aac -b:a 128k \
+           "${1%.*}_720.mp4"
+}

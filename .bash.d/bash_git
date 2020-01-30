@@ -8,14 +8,15 @@
 # Git completion and git prompt
 if [[ $(uname -s) == 'Darwin' ]]; then
     gitCompl='/opt/local/share/git/contrib/completion/git-completion.bash'
-    gitCompl='/opt/local/share/git/contrib/completion/git-prompt.sh'
+    gitPrompt='/opt/local/share/git/contrib/completion/git-prompt.sh'
 else
     gitCompl='/usr/share/git/completion/git-completion.bash'
-    gitCompl='/usr/share/git/completion/git-prompt.sh'
+    gitPrompt='/usr/share/git/completion/git-prompt.sh'
 fi
 
 # Load git-completion
 [ -f ${gitCompl} ] && . ${gitCompl}
+[ -f ${gitPrompt} ] && . ${gitPrompt}
 
 # Add git-prompt
 PS1="\[\e[0;32m\]\$(__git_ps1 \"(%s) \")\[\e[m\]$PS1";
