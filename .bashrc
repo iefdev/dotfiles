@@ -64,7 +64,7 @@ PS4=' :+ '
 
 # Bash files to load
 if [[ $(uname -s) == 'Darwin' ]]; then
-    bash_files=( ruby aliases functions git macports cheat opo venv wp );
+    bash_files=( ruby aliases functions git macports cheat opo venv );
     bashCompl='/opt/local/etc/profile.d/bash_completion.sh';
 else
     #add: pacman, dnf, yum etc
