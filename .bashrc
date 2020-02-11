@@ -39,18 +39,16 @@ _uCol="${_grn}"
 [[ $SUDO_USER ]] && set -e && _uCol="${_ylw}"
 
 # PS 0-4
-function setPS1 () {
-    [[ $# = 1 ]] || exit 255;
+function setPS () {
+    [[ $# < 3 ]] || return 1;
     case "${1}" in
-        none)     export PS1="";                                                  ;;
-        off)      export PS1="\$ ";                                               ;;
-        dir)      export PS1="${_gry}\W${_def}\$ ";                               ;;
-        demo)     export PS1="[${_uCol}demo${_def}@fooBar] ${_gry}\W${_def}\$ ";  ;;
-        test)     export PS1="[${_uCol}test${_def}@foooBar] ${_gry}\W${_def}\$ "; ;;
-        basic)    export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";             ;;
-        _default) export PS1="[${_uCol}\u${_def}@\h ${_gry}\W]${_def}\$ ";        ;;
-        default)  export PS1="[${_uCol}\u${_def}@\h] ${_gry}\W${_def}\$ ";        ;;
-        full)     export PS1="[${_uCol}\u${_def}@\H] ${_gry}\W${_def}\$ ";        ;;
+        x|none)   export PS1="${2:-> }";                                              ;;
+        s|simple) export PS1="\$ ";                                                   ;;
+        d|dir)    export PS1="${_gry}\W${_def}\$ ";                                   ;;
+        u|user)   export PS1="[${_uCol}${2:-baz}${_def}@foobar] ${_gry}\W${_def}\$ "; ;;
+        b|basic)  export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";                 ;;
+        _default) export PS1="[${_uCol}\u${_def}@\h ${_gry}\W]${_def}\$ ";            ;;
+        *|def|default) export PS1="[${_uCol}\u${_def}@\h] ${_gry}\W${_def}\$ ";       ;;
     esac
 }
 
@@ -66,28 +64,31 @@ PS4=' :+ '
 
 # Bash files to load
 if [[ $(uname -s) == 'Darwin' ]]; then
-    bash_files=( ruby aliases functions git macports cheat opo venv );
+    bash_files=( ruby aliases functions git macports cheat opo venv wp );
     bashCompl='/opt/local/etc/profile.d/bash_completion.sh';
 else
-    # pacman, dnf, yum etc
-    #pkg_manager='pacman'
+    #add: pacman, dnf, yum etc
     bash_files=( ruby aliases functions git cheat opo venv );
     bashCompl='/etc/profile.d/bash_completion.sh'
 fi
 
-bash_file_prefix=`echo ~/.bash.d/bash_`
 for _file in ${bash_files[@]}; do
-    [ -f ${bash_file_prefix}${_file} ] && . ${bash_file_prefix}${_file};
+    [ -f ~/.bash.d/${_file} ] && . ~/.bash.d/${_file};
 done
-
-# Load archey (if installed)
-# If not running interactively, don't do anything
-if [[ -n "$PS1" && $UID != 0 ]]; then
-    [[ `type archeyX 2> /dev/null` ]] && archeyX
-fi
 
 # bash completion
 [ -f ${bashCompl} ] && . ${bashCompl};
+
+# bd completion
+bdCompl='/etc/profile.d/bd'
+[ -f ${bdCompl} ] && . ${bdCompl};
+
+
+# Load archey (if installed)
+# If not running interactively, or in TMUX, don't do anything
+if [[ -n "${PS1}" && ${UID} != 0 && -z ${TMUX} ]]; then
+    [[ `type archeyX 2> /dev/null` ]] && archeyX
+fi
 
 
 # Misc xtras

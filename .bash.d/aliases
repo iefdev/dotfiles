@@ -1,5 +1,5 @@
 #
-# ~/.bash.d/bash_aliases
+# ~/.bash.d/aliases
 #
 
 # sudo with aliases
@@ -21,6 +21,9 @@ alias srw='cd /srv/www'
 alias ..='cd ..'
 alias ...='cd ../..'
 
+# bd
+alias bd='. bd -si'
+
 # xtras
 alias cdA='cd ~/Repos/_Forks/Archey-X'
 alias cdM='cd ~/Repos/_Forks/macports-ports'
@@ -31,7 +34,7 @@ alias ln='ln -iv'
 
 alias c='clear'
 alias k="clear && printf '\e[3J'"
-alias cx='clear && k && archeyX'
+alias cx='k && archeyX'
 alias cxH='cd && cx'
 
 alias h='history'
@@ -111,7 +114,7 @@ alias suvi='sudo vim'
 # Fuck
 alias fuck='sudo $(history -p \!\!)'
 
-alias tmux='tmux -2uv'
+alias tmux='tmux -2u'
 
 
 # Linux
@@ -152,7 +155,9 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 # --------------------
 
 # .DS_Store and ._files
-alias rmDS='find . -type f -name .DS_Store -exec rm -v {} \;'
+# find . -type f -name .DS_* -delete
+# find . -type f -name ._* -delete
+alias rmDS='find . -type f -name .DS_* -exec rm -v {} \;'
 alias rmDF='find . -type f -name ._* -exec rm -v {} \;'
 
 # OS X only
@@ -258,6 +263,7 @@ alias LinX='links -g'
 
 # mkspace
 alias mkspace='echo -e "\v\v"'
+alias s='mkspace'
 
 # vim + w/o plugins and xtras
 alias vi='vim --clean'

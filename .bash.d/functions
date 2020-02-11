@@ -1,5 +1,5 @@
 #
-# ~/.bash.d/bash_functions
+# ~/.bash.d/functions
 #
 # Description: Separate file for bash functions and helpers
 #
@@ -13,54 +13,57 @@ function printfn() { printf '%s\n' "$*"; }
 # --------------------
 
 # Make a dir and cd into it (cd "${1}", or cd "$_")
-function mkdircd() { mkdir -p "${1}" && cd "${1}"; }
+function mkdircd() { mkdir -pv "${1}" && cd "${1}"; }
 
 # Make dirs from file
 function mkdirff() { xargs -I {} mkdir -pv "{}" < "${1}"; }
 function ytdl.ff() { xargs -I {} youtube-dl "{}" < "${1}"; }
 
 # Misc bak helpers (mbakd, for dirs)
-[[ $(uname -s) == 'Darwin' ]] && function mkbakd() { _dir=`echo "${1%/}"`; ditto -v "${_dir}"{,.bak}; }
+[[ $(uname -s) == 'Darwin' ]] && function mkbakd() { [ -d ${1} ] && ditto -v "${1%/}"{,.bak}; }
 function mkbak() { cp -iv "${1}"{,.bak}; }
 function mvbak() { mv -iv "${1}"{,.bak}; }
 
 
-# Usage: openBash [<letter>]
-# Empty = .bashrc (${1} = 1st letter after bash_)
+# Usage: openBash [<letter(s)>]
+# Empty = .bashrc (${1} = 1st letter(s))
 function  openBash()
 {
-    [[ ${1} == 'h' ]] && open -e ~/.bash_history && return;
-    [[ ${1} == 'i' ]] && open -e ~/.inputrc && return;
+    [[ ${1} =~ ^h ]] && open -e ~/.bash_history && return;
+    [[ ${1} =~ ^i ]] && open -e ~/.inputrc && return;
     [ -z ${1} ] && open -e ~/.bashrc || \
-    for file in $(ls -d ~/.bash.d/* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
-        [[ $(echo ${1} | cut -c 1) == $(echo `basename ${file}` | cut -c 6) ]] \
+    for file in $(ls -d ~/.bash.d/*); do
+        [[ ${1} == $(basename ${file} | cut -c -1-${#1}) ]] \
         && open -e ${file} && break;
     done;
 }
 
-# Usage: editBash [<letter>] [nano] (vim is default)
-# Empty = .bashrc (${1} = 1st letter after bash_)
+# Usage: editBash [<letter(s)>] [vim|nano] (default: ${EDITOR})
+# Empty = .bashrc (${1} = 1st letter(s))
 function editBash()
 {
-    [[ ${1} == 'h' ]] && ${2:-vim} ~/.bash_history && return;
-    [[ ${1} == 'i' ]] && ${2:-vim} ~/.inputrc && return;
-    [[ ${1} == 'n' ]] && sudo ${2:-vim} /etc/nanorc && return;
-    [ -z ${1} ] && ${2:-vim} ~/.bashrc || \
-    for file in $(ls -d ~/.bash.d/* | grep bash | grep -v -e 'bashrc' | sed -e 's/.*\://'); do
-        [[ $(echo ${1} | cut -c 1) == $(echo `basename ${file}` | cut -c 6) ]] && ${2:-vim} ${file} && break;
+	local _e="${2:-${EDITOR}}";
+    [[ ${1} =~ ^h ]] && ${_e} ~/.bash_history && return;
+    [[ ${1} =~ ^i ]] && ${_e} ~/.inputrc && return;
+    [[ ${1} =~ ^n ]] && sudo ${_e} /etc/nanorc && return;
+    [ -z ${1} ] && ${_e} ~/.bashrc || \
+    for file in $(ls -d ~/.bash.d/*); do
+        [[ ${1} == $(basename ${file} | cut -c -1-${#1}) ]] \
+        && ${_e} ${file} && break;
     done;
 }
 
-# Usage: reBash [<letter>]
-# Empty = .bashrc (${1} = 1st letter after bash_)
+# Usage: reBash [<letter(s)>]
+# Empty = .bashrc (${1} = 1st letter(s))
 function reBash()
 {
-    [[ ${1} == 'h' ]] && return;
-    [[ ${1} == 'i' ]] && . ~/.inputrc && return;
-    [[ ${1} == 'n' ]] && . /etc/nanorc && return;
+    [[ ${1} =~ ^h ]] && return;
+    [[ ${1} =~ ^i ]] && . ~/.inputrc && return;
+    [[ ${1} =~ ^n ]] && . /etc/nanorc && return;
     [ -z ${1} ] && . ~/.bashrc || \
-    for file in $(ls -d ~/.bash.d/* | grep bash | egrep -v -e 'bashrc|history' | sed -e 's/.*\://'); do
-        [[ $(echo ${1} | cut -c 1) == $(echo `basename ${file}` | cut -c 6) ]] && . ${file} && break;
+    for file in $(ls -d ~/.bash.d/*); do
+        [[ ${1} == $(basename ${file} | cut -c -1-${#1}) ]] \
+        && . ${file} && break;
     done;
 }
 
@@ -110,14 +113,14 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 fi
 
 # Reveal program in Finder
-function whichR() { open -R $(which ${1}); }
+[[ $(uname -s) == 'Darwin' ]] && function whichR() { open -R $(which ${1}); }
 
 # Linux 'open'
-[[ $(uname -s) == 'Linux' ]] && open() { xdg-open "$@" > /dev/null 2>&1 ; }
+[[ $(uname -s) == 'Linux' ]] && function open() { xdg-open "$@" > /dev/null 2>&1 ; }
 
 # Search and delete (recursively), using find. $1 = the regexp.
-function searchFiles() { find . -name "${1}" -type f; }
-function rmFiles() { find . -name "${1}" -type f -delete; }
+function searchFiles() { find . -type f -name "${1}"; }
+function rmFiles() { find . -type f -name "${1}" -delete; }
 
 function adminstall() { sudo install -v -m 0755 -o 0 -g 0 ${@}; }
 function badminstall() { sudo install -vb -m 0755 -o 0 -g 0 ${@}; }

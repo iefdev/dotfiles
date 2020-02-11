@@ -1,5 +1,5 @@
 #
-# ~/.bash_exports
+# ~/.bash.d/exports
 #
 # Misc PATH's and exports, to keep .bashrc clean(er).
 #
