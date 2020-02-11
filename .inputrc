@@ -1,3 +1,7 @@
+#
+# ~/.inputrc
+#
+
 ### TAB Completion ###
 
 # show multiple possibilities on tab completion
