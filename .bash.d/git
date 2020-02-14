@@ -4,6 +4,7 @@
 # Description: Separate file for git related stuff
 #
 
+alias got='git'
 
 # Git completion and git prompt
 if [[ $(uname -s) == 'Darwin' ]]; then

@@ -14,14 +14,16 @@ _pt="$HOME/OnePlus1/pt/platform-tools"
 
 
 # Android - ADB
-# --------------------------------------------------------------------------
-#	$ adb devices
-#	aaaaaaaa	device		// OPO
-#	bbbbbbbb	device		// S4 mini
-#
+# ----------------------------------------
+#    $ adb devices
+#    aaaaaaaa    device        // OPO
+#    bbbbbbbb    device        // S4 mini
 
 # Default
 export ANDROID_SERIAL="aaaaaaaa"
 
-alias adbOPO='adb -s aaaaaaaa'
-alias adbS4='adb -s bbbbbbbb'
+alias adb.OPO='adb -s aaaaaaaa'
+alias adb.S4='adb -s bbbbbbbb'
+
+alias adb.kill='adb kill-server'
+
