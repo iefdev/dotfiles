@@ -21,12 +21,11 @@ alias srw='cd /srv/www'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# bd
-alias bd='. bd -si'
-
-# xtras
 alias cdA='cd ~/Repos/_Forks/Archey-X'
 alias cdM='cd ~/Repos/_Forks/macports-ports'
+
+# bd
+alias bd='. bd -si'
 
 alias mv='mv -iv'
 alias cp='cp -iv'
@@ -253,10 +252,10 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 
     alias tray.open='drutil tray eject'
     alias tray.close='drutil tray close'
-fi
 
-# the defaults log
-alias openDeflog='open $HOME/ShellScripts/__defaultsLog.txt'
+    # the defaults log
+    alias openDeflog='open -e $HOME/ShellScripts/__defaultsLog.txt'
+fi
 
 # Links X11
 alias LinX='links -g'
@@ -276,8 +275,8 @@ alias ffprobe='ffprobe -hide_banner'
 _ytdl_confd="~/.config/youtube-dl"
 alias ytdl='youtube-dl '
 alias ytdl.up='sudo youtube-dl -U'
-alias ytdl.conf="open ${_ytdl_confd}/config"
-alias ytdl.help="open ${_ytdl_confd}/help.txt"
+alias ytdl.conf="open ${_e:-} ${_ytdl_confd}/config"
+alias ytdl.help="open ${_e:-} ${_ytdl_confd}/help.txt"
 
 
 # Srv & Dev
@@ -305,8 +304,6 @@ alias cdP='cd /srv/www/ief.dev/pelican/'
 
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
-    alias mysql.server='sudo /opt/local/share/mariadb-10.1/support-files/mysql.server'
-
     alias tailSrv='tail -f /var/log/httpd/access_log'
 
     # PHP 5.4, 7.0 (5.6 is in PATH)
@@ -345,6 +342,7 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     # Icefloor (pf):
     alias ice.dump='clear; sudo /usr/sbin/tcpdump -vlnettti pflog0'
 fi
+
 
 # GnuPG
 # --------------------
