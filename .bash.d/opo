@@ -1,16 +1,17 @@
 #
 # ~/.bash.d/opo
 #
+#
 # Description: Separate file for OPO and abd
 #
 
 # Android SDK
 #export ANDROID_HOME="/path/to/android-sdk/"
-#export PATH="$ANDROID_HOME/platform-tools:$PATH"
-#export PATH="$ANDROID_HOME/tools:$PATH"
+#export PATH="${ANDROID_HOME}/platform-tools:${PATH}"
+#export PATH="${ANDROID_HOME}/tools:${PATH}"
 
-_pt="$HOME/OnePlus1/pt/platform-tools"
-[ -d "${_pt}" ] && export PATH="${_pt}:$PATH"
+_pt="${HOME}/OnePlus1/pt/platform-tools"
+[ -d "${_pt}" ] && export PATH="${_pt}:${PATH}"
 
 
 # Android - ADB
