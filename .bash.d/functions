@@ -29,12 +29,12 @@ function mvbak() { mv -iv "${1}"{,.bak}; }
 # Empty = .bashrc (${1} = 1st letter(s))
 function  openBash()
 {
-    [[ ${1} =~ ^h ]] && open -e ~/.bash_history && return;
-    [[ ${1} =~ ^i ]] && open -e ~/.inputrc && return;
-    [ -z ${1} ] && open -e ~/.bashrc || \
+    [[ ${1} =~ ^h ]] && open ${_e:-} ~/.bash_history && return;
+    [[ ${1} =~ ^i ]] && open ${_e:-} ~/.inputrc && return;
+    [ -z ${1} ] && open ${_e:-} ~/.bashrc || \
     for file in $(ls -d ~/.bash.d/*); do
         [[ ${1} == $(basename ${file} | cut -c -1-${#1}) ]] \
-        && open -e ${file} && break;
+        && open ${_e:-} ${file} && break;
     done;
 }
 
@@ -42,7 +42,7 @@ function  openBash()
 # Empty = .bashrc (${1} = 1st letter(s))
 function editBash()
 {
-	local _e="${2:-${EDITOR}}";
+    local _e="${2:-${EDITOR:-vim}}";
     [[ ${1} =~ ^h ]] && ${_e} ~/.bash_history && return;
     [[ ${1} =~ ^i ]] && ${_e} ~/.inputrc && return;
     [[ ${1} =~ ^n ]] && sudo ${_e} /etc/nanorc && return;
@@ -70,6 +70,9 @@ function reBash()
 
 # Delete empty lines in a file
 function mtLines() { [ -f "${1}" ] && sed -i '/^$/d' "${1}"; }
+
+# Windows (CRLF) -> Unix (LF)
+function mkLF() { find . -name "${1:-*.txt}" -print0 | xargs -0 dos2unix; }
 
 # Search/delete lines in history
 if [[ $(uname -s) == 'Darwin' && $(which sed) == '/usr/bin/sed' ]]; then
@@ -166,7 +169,6 @@ function man2txt()
 # Diff & Patching
 # --------------------
 
-# Create a patch file
 # Usage: mkpatch file.ext.orig file.ext [patchname]
 function mkpatch() { diff -Naur "${1}" "${2}" > "${3:-$(basename ${2})}.patch"; }
 
@@ -221,7 +223,6 @@ function fixPDF() {
 
 # Adminer :: Changing theme.
 function chgAdminer() { sudo ln -s /usr/share/webapps/adminer/{themes/${1},adminer}.css; }
-
 
 if [[ $(uname -s) == 'Darwin' ]]; then
     function spdl() { /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/svtplay-dl -r "${1}"; }
