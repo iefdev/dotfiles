@@ -8,6 +8,9 @@
 # Default dir
 export DEFAULT_CHEAT_DIR=~/.cheat.d
 
+# xtra cheat dir
+#export CHEATPATH=/path/to/more/cheats
+
 # Colors
 export CHEATCOLORS=true
 
