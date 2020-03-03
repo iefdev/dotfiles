@@ -25,6 +25,9 @@ alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
 
 alias setReq='sudo port setrequested'
 
+#  ...and not
+function portupnotall() { sudo port upgrade outdated and not \( "${@}" \); }
+
 
 # Bootstrap version: curl only (+ dependencies)
 # ---------------------------------------------
