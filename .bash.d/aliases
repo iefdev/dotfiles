@@ -21,7 +21,7 @@ alias srw='cd /srv/www'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias cdA='cd ~/Repos/_Forks/Archey-X'
+alias cdA='cd ~/Repos/Archey-X'
 alias cdM='cd ~/Repos/_Forks/macports-ports'
 
 # bd
@@ -94,8 +94,8 @@ alias iIP="ifconfig | grep inet\ | grep -v 127 | awk '{print \$2}'"
 alias eIP='wget -qO- ifconfig.co'
 
 # qip netstat info
-alias qip='netstat -rn | grep default'	# ip + interface
-alias whatPorts='netstat -tulanp'	# open ports ($: whatPorts tcp)
+alias qip='netstat -rn | grep default'  # ip + interface
+alias whatPorts='netstat -tulanp'       # open ports ($: whatPorts tcp)
 
 # 3 ping is ok..
 alias ping='ping -c 3'
