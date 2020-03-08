@@ -62,11 +62,11 @@ PS4=' :+ '
 # Load .bash_* files from ~/.bash.d/, Archey and bash completion
 # ------------------------------------------------------------------------------
 
-# Used with open -e (TextEdit): ${_e:-}
-[[ $(uname -s) == 'Darwin' ]] && _e='-c'
-
 # Bash files to load
 if [[ $(uname -s) == 'Darwin' ]]; then
+    # Used with open -e (TextEdit): ${_e:-}
+    _e='-e'
+
     bash_files=( ruby aliases functions git macports cheat opo venv );
     bashCompl='/opt/local/etc/profile.d/bash_completion.sh';
 else

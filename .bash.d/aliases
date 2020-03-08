@@ -188,11 +188,13 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 
     # Fix broken "open with" menu
     alias fixOW='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
+
+    alias purge='sudo purge'
+elif [[ $(uname -s) == 'Linux' ]]; then
+    # OS X “purge”
+    alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
 fi
 
-
-# OS X “purge”
-[[ $(uname -s) == 'Linux' ]] && alias purge='sync; su -c "echo 3 > /proc/sys/vm/drop_caches"'
 alias purgeH='purge && cxH'
 
 
