@@ -93,9 +93,14 @@ alias tree='tree -C'
 alias iIP="ifconfig | grep inet\ | grep -v 127 | awk '{print \$2}'"
 alias eIP='wget -qO- ifconfig.co'
 
-# qip netstat info
+# Netstat
 alias qip='netstat -rn | grep default'  # ip + interface
 alias whatPorts='netstat -tulanp'       # open ports ($: whatPorts tcp)
+
+if [[ $(uname -s) == 'Darwin' ]]; then
+    alias netstat.anv='netstat -anv | egrep "^tcp|^udp"'
+    alias netstat.grep='netstat.anv | egrep "LIS|ED"'
+fi
 
 # 3 ping is ok..
 alias ping='ping -c 3'
