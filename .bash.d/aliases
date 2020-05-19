@@ -158,12 +158,6 @@ alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec 
 # Cleaning up stuff...
 # --------------------
 
-# .DS_Store and ._files
-# find . -type f -name .DS_* -delete
-# find . -type f -name ._* -delete
-alias rmDS='find . -type f -name .DS_* -exec rm -v {} \;'
-alias rmDF='find . -type f -name ._* -exec rm -v {} \;'
-
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
     # fix dns
@@ -208,7 +202,7 @@ alias purgeH='purge && cxH'
 
 # Wget continue
 # (with curl: curl -o <incomplete_local_file> -C - <URL>)
-alias wgetc='wget -c'
+alias wget='wget -c'
 
 # Wget no-check
 alias wgetnc='wget --no-check-certificate'
@@ -240,7 +234,7 @@ fi
 alias gzip='gzip -9v -N'
 
 # List disks
-alias disklist="mount | egrep ^/dev/ | awk '{ print \$1 \" »» \" \$3 }' | sort"
+alias disklist="mount | egrep ^/dev/ | awk '{ print \$1,\"»»\",\$3 }' | sort"
 alias diskspace='df -Hl'
 
 # OS X only
@@ -290,7 +284,7 @@ alias ytdl.help="open ${_e:-} ${_ytdl_confd}/help.txt"
 # --------------------
 
 # htpasswd: bcrypt, cost: 12
-alias pwdB12='htpasswd -b -B -C 12 '
+alias htpwd='htpasswd -B -C 12 '
 
 # Upgrade pip
 alias pipup='pip install -U pip'
