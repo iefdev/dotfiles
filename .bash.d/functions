@@ -71,6 +71,14 @@ function reBash()
 # Delete empty lines in a file
 function mtLines() { [ -f "${1}" ] && sed -i '/^$/d' "${1}"; }
 
+# Remove OS X/macOS resource files (.DS_Store, ._files)
+#function rmDS { find "${1:-.}" -type f -name .DS_* -delete; }
+#function rmDF { find "${1:-.}" -type f -name ._* -delete; }
+
+# Unix way (general)
+function rmDS { find "${1:-.}" -type f -name .DS_* -exec rm -v {} \;; }
+function rmDF { find "${1:-.}" -type f -name ._* -exec rm -v {} \;; }
+
 # Windows (CRLF) -> Unix (LF)
 function mkLF() { find . -name "${1:-*.txt}" -print0 | xargs -0 dos2unix; }
 
@@ -100,14 +108,14 @@ function rsyncdir()
 {
     # removing trailing "/" and adding our own
     # to make sure there is one, and not end up with "//"
-    rsync -avzuc --delete "${1%/}/" "${2%/}/";
+    rsync -avzuch ${3:-} --delete --progress "${1%/}/" "${2%/}/";
 }
 
 if [[ $(uname -s) == 'Darwin' ]]; then
     # Remove sticky bit
     function rmxattr()
     {
-        local _file="${1}"
+        local _file="${1}";
         xattr -d $(xattr "${_file}") "${_file}";
     }
 
@@ -273,4 +281,16 @@ function mk720()
            -preset:v medium \
            -c:a libfdk_aac -b:a 128k \
            "${1%.*}_720.mp4"
+}
+
+function mkgif()
+{
+    _palette=",split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse";
+    [[ ${1} == '-s' ]] && _s="${2}" && shift 2 || _s=;
+    [[ ${1} == '-q' ]] && _q="${_palette}" && shift || _q=;
+
+    ffmpeg -i "${1}" -r 10 -vf "scale=${_s:-480}:-1${_q:-}" "${1%.*}_ffmpeg.gif";
+    convert -delay 1 -loop 0 "${1%.*}_ffmpeg.gif" "${1%.*}.gif";
+    echo -n '»» removing: ' && rm -v "${1%.*}_ffmpeg.gif";
+    gifopt "${1%.*}.gif";
 }
