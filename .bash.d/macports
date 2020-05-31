@@ -6,7 +6,7 @@
 
 # Macports
 # --------------------
-alias portout='echo -e "\v--->  Outdated:\n" && port outdated'
+alias portout='echo -en "\n\n--->  " && port outdated'
 alias portsync='sudo port -v sync && portout'
 alias portup='portsync'
 #alias portup='sudo port -v selfupdate && portout'
@@ -33,7 +33,7 @@ function portupnotall() { sudo port upgrade outdated and not \( "${@}" \); }
 # ---------------------------------------------
 alias boort='/opt/bootstrap/bin/port'
 
-alias boortout='echo -e "\v--->  Outdated:\n" && boort outdated'
+alias boortout='echo -en "\n\n--->  " && boort outdated'
 alias boortsync='sudo boort -v sync && boortout'
 alias boortup='boortsync'
 alias boortupgrade='sudo boort upgrade'
