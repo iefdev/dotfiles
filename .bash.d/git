@@ -32,9 +32,20 @@ PS1="\[\e[0;32m\]\$(__git_ps1 \"(%s) \")\[\e[m\]$PS1";
 function rbm()
 {
 	local _branch="${1:-devel}";
-	git checkout "${_branch}" && git rebase master;
+    git checkout "${_branch}" && git rebase main;
+	git checkout main && git merge "${_branch}";
+}
+
+function rbma()
+{
+	local _branch="${1:-devel}";
+    git checkout "${_branch}" && git rebase master;
 	git checkout master && git merge "${_branch}";
 }
+
+# ${@} to add '-f' or spec branch, etc
+function gitPush() { rbm && git push ${@} && git co devel; }
+function gitPusha() { rbma && git push ${@} && git co devel; }
 
 
 # Sign commit and tag
