@@ -40,15 +40,13 @@ _uCol="${_grn}"
 
 # PS 0-4
 function setPS () {
-    [[ $# < 3 ]] || return 1;
+    [[ $# < 4 ]] || return 1;
     case "${1}" in
-        x|none)   export PS1="${2:-> }";                                              ;;
-        s|simple) export PS1="\$ ";                                                   ;;
-        d|dir)    export PS1="${_gry}\W${_def}\$ ";                                   ;;
-        u|user)   export PS1="[${_uCol}${2:-baz}${_def}@foobar] ${_gry}\W${_def}\$ "; ;;
-        b|basic)  export PS1="${_uCol}\u${_def}:${_gry}\W${_def}\$ ";                 ;;
-        _default) export PS1="[${_uCol}\u${_def}@\h ${_gry}\W]${_def}\$ ";            ;;
-        *|def|default) export PS1="[${_uCol}\u${_def}@\h] ${_gry}\W${_def}\$ ";       ;;
+        s|simple) export PS1="${2:-\$} ";                                                  ;;
+        d|dir)    export PS1="${_gry}\W${_def}\$ ";                                         ;;
+        b|basic)  export PS1="${_uCol}${2:-\u}${_def}:${_gry}\W${_def}\$ ";                 ;;
+        _default) export PS1="[${_uCol}${2:-\u}${_def}@${3:-\h} ${_gry}\W]${_def}\$ ";      ;;
+        *|def|default) export PS1="[${_uCol}${2:-\u}${_def}@${3:-\h}] ${_gry}\W${_def}\$ "; ;;
     esac
 }
 
