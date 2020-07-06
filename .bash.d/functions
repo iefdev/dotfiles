@@ -24,6 +24,10 @@ function ytdl.ff() { xargs -I {} youtube-dl "{}" < "${1}"; }
 function mkbak() { cp -iv "${1}"{,.bak}; }
 function mvbak() { mv -iv "${1}"{,.bak}; }
 
+# Get the source of a symlink
+# usage: symsrc <symlink>
+function symsrc() { ls -l | awk -v l="${1}" -F '-> ' 'match($0, l) {print $2}'; }
+
 
 # Usage: openBash [<letter(s)>]
 # Empty = .bashrc (${1} = 1st letter(s))
@@ -276,10 +280,12 @@ function wttr.v2() { curl "v2.wttr.in/${1:-Hometown}"; }
 
 function mk720()
 {
-    ffmpeg -i "$1" \
-           -vf scale=720:-2 \
+    [[ "${1}" == '-w' ]] && _scale='720:-2' && shift 1;
+    ffmpeg -y -hide_banner -i "${1}" \
+           -vf scale=${_scale:--2:720} \
            -c:v libx264 -crf ${2:-20} \
-           -preset:v medium \
+           -preset:v slow \
+           -tune:v film \
            -c:a libfdk_aac -b:a 128k \
            "${1%.*}_720.mp4"
 }
@@ -290,8 +296,18 @@ function mkgif()
     [[ ${1} == '-s' ]] && _s="${2}" && shift 2 || _s=;
     [[ ${1} == '-q' ]] && _q="${_palette}" && shift || _q=;
 
-    ffmpeg -i "${1}" -r 10 -vf "scale=${_s:-480}:-1${_q:-}" "${1%.*}_ffmpeg.gif";
+    ffmpeg -i "${1}" -r 10 -vf "scale=${_s:-480}:-1${_q:-}" -tune:v animation "${1%.*}_ffmpeg.gif";
     convert -delay 1 -loop 0 "${1%.*}_ffmpeg.gif" "${1%.*}.gif";
     echo -n '»» removing: ' && rm -v "${1%.*}_ffmpeg.gif";
     gifopt "${1%.*}.gif";
+}
+
+function mkMeme() {
+    local top_text="${1}";
+	local bottom_text="${2}";
+    convert "${3}" -font "Impact" -fill white \
+    -pointsize "${4:-60}" -stroke black -strokewidth ${5:-2} \
+    -gravity north -annotate +0+5 "${top_text}" \
+    -gravity south -annotate +0+5 "${bottom_text}" \
+    "${3%.*}_meme.${3##*.}" 2> /dev/null;
 }
