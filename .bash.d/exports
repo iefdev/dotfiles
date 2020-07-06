@@ -31,7 +31,7 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     export COPYFILE_DISABLE=true
 
     # Log "defaults ..." to separate file
-    export PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> ${HOME}/ShellScripts/__defaultsLog.txt'
+    export PROMPT_COMMAND='echo "$(history 1 | grep -E "(sudo)? defaults ")" | sed '/^$/d' >> ${HOME}/Scripts/__defaultsLog.txt'
 fi
 
 
@@ -53,8 +53,8 @@ _ST="/usr/local/syncthing/bin"
 # xbin for own custom scripts
 _xbin="/usr/local/xbin"
 
-# ShellScripts
-_Sh="${HOME}/ShellScripts"
+# Scripts
+_Sh="${HOME}/Scripts"
 
 
 # System specific paths

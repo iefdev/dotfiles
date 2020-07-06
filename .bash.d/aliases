@@ -11,7 +11,7 @@ alias sudo='sudo ';
 
 # Alias to cd the folder:
 alias cdD='cd ~/Desktop'
-alias cdS='cd ~/ShellScripts'
+alias cdS='cd ~/Scripts'
 alias cdR='cd ~/Repos'
 alias cdT='cd ~/.Trash'
 alias cdL='cd /usr/local'
@@ -234,7 +234,7 @@ fi
 alias gzip='gzip -9v -N'
 
 # List disks
-alias disklist="mount | egrep ^/dev/ | awk '{ print \$1,\"»»\",\$3 }' | sort"
+alias disklist="mount | awk 'match(\$0, \"dev/\") { print \$1,\"»»\",\$3 }' | sort"
 alias diskspace='df -Hl'
 
 # OS X only
@@ -255,7 +255,7 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     alias tray.close='drutil tray close'
 
     # the defaults log
-    alias openDeflog='open -e $HOME/ShellScripts/__defaultsLog.txt'
+    alias openDeflog='open -e $HOME/Scripts/__defaultsLog.txt'
 fi
 
 # Links X11
