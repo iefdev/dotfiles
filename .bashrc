@@ -42,7 +42,7 @@ _uCol="${_grn}"
 function setPS () {
     [[ $# < 4 ]] || return 1;
     case "${1}" in
-        s|simple) export PS1="${2:-\$} ";                                                  ;;
+        s|simple) export PS1="${2:-\$} ";                                                   ;;
         d|dir)    export PS1="${_gry}\W${_def}\$ ";                                         ;;
         b|basic)  export PS1="${_uCol}${2:-\u}${_def}:${_gry}\W${_def}\$ ";                 ;;
         _default) export PS1="[${_uCol}${2:-\u}${_def}@${3:-\h} ${_gry}\W]${_def}\$ ";      ;;
