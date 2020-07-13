@@ -41,8 +41,8 @@ alias j='jobs -l'
 alias x='exit'
 alias q='x'
 
-alias rsync.cp='rsync -avhP '
-alias rsync.hax='rsync -avz -HAX '
+alias rsync.cp='rsync -avzhP '
+alias rsync.hax='rsync.cp -HAX '
 
 # top, show cpu and memory. 20 processes. (exit with: q)
 alias top20='top -o cpu -O +rsize -s 5 -n 20'
@@ -155,13 +155,20 @@ alias mkrun='chmod +x'
 alias fixacl='find ./ -type d -exec chmod -v 755 {} \; && find ./ -type f -exec chmod -v 644 {} \;'
 
 
-# Cleaning up stuff...
+# DNS + Cleaning up...
 # --------------------
 
 # OS X only
 if [[ $(uname -s) == 'Darwin' ]]; then
+    # networksetup -help
+    # networksetup -printcommands
+    # networksetup -getinfo <device>
+
+    # set DNS to 1.1.1.1 when DCP fails
+    alias setDNS1='sudo networksetup -setdnsservers "Ethernet 1" 1.1.1.1'
+
     # fix dns
-    #alias fixDNS='for p in 1 2; do sudo networksetup -setdnsservers "Ethernet ${p}" 127.0.0.1; sudo networksetup -setsearchdomains "Ethernet ${p}" $(hostname); done;';
+    alias fixDNS='for p in 1 2; do sudo networksetup -setdnsservers "Ethernet ${p}" 127.0.0.1; sudo networksetup -setsearchdomains "Ethernet ${p}" $(hostname); done;';
 
     # Kill/Flush (DNS)cache (10.7/8/9)
     alias flushDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;'
