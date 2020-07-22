@@ -35,8 +35,9 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 fi
 
 
-# XZ options
+# GZIP and XZ options
 # --------------------
+export GZIP="-9v --name"
 export XZ_DEFAULTS="-6e -T 2 "
 export XZ_OPT=${XZ_OPT-"-6e"}
 
@@ -79,8 +80,8 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 
     export OS_PATHS="${_AP24}:${_MP}:${_PHP}:${_CPOS}:${_SQL}:${_PERL}:${_ST}"
 else
-    # Python/pip
-    _pbin="/usr/local/pbin"
+    # Python/pip (+ cookiecutter)
+    _pbin="/opt/local/pbin:${HOME}/Library/Python/3.8/bin"
 
     export OS_PATHS="${_CPOS}:${_ST}"
 fi
