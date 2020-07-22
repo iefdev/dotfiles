@@ -149,6 +149,12 @@ function remount()
     [[ -n "${1}" && -e "${1}" ]] && mount -o remount,${2:-rw} "${1}" || return 1;
 }
 
+# Fix dir(s) with messy ACL -> 755/644
+function fixacl()
+{
+    find ${1:-.} -type d -exec chmod -v 755 {} \; && find ${1:-.} -type f -exec chmod -v 644 {} \;
+}
+
 
 # Get this...
 # --------------------
