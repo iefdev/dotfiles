@@ -73,7 +73,7 @@ alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)
 # Portfiles
 # --------------------
 
-alias pindex='(cd /opt/ports/ && sudo portindex)'
+alias pindex='for d in dev local; do (cd /opt/ports/${d}/ && sudo portindex); done'
 
 # mpchksum <portname>
 function mpchksum()
