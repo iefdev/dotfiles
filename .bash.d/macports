@@ -57,7 +57,7 @@ alias setBReq='sudo boort setrequested'
 alias fail2ban.start='sudo port load fail2ban'
 alias fail2ban.stop='sudo port unload fail2ban'
 
-_mariadb='mariadb-10.2-server'
+_mariadb='mariadb-10.4-server'
 alias mysql.load="sudo port load ${_mariadb}"
 alias mysql.unload="sudo port unload ${_mariadb}"
 alias mysql.reload="sudo port reload ${_mariadb} && echo :: MariaDB Reloaded"
