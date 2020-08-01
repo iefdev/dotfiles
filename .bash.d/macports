@@ -52,18 +52,22 @@ alias rmBoortBuild='sudo rm -rvf /opt/bootstrap/var/macports/{distfiles,build}/*
 alias setBReq='sudo boort setrequested'
 
 
-# Port loads
+# MariaDB
 # --------------------
-alias fail2ban.start='sudo port load fail2ban'
-alias fail2ban.stop='sudo port unload fail2ban'
+_mariadb='mariadb-10.4'
+export PATH="/opt/local/lib/${_mariadb}/bin:${PATH}"
 
-_mariadb='mariadb-10.4-server'
-alias mysql.load="sudo port load ${_mariadb}"
-alias mysql.unload="sudo port unload ${_mariadb}"
-alias mysql.reload="sudo port reload ${_mariadb} && echo :: MariaDB Reloaded"
+alias mysql.load="sudo port load ${_mariadb}-server"
+alias mysql.unload="sudo port unload ${_mariadb}-server"
+alias mysql.reload="sudo port reload ${_mariadb}-server && echo :: MariaDB Reloaded"
 
 alias mysql.status='ps aux | grep mysql | grep -v grep'
 alias mysql.history='open ~/.mysql_history'
+
+# Fail2Ban
+# --------------------
+alias fail2ban.start='sudo port load fail2ban'
+alias fail2ban.stop='sudo port unload fail2ban'
 
 
 # For MacPorts GitHub PR template

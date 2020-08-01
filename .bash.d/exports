@@ -69,19 +69,19 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     # PHP 5.6 (default), 5.4 in .bash_aliases
     _PHP="/usr/local/php56/bin:/usr/local/php56/sbin"
 
-    # MySql, PgSql
-    _SQL="/usr/local/mysql/bin:/usr/local/pgsql/bin"
+    # PgSql
+    _SQL="/usr/local/pgsql/bin"
 
     # Active Perl
     _PERL="/usr/local/ActivePerl-5.16/bin"
 
-    # Python/pip
-    _pbin="/opt/local/pbin"
+    # Python/pip (+ cookiecutter)
+    _pbin="/opt/local/pbin:${HOME}/Library/Python/3.8/bin"
 
     export OS_PATHS="${_AP24}:${_MP}:${_PHP}:${_CPOS}:${_SQL}:${_PERL}:${_ST}"
 else
-    # Python/pip (+ cookiecutter)
-    _pbin="/opt/local/pbin:${HOME}/Library/Python/3.8/bin"
+    # Python/pip
+    _pbin="/usr/local/pbin"
 
     export OS_PATHS="${_CPOS}:${_ST}"
 fi
