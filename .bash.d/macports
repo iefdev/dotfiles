@@ -92,6 +92,10 @@ function mpchksum()
     echo -e '---\n';)
 }
 
+function port.cd() { cd $(port dir "${1}"); }
+function port.finder() { open -R $(port dir "${1}"); }
+alias port.logs='open -R /opt/local/var/macports/logs/'
+
 
 # Go (port notes Lion)
 # --------------------
