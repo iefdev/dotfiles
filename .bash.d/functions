@@ -311,8 +311,9 @@ function mkgif()
 function mkMeme() {
     local top_text="${1}";
 	local bottom_text="${2}";
-    convert "${3}" -font "Impact" -fill white \
-    -pointsize "${4:-60}" -stroke black -strokewidth ${5:-2} \
+    convert "${3}" -colorspace srgb -quantize lab -layers optimize +dither \
+    -font "Impact" -fill white -pointsize "${4:-60}" \
+    -stroke black -strokewidth ${5:-1} \
     -gravity north -annotate +0+5 "${top_text}" \
     -gravity south -annotate +0+5 "${bottom_text}" \
     "${3%.*}_meme.${3##*.}" 2> /dev/null;
