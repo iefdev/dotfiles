@@ -6,13 +6,13 @@
 
 # Macports
 # --------------------
-alias portout='echo -en "\n--->  " && port outdated'
-alias portsync='sudo port -v sync && portout && boortout'
-alias portup='portsync'
-#alias portup='sudo port -v selfupdate && portout'
-alias portupgrade='sudo port upgrade'
-alias portupall='sudo port upgrade outdated'
-alias portclean='sudo port clean'
+alias port.out='echo -en "\n--->  " && port outdated'
+alias port.sync='sudo port -v sync && port.out && boort.out'
+alias port.up='port.sync'
+#alias port.up='sudo port -v selfupdate && port.out'
+alias port.upgrade='sudo port upgrade'
+alias port.upall='sudo port upgrade outdated'
+alias port.clean='sudo port clean'
 
 alias lsPorts='port echo installed'
 alias lsLeaves='port echo leaves'
@@ -26,19 +26,19 @@ alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
 alias setReq='sudo port setrequested'
 
 #  ...and not
-function portupnotall() { sudo port upgrade outdated and not \( "${@}" \); }
+function port.upnotall() { sudo port upgrade outdated and not \( "${@}" \); }
 
 
 # Bootstrap version: curl only (+ dependencies)
 # ---------------------------------------------
 alias boort='/opt/bootstrap/bin/port'
 
-alias boortout='echo -en "\n--->  [boort]" && boort outdated'
-alias boortsync='sudo boort -v sync && boortout'
-alias boortup='boortsync'
-alias boortupgrade='sudo boort upgrade'
-alias boortupall='sudo boort upgrade outdated'
-alias boortclean='sudo boort clean'
+alias boort.out='echo -en "\n--->  [boort] " && boort outdated'
+alias boort.sync='sudo boort -v sync && boort.out'
+alias boort.up='boort.sync'
+alias boort.upgrade='sudo boort upgrade'
+alias boort.upall='sudo boort upgrade outdated'
+alias boort.clean='sudo boort clean'
 
 alias lsBoorts='boort echo installed'
 alias lsBLeaves='boort echo leaves'
@@ -79,22 +79,29 @@ alias sysXcode="echo \"macOS $(sw_vers -productVersion) $(sw_vers -buildVersion)
 
 alias pindex='for d in dev local; do (cd /opt/ports/${d}/ && sudo portindex); done'
 
-# mpchksum <portname>
-function mpchksum()
+# mpchksum <portname> [ <pkgname> ]
+function mp.chksum()
 {
     local _file="/opt/local/var/macports/distfiles/${1}/${2:-${1}}*";
+    local _indent1='           ';          # 11 spaces
+    local _indent2='                    '; # 20 spaces (5 tabs)
     (cd $(dirname ${_file});
     echo "# $(basename ${_file})";
+    echo -n "checksums${_indent1}";
     for p in rmd160 sha256; do
         openssl dgst -r -${p} $(basename ${_file}) | awk -v p="${p}" '{print p "  " $1 " \\"}';
+		echo -n "${_indent2}";
     done;
     stat -x ${_file} | grep 'Size' | awk '{print "size    " $2}';
     echo -e '---\n';)
 }
 
+function port.version() { port info "${1}" | head -1; }
+function port.maintainers() { port info --maintainers "${1}"; }
+
 function port.cd() { cd $(port dir "${1}"); }
 function port.finder() { open -R $(port dir "${1}"); }
-alias port.logs='open -R /opt/local/var/macports/logs/'
+alias mp.var='open -R /opt/local/var/macports/'
 
 
 # Go (port notes Lion)
