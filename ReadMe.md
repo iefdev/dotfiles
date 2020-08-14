@@ -1,5 +1,7 @@
 # dotfiles
 
+![][license]
+
 Since I use both Mac and GNU/Linux, the commands/functions/aliases for each platform are different. Earlier I kept the dotfiles in 2 separate folder here (osx, linux), but I have merged them now to be able to use the same set of files on all computers. You'll notice a few if statements throughout the files, like:
 
 ```bash
@@ -38,5 +40,6 @@ Some aliases and functions are using `x-clip`. Look in your package manager, or 
 
 
 <!-- Markdown: link and img defs -->
+[license]: https://img.shields.io/badge/License-0BSD-789.svg?style=plastic "BSD Zero Clause License (SPDX: 0BSD)"
 [jy]: https://gitlab.com/iEFdev/junkyard "Junkyard"
 [xclip]: http://sourceforge.net/projects/xclip/ "xclip :: SourceForge"
