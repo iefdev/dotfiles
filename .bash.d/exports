@@ -35,9 +35,8 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 fi
 
 
-# GZIP and XZ options
+# XZ options
 # --------------------
-export GZIP="-9 --name"
 export XZ_DEFAULTS="-6e -T 2 "
 export XZ_OPT=${XZ_OPT-"-6e"}
 
