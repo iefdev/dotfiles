@@ -85,10 +85,10 @@ bdCompl='/etc/profile.d/bd'
 [ -f ${bdCompl} ] && . ${bdCompl};
 
 
-# Load archey (if installed)
-# If not running interactively, or in TMUX, don't do anything
-if [[ -n "${PS1}" && ${UID} != 0 && -z ${TMUX} ]]; then
-    [[ `type archeyX 2> /dev/null` ]] && archeyX
+# Load archeyX (if installed)
+# If not running interactively, don't do anything
+if [[ $- == *i*  && ${UID} != 0 ]]; then
+    [[ $(type archeyX 2> /dev/null) ]] && archeyX
 fi
 
 
