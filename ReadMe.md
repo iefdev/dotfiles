@@ -10,7 +10,7 @@ Since I use both Mac and GNU/Linux, the commands/functions/aliases for each plat
 etc.
 ```
 
-To clean up the home folder… Except the standard bash files, the additional files lives in a subfolder: `~/.bash.d/bash_*`. To load them - just add the last part of the name into the `bash_file` array:
+To clean up the home folder… Except the standard bash files, the additional bash files are located in: `~/.bash.d/<file>`. To load them - just add the name into the `bash_files` array:
 
 ```bash
 bash_files=( ruby aliases functions git cheat opo venv );
@@ -28,7 +28,7 @@ Some of the content _(functions/aliases)_ are sometimes being removed and moved 
 
 ###### Linux
 
-At the moment… `bash_dnf` and `bash_yum` are empty.
+At the moment… `~/.bash.d/dnf` and `~/.bash.d/yum` are empty.
 
 Some aliases and functions are using `x-clip`. Look in your package manager, or download it [here][xclip].
 
