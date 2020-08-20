@@ -5,11 +5,14 @@
 # Misc PATH's and exports, to keep .bashrc clean(er).
 #
 
+# __DARWIN__ || __LINUX__
+[[ `uname -s` == 'Darwin' ]] && __DARWIN__=1
+[[ `uname -s` == 'Linux' ]] &&  __LINUX__=1
 
 # GPG
 export GPG_TTY=$(tty)
 
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ ${__DARWIN__} ]]; then
     # Fix for additional added manual path's...
     # OS X seems to forget/ignore some of the paths added
     # to /etc/manpaths and /etc/manpaths.d/
@@ -58,7 +61,7 @@ _Sh="${HOME}/Scripts"
 
 
 # System specific paths
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ ${__DARWIN__} ]]; then
     # Macports
     _MP="/opt/local/bin:/opt/local/sbin"
 

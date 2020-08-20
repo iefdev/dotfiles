@@ -20,7 +20,7 @@ function mkdirff() { xargs -I {} mkdir -pv "{}" < "${1}"; }
 function ytdl.ff() { xargs -I {} youtube-dl "{}" < "${1}"; }
 
 # Misc bak helpers (mbakd, for dirs)
-[[ $(uname -s) == 'Darwin' ]] && function mkbakd() { [ -d ${1} ] && ditto -v "${1%/}"{,.bak}; }
+[[ ${__DARWIN__} ]] && function mkbakd() { [ -d ${1} ] && ditto -v "${1%/}"{,.bak}; }
 function mkbak() { cp -iv "${1}"{,.bak}; }
 function mvbak() { mv -iv "${1}"{,.bak}; }
 
@@ -87,7 +87,7 @@ function rmDF { find "${1:-.}" -type f -name ._* -exec rm -v {} \;; }
 function mkLF() { find . -name "${1:-*.txt}" -print0 | xargs -0 dos2unix; }
 
 # Search/delete lines in history
-if [[ $(uname -s) == 'Darwin' && $(which sed) == '/usr/bin/sed' ]]; then
+if [[ ${__DARWIN__} && $(which sed) == '/usr/bin/sed' ]]; then
     # osx version of sed wants an xtra ''
     function delHist() { sed -i '' "/${1}/d" ${HISTFILE}; }
 else
@@ -115,7 +115,7 @@ function rsyncdir()
     rsync -avzuch ${3:-} --delete --progress "${1%/}/" "${2%/}/";
 }
 
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ ${__DARWIN__} ]]; then
     # Remove sticky bit
     function rmxattr()
     {
@@ -128,10 +128,10 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 fi
 
 # Reveal program in Finder
-[[ $(uname -s) == 'Darwin' ]] && function whichR() { open -R $(which ${1}); }
+[[ ${__DARWIN__} ]] && function whichR() { open -R $(which ${1}); }
 
 # Linux 'open'
-[[ $(uname -s) == 'Linux' ]] && function open() { xdg-open "$@" > /dev/null 2>&1 ; }
+[[ ${__LINUX__} ]] && function open() { xdg-open "$@" > /dev/null 2>&1 ; }
 
 # Search and delete (recursively), using find. $1 = the regexp.
 function searchFiles() { find . -type f -name "${1}"; }
@@ -181,7 +181,7 @@ function man2txt()
 }
 
 # open man-page(s) in its own window. Use: "manx" instead of "man" (OS X)
-[[ $(uname -s) == 'Darwin' ]] && function manx() { local i; for i; do open x-man-page://${i}; done; }
+[[ ${__DARWIN__} ]] && function manx() { local i; for i; do open x-man-page://${i}; done; }
 
 
 # Diff & Patching
@@ -242,7 +242,7 @@ function fixPDF() {
 # Adminer :: Changing theme.
 function chgAdminer() { sudo ln -s /usr/share/webapps/adminer/{themes/${1},adminer}.css; }
 
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ ${__DARWIN__} ]]; then
     function spdl() { /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/svtplay-dl -r "${1}"; }
     alias svtplay-dl='/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/svtplay-dl'
 fi
@@ -278,7 +278,7 @@ function wttr() { curl "wttr.in/${1:-Hometown}"; }
 function wttr.v2() { curl "v2.wttr.in/${1:-Hometown}"; }
 
 # Not in Linux
-[[ $(uname -s) == 'Darwin' ]] && function whatDisk() { stat -f %Sd "${1:-.}"; }
+[[ ${__DARWIN__} ]] && function whatDisk() { stat -f %Sd "${1:-.}"; }
 
 
 # ffmpeg

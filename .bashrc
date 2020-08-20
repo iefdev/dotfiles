@@ -9,9 +9,6 @@
 # ------------------------------------------------------------------------------
 #
 
-# DARWIN
-[[ `uname -s` == 'Darwin' ]] && DARWIN=1;
-
 # Load: ~/.bash.d/bash_exports (PATH's and misc exports)
 [ -f ~/.bash.d/bash_exports ] && . ~/.bash.d/bash_exports
 
@@ -61,7 +58,7 @@ PS4=' :+ '
 # ------------------------------------------------------------------------------
 
 # Bash files to load
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ ${__DARWIN__} ]]; then
     # Used with open -e (TextEdit): ${_e:-}
     _e='-e'
 
@@ -79,10 +76,6 @@ done
 
 # bash completion
 [ -f ${bashCompl} ] && . ${bashCompl};
-
-# bd completion
-bdCompl='/etc/profile.d/bd'
-[ -f ${bdCompl} ] && . ${bdCompl};
 
 
 # Load archeyX (if installed)
