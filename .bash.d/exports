@@ -62,7 +62,7 @@ _Sh="${HOME}/Scripts"
 
 # System specific paths
 if [[ ${__DARWIN__} ]]; then
-    # Macports
+    # MacPorts
     _MP="/opt/local/bin:/opt/local/sbin"
 
     # Apache 2.4
