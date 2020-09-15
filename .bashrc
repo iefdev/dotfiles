@@ -79,8 +79,8 @@ done
 
 
 # Load archeyX (if installed)
-# If not running interactively, don't do anything
-if [[ $- == *i*  && ${UID} != 0 ]]; then
+# If not running interactively (or inside tmux or vim), don't do anything
+if [[ $- == *i* &&  ${EUID} != 0 && -z ${TMUX} && -z ${VIM} ]]; then
     [[ $(type archeyX 2> /dev/null) ]] && archeyX
 fi
 
