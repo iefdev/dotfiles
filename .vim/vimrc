@@ -1,0 +1,43 @@
+"
+" ~/.vim/vimrc
+"
+
+" Basics
+" - - - - - - - - - - - - - - - - - - - -
+set nocp                    " be iMproved
+
+filetype plugin indent on
+syntax on
+set backspace=start,eol,indent
+"set hidden
+
+
+" Load external config files (partials)
+" Usage: call LoadConf('filename')
+" - - - - - - - - - - - - - - - - - - - -
+function! LoadConf(cf = '')
+    let b:file = printf("%s%s%s", '~/.vim/config/', a:cf, '.vim')
+    if filereadable(expand(b:file))
+        exe 'so' . b:file
+    else
+        echom "»»» ERR: LoadConf('" . a:cf . "')"
+        echom '    ' . b:file . ' do not exist.' | echom ''
+    endif
+endfunction
+
+
+" -- Load plugins --
+call LoadConf('vim_plug')
+
+" -- netRW --
+call LoadConf('netRW')
+
+
+
+"
+" This is just the start of my vimrc…  as help for
+" the example in the ReadMe.
+"
+" The rest of the file is still a bit too crappy
+" to add here. Maybe I can clean it up a bit later.
+"
