@@ -10,8 +10,8 @@ alias port.out='echo -en "\n--->  " && port outdated'
 alias port.sync='sudo port -v sync && port.out && boort.out'
 alias port.up='port.sync'
 #alias port.up='sudo port -v selfupdate && port.out'
-alias port.upgrade='sudo port upgrade'
-alias port.upall='sudo port upgrade outdated'
+alias port.upgrade='sudo port -t upgrade'
+alias port.upall='sudo port -t upgrade outdated'
 alias port.clean='sudo port clean'
 
 alias lsPorts='port echo installed'
@@ -26,7 +26,7 @@ alias rmDistBuild='sudo rm -rvf /opt/local/var/macports/{distfiles,build}/*'
 alias setReq='sudo port setrequested'
 
 #  ...and not
-function port.upnotall() { sudo port upgrade outdated and not \( "${@}" \); }
+function port.upnotall() { sudo port -t upgrade outdated and not \( "${@}" \); }
 
 
 # Bootstrap version: curl only (+ dependencies)
@@ -36,8 +36,8 @@ alias boort='/opt/bootstrap/bin/port'
 alias boort.out='echo -en "\n--->  [boort] " && boort outdated'
 alias boort.sync='sudo boort -v sync && boort.out'
 alias boort.up='boort.sync'
-alias boort.upgrade='sudo boort upgrade'
-alias boort.upall='sudo boort upgrade outdated'
+alias boort.upgrade='sudo boort -t upgrade'
+alias boort.upall='sudo boort -t upgrade outdated'
 alias boort.clean='sudo boort clean'
 
 alias lsBoorts='boort echo installed'
@@ -63,6 +63,7 @@ alias mysql.reload="sudo port reload ${_mariadb}-server && echo :: MariaDB Reloa
 
 alias mysql.status='ps aux | grep mysql | grep -v grep'
 alias mysql.history='open ~/.mysql_history'
+
 
 # Fail2Ban
 # --------------------
