@@ -1,0 +1,65 @@
+#
+# # ${XDG_CONFIG_HOME}/readline/inputrc
+#
+#
+# Documentation:
+#   https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
+#
+# Description:
+#   This file controls the behaviour of line input editing for
+#   programs that use the GNU Readline library. Existing programs
+#   include FTP, Bash, and GDB.
+#
+# Notes:
+#   This file is defined in: ~/.bash.d/exports
+#       export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+#
+#   You can re-read the inputrc file with C-x C-r.
+#   Lines beginning with '#' are comments.
+#
+
+# First, include any system-wide bindings and variable
+# assignments from: /etc/inputrc
+$include /etc/inputrc
+
+
+# TAB Completion
+# --------------
+
+# show multiple possibilities on tab completion
+set show-all-if-ambiguous on
+
+# set file completion case-insensitive
+set completion-ignore-case on
+
+# On 1st tab: shows all matches, 2nd tab: starts to cycle
+set menu-complete-display-prefix on
+
+$if Bash
+    # complete = show matches
+    # menu-complete = cycles through matches
+    TAB: menu-complete
+    # shift tab cycles backward
+    "\e[Z": menu-complete-backward
+$endif
+
+# --------------
+
+# none, visible, audible (default)
+set bell-style visible
+
+# Append slash to completed names which are symbolic links to directories
+set mark-symlinked-directories on
+
+# Meta settings
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Enable keypad, of course
+set enable-keypad on
+
+# Don't use. It will show dual entries
+# in completion for folders in HOME (~)
+#set expand-tilde on
