@@ -21,4 +21,3 @@ function venv.start() { deactivate &> /dev/null; . "./.${1:-venv}/bin/activate";
 
 # venv.stop
 alias venv.stop='deactivate'
-

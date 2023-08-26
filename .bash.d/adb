@@ -1,0 +1,33 @@
+#
+# ~/.bash.d/adb
+#
+# Description:
+#   Separate file for abd (Android)
+#
+
+export ANDROID_HOME="${XDG_DATA_HOME}/android"
+
+# If using Android SDK Platform Tools
+# https://developer.android.com/tools/variables
+# You may need to adjust the path to where you want your tools.
+if [ ! -x /usr/bin/adb ]; then
+    #_pt="${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools"
+    _pt="${HOME}/OnePlus1/pt/platform-tools"
+    [ -d "${ANDROID_HOME}" ] && export PATH="${_pt}:${PATH}"
+fi
+
+
+# Android - ADB
+# ----------------------------------------
+#    $ adb devices
+#    aaaaaaaa    device        // Phone 1
+#    bbbbbbbb    device        // Phone 2
+
+# Default
+export ANDROID_SERIAL='aaaaaaaa'
+
+alias adb.OPO='adb -s ${ANDROID_SERIAL}'
+alias adb.p615='adb -s bbbbbbbb'
+
+alias adb.start='adb start-server'
+alias adb.kill='adb kill-server'
