@@ -1,0 +1,18 @@
+#
+# ~/.config/tmux/mouse
+#
+#
+# Mouse supprt settings
+#
+
+# UTF-8 is auto detected
+#set -g mouse-utf8 on
+set -g mouse on
+setw -g mouse on
+set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+
+## Enable mouse with 'm' and disable with 'M'
+unbind m
+unbind M
+bind m set -g mouse on \; setw -g mouse on \; display 'Mouse: ON'
+bind M set -g mouse off \; setw -g mouse off \; display 'Mouse: OFF'

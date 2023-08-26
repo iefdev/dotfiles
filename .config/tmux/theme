@@ -1,10 +1,12 @@
 #
-# ~/.tmux.d/theme.conf
+# ~/.config/tmux/theme
+#
+#
+# Theme/colors settings (status bar)
 #
 
-# Theme/colors for tmux
-
-# Misc vars
+# Misc color vars
+# ----------------------------------------
 FG="colour247"
 BG="colour234"
 ATTR="none"
@@ -19,6 +21,12 @@ MSG_CMD_BG="colour22"
 MSG_BG="colour24"
 MSG_FG="colour255"
 
+
+# Color in Clock mode
+set -g clock-mode-colour cyan
+
+# Status bar
+# ----------------------------------------
 
 # Main colors
 set -g status-style fg=${FG},bg=${BG},${ATTR}
@@ -46,4 +54,3 @@ setw -g window-status-current-format " #I:#W#{?window_flags,#{window_flags}, } "
 set -g status-right-style fg=${RIGHT_FG},bg=${RIGHT_BG}
 set -g status-right-length 45
 set -g status-right " #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}\"#{=21:pane_title}\" %H:%M %b %d, %Y "
-

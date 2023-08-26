@@ -1,0 +1,47 @@
+#
+# ~/.config/tmux/copy_clipboard
+#
+#
+# Copy and clipboard settings
+#
+
+# copy mode using 'Esc'
+unbind [
+bind Escape copy-mode
+
+#unbind -T copy-mode-vi Enter
+unbind -T copy-mode-vi Space
+unbind -T copy-mode-vi v
+unbind -T copy-mode-vi V
+unbind -T copy-mode-vi r
+unbind -T copy-mode-vi y
+
+# start selection with 'v' (or 'space') and copy using 'y'
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi V send -X select-line
+bind -T copy-mode-vi r send-keys -X rectangle-toggle
+bind -T copy-mode-vi y send-keys -X copy-selection
+
+# As my (Xfce) terminal settings are to copy selected text,
+# automaticall... This is a fallback for that. 
+set -s set-clipboard off
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -sel clipboard -i"
+
+# Paste using 'p'
+unbind p
+bind p paste-buffer
+
+
+# OS X/macOS
+# TODO: test wich one of 'y' is best
+# ----------------------------------------
+if -b ${DARWIN} " \
+    bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'; \
+"
+
+if ${DARWIN} " \
+    bind y run 'tmux save-buffer - | reattach-to-user-namespace pbcopy'; \
+    bind p run 'reattach-to-user-namespace pbpaste | tmux load-buffer - \; paste-buffer -d'; \
+    bind C-c run 'tmux save-buffer - | reattach-to-user-namespace pbcopy'; \
+    bind C-v run 'reattach-to-user-namespace pbpaste | tmux load-buffer - \; paste-buffer -d'; \
+"

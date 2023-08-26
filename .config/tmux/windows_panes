@@ -1,0 +1,85 @@
+#
+# ~/.config/tmux/windows_panes
+#
+#
+# Windows and pane settings
+#
+
+# Start numbers @ 1
+set -g renumber-windows on
+set -g base-index 1
+set -g pane-base-index 1
+
+set -g automatic-rename on
+set -g set-titles on
+
+# Highlight windows
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Resize
+setw -g aggressive-resize on
+
+
+# Window bindings
+# ----------------------------------------
+
+# Open a new (tmux) window
+bind n new-window
+
+# Walk through the windows
+# last = last/previous used window
+bind -r P prev
+bind -r N next
+bind L last
+
+# Shift arrow to switch windows withough prefix
+bind -n S-Left prev
+bind -n S-Right next
+bind -n S-Down last
+
+# Make the current window the first window
+bind T swap-window -t 1
+bind -n S-Up swap-window -t 1
+
+# Easily reorder windows with CTRL+SHIFT+Arrow
+bind-key -n C-S-Left swap-window -t -1
+bind-key -n C-S-Right swap-window -t +1
+
+
+# Pane bindings
+# ----------------------------------------
+
+# Sync scroll 'y' (toggle)
+unbind y
+bind y setw synchronize-panes
+
+# pane movement shortcuts (same as vim)
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# ...or use Meta/Alt-arrow keys
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+
+# Join Windows (paness)
+bind j command -p "Join pane from:" "join-pane -s '%%'"
+bind s command -p "Send pane to:" "join-pane -t '%%'"
+
+
+
+# Misc bindings
+# ----------------------------------------
+
+# Kill windows and panes
+# without the prompt (y/n)
+unbind &
+unbind x
+bind & killw
+bind x killp
+#bind End killw -a
