@@ -13,7 +13,8 @@ etc.
 To clean up the home folder… Except the standard bash files, the additional bash files are located in: `~/.bash.d/<file>`. To load them - just add the name into the `bash_files` array:
 
 ```bash
-bash_files=( ruby aliases functions git cheat opo venv );
+# Example
+bash_files=( ruby aliases functions git cheat adb venv );
 ```
 
 - - -
@@ -21,18 +22,9 @@ bash_files=( ruby aliases functions git cheat opo venv );
 Some of the content _(functions/aliases)_ are sometimes being removed and moved to their own scripts instead. You'll most likely find those scripts in the [junkyard][jy].
 
 
-## Notes
+## .config files
 
-###### Linux
-
-At the moment… `~/.bash.d/dnf` and `~/.bash.d/yum` are empty.
-
-Some aliases and functions are using `x-clip`. Look in your package manager, or download it [here][xclip].
-
-
-###### OS X / macOS
-
-...
+I've added a few of my files/settings to the `.config` folder. Mostly so I can download them my self, when on a new computer.
 
 
 ## License
@@ -47,7 +39,7 @@ See [`LICENSE`][license] for more information.
 ## Contributing
 
 1. Fork it (<https://gitlab.com/iefdev/vimfiles/forks/new>)
-2. Create your feature branch (`git checkout -b feature/this`)
+2. Create your feature branch (`git switch -c feature/this`)
 3. Commit your changes (`git commit -am 'Add this feature'`)
 4. Push to the branch (`git push origin feature/this`)
 5. Create a new Merge Request
@@ -58,5 +50,5 @@ See [`LICENSE`][license] for more information.
 [license]: ./LICENSE "LICENSE"
 [spdx]: https://spdx.org/licenses/0BSD.html "SPDX: 0BSD"
 
-[jy]: https://gitlab.com/iEFdev/junkyard "Junkyard"
+[jy]: https://gitlab.com/iefdev/junkyard "Junkyard"
 [xclip]: http://sourceforge.net/projects/xclip/ "xclip :: SourceForge"
