@@ -1,0 +1,36 @@
+#
+# ${XDG_CONFIG_HOME}/git/ignore
+#
+#
+# Description:
+#   Global file for .gitignore
+#
+
+*~
+*.diff
+*.patch
+*.err
+*.orig
+*.rej
+*.swo
+*.swp
+*.vi
+*.bak
+*.old
+*.svn
+
+_notes
+__notes
+
+.DS_*
+._*
+.Trashes
+.Spotlight_V100
+*MACOSX*
+
+Thumbs.db
+
+*.bfproject
+
+# Folders
+x_*

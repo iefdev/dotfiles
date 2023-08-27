@@ -1,0 +1,150 @@
+#
+# ${XDG_CONFIG_HOME}/git/config
+#
+# Description: Global config file
+#
+# To list them in terminal:
+#   $ git config --list                 (alias: li)
+#   $ git config --list --show-origin   (alias: lip)
+#
+# https://git-scm.com/docs/git-config
+#
+# Notes:
+#   @ = HEAD
+#
+
+[user]
+    name = Your Name
+    email = your@email.tld
+    handler = Nickname
+
+    # Main key
+    signingKey = <long key
+
+    # Alt key
+    #signingKey = <long key
+
+[alias]
+    ca = co --amend
+    cam = ca -m
+    cane = ca --no-edit
+    br = branch
+    bra = br -a
+    brd = br -d
+    brD = br -D
+    brm = br -m
+    co = checkout
+    cob = co -b
+    ds = diff --staged
+    sw = switch
+    swc = switch -c
+    ci = commit -v
+    cim = ci -m
+    l1 = log --oneline --graph --decorate
+    lg = log -p
+    li = config -l
+    lip = li --show-origin
+    ed = config --global --edit
+    rtags = ls-remote --tags
+    stat = status
+    st = stat -sb
+    ls = ls-files
+    pom = push origin main
+    poma = push origin master
+    pusu = pom --set-upstream
+    # undo last
+    undo = reset --soft @^
+    unstage = reset @ --
+    rbi = rebase -i
+    rbin = "!f() { git rbi @~${1:-3}; }; f"
+    rbir = rbi --root
+    gclean = gc --prune=now --aggressive
+    last = log -1 HEAD --stat
+    # When push fails/aborts and next push is ok, but still N ci ahead
+    puh = "!f() { git push origin HEAD:${1:-main}; }; f"
+
+[core]
+    editor = vim
+    excludesFile = /home/<your username>/.config/git/ignore
+    eol = lf
+    #pager = diff-highlight | less -r
+    #quotepath = off
+
+[credential]
+    helper = /usr/lib/git-core/git-credential-libsecret
+
+[gpg]
+    program = gpgit
+
+[tar]
+    umask = user
+
+[tar "tar.xz"]
+    command = xz -c
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
+    # also: grep, decorate, showbranch
+
+[pager]
+    # maybe use: less -r
+    log = diff-highlight | less
+    show = diff-highlight | less
+    diff = diff-highlight | less
+
+[push]
+    followTags = true
+    #autoSetupRemote = true
+
+[remote "origin"]
+    # Look more into this. Can't get it to work properly
+    # Push will fail. Pushing notes manually, for now
+    #fetch = +refs/notes/*:refs/notes/*
+    #push = refs/notes/*:refs/notes/*
+
+[notes]
+    displayRef = refs/notes/*
+    rewriteRef = refs/notes/commits
+
+[init]
+    defaultBranch = main
+
+[help]
+    #autocorrect = prompt
+    format = web
+    #htmlPath = /path/to/docs
+
+[gui]
+    editor = mousepad
+
+[web]
+    browser = firefox
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoSquash = true
+    autoStash = true
+
+[fetch]
+    prune = true
+
+[diff]
+    colorMoved = zebra
+
+[commit]
+    sign = true
+    gpgSign = true
+    verbose = true
+
+[tag]
+    gpgSign = true
+
+[status]
+    submoduleSummary = true
