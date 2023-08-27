@@ -16,6 +16,7 @@
 *.swp
 *.vi
 *.bak
+*.new
 *.old
 *.svn
 

@@ -19,10 +19,10 @@
     handler = Nickname
 
     # Main key
-    signingKey = <long key
+    signingKey = <long key>
 
     # Alt key
-    #signingKey = <long key
+    #signingKey = <long key>
 
 [alias]
     ca = co --amend
