@@ -1,0 +1,20 @@
+# make it continious...
+-ci
+
+--youtube-skip-dash-manifest
+--audio-quality 192K
+
+# Use native hls
+#--native-hls
+
+-f best
+
+# Format: not bigger than 720p
+#-f bestvideo[ext=mp4][height<=720]+bestaudio[ext=m4a]/best[height=720p]
+#-f hls-480p
+#-f hls-720p
+
+-o '%(title)s.%(ext)s'
+
+# Autonumber playlist
+#-o '%(autonumber)02d_%(title)s.%(ext)s' 
