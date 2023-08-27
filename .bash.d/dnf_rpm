@@ -1,0 +1,40 @@
+#
+# ~/.bash.d/dnf_rpm
+#
+# Description:
+#     Separate file for dnf and rpm.
+#     For aliases, use the built in alias system in dnf
+#     instead of bash aliases. We just keep a few here.
+#
+# This file is sourced from ~/.bashrc
+#
+
+# DNF
+# --------------------
+
+# Only 2 aliases for DNF
+alias sdnf='sudo dnf'
+alias srpm='sudo rpm'
+
+# these will go away
+alias dnf.req='dnf rq --requires'
+alias dnf.wreq='dnf rq --whatrequires'
+
+function dnf.repoPkgList() {
+    dnf repository-packages ${1} list;
+}
+
+## RPM
+
+# from fusion faq: list fusion pkgs
+alias lsFusionInstalls='rpm -qa --qf "%{NAME} %{PACKAGER}\n" | \
+                        grep "RPM Fusion" | cut -d\  -f1 | sort'
+
+
+# rpmbuild
+# --------------------
+
+function rpmba() {
+    cd ~/.rpm/rpmbuild/${1};
+    rpmbuild -ba --clean SPECS/${1}.spec
+}
