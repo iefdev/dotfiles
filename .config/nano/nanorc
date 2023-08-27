@@ -1,0 +1,132 @@
+#
+# ${XDG_CONFIG_HOME}/nano/nanorc
+#
+# ------------------------------
+#
+# See the nanorc(5) man page for details.
+#
+# Initialization file for GNU nano.
+#
+# To make sure an option is disabled, use "unset <option>".
+#
+# For the options that take parameters, the default value is given.
+# Other options are unset by default.
+#
+# Quotes inside string parameters don't have to be escaped with
+# backslashes.  The last double quote in the string will be treated as
+# its end.  For example, for the "brackets" option, ""')>]}" will match
+# ", ', ), >, ], and }.
+
+# 'nextword' stops at word ends
+set afterends
+
+# wrap lines at blanks
+set atblanks
+
+set autoindent
+
+# Back up files to the current filename plus a tilde.
+set backup
+
+# The characters treated as closing brackets when justifying paragraphs.
+set brackets ""')>]}"
+
+set casesensitive
+
+# Display the cursor position in the status bar
+set constantshow
+
+# Use cut-from-cursor-to-end-of-line by default
+set cutfromcursor
+
+# Wrapping point
+set fill -6
+
+set linenumbers
+
+# Enable vim-style lock-files.
+set locking
+
+# The opening and closing brackets that can be found by bracket searches
+set matchbrackets "(<[{)>]}"
+
+# Use the blank line below the title bar as extra editing space
+set morespace
+
+# Enable mouse support
+set mouse
+
+# Don't wrap text at all.
+unset nowrap
+
+# Remember the cursor position
+set positionlog
+
+# Preserve the XON and XOFF keys (^Q and ^S).
+set preserve
+
+# The characters treated as closing punctuation when justifying paragraphs
+set punct "!.?"
+
+## Do quick status-bar blanking.  Status-bar messages will disappear after
+## 1 keystroke instead of 26.  Note that "constantshow" overrides this.
+set quickblank
+
+# The email-quote string, used to justify email-quoted paragraphs.
+set quotestr "^([ 	]*([#:>|}]|//))+"
+
+# Fix Backspace/Delete confusion problem.
+set rebinddelete
+
+# Fix numeric keypad key confusion problem.
+set rebindkeypad
+
+# Extended regexp searches by default
+set regexp
+
+set smarthome
+
+set softwrap
+
+set speller "hunspell"
+
+set tabsize 4
+set tabstospaces
+
+# Snip whitespace at the end of lines when justifying or hard-wrapping
+set trimblanks
+
+## The default when in a UTF-8 locale:
+# set whitespace "»·"
+## The default otherwise:
+# set whitespace ">."
+
+## Paint the interface elements of nano.  These are examples;
+## by default there are no colors, except for errorcolor.
+set titlecolor white,black
+set statuscolor brightblack
+set errorcolor brightwhite,red
+set selectedcolor brightwhite,cyan
+set numbercolor black,white
+set keycolor brightcyan,black
+set functioncolor cyan
+
+## In root's .nanorc you might want to use:
+# set titlecolor brightwhite,magenta
+# set statuscolor brightwhite,magenta
+# set errorcolor brightwhite,red
+# set selectedcolor brightwhite,cyan
+# set numbercolor magenta
+# set keycolor brightmagenta
+# set functioncolor magenta
+
+# Include all existing syntax definitions
+include "/usr/share/nano/*.nanorc"
+
+# Key bindings.
+# See nanorc(5) (section REBINDING KEYS) for more details on this.
+
+bind M-B cutwordleft main
+bind M-N cutwordright main
+
+set unix
