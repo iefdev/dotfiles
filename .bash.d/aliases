@@ -272,9 +272,8 @@ if [[ ${__DARWIN__} ]]; then
     # Ncurses
     # --------------------
     # Fix for display issues with ncurses 6+
-        alias 2048="TERM=nsterm 2048"
-        alias bmon="TERM=nsterm bmon"
-    fi
+    alias 2048="TERM=nsterm 2048"
+    alias bmon="TERM=nsterm bmon"
 
     alias gcal='gcal --starting-day=1'
 
